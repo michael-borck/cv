@@ -1,0 +1,320 @@
+personal:
+  name: Michael Borck
+  email: michael.borck@curtin.edu.au
+  phone: 0402 297 573
+  linkedin: https://linkedin.com/in/michaelborck
+  github: https://github.com/michael-borck
+  portfolio: https://michaelborck.dev
+  education_platform: https://michaelborck.education
+  location: Perth, WA
+
+summary:
+  main: AI Leader and Cyber Security expert with 25+ years spanning military → academia → industry consulting transition. Author of 4 technical books (Creative Commons licensed), creator of innovative educational AI tools, and pioneer in AI-enhanced pedagogy serving academics, education, agriculture and mining sectors. Technical Lead for Business AI Research Group with a rare combination of technical depth and educational innovation expertise. Teaching philosophy grounded in three conceptual pillars - Caring, Competence, and Passion, with a core principle of "Make Contact Count."
+
+teaching:
+  philosophy:
+    core: "Make Contact Count - maximising impact through every student interaction"
+    framework: "Built on three pillars - Caring, Competence, and Passion"
+    approach: "Grounded in Constructivist learning theory, Bloom's Taxonomy, and Universal Design for Learning (UDL)"
+  
+  satisfaction:
+    - metric: "100% Satisfaction Scores"
+      details: "Achieved across ISYS3015 Business Application Development, ISYS2001 Introduction to Business Programming, and ISYS6018 Information Security"
+    - metric: "100% 'Effective Teacher' Ratings"
+      details: "Across Enterprise Network Security, Business Systems Selection, and Introduction to Programming units"
+  
+  feedback:
+    - "Michael is an absolute legend, I love his teaching style"
+    - "He really did feel like he cared about my learning"
+    - "The unit was hard, but fun, because he clearly cared about our learning"
+    - "Michael made it easy for me to gain information"
+  
+  innovations:
+    - name: "Cloud Core Simulation"
+      description: "Created complete virtual company with IT infrastructure, policies, and staff chatbot for authentic audit experiences"
+    - name: "Real-World Integration"
+      description: "Students report assessments prepare them for 'workplace environment'"
+    - name: "Student Impact"
+      description: "The environment created while performing the assignment is nothing less than working in real-time"
+
+achievements:
+  - Educational Leadership - AI Leader for School of Marketing and Management, led development of AI curriculum serving 500+ students across undergraduate and postgraduate programs
+  - Teaching Excellence - Achieved 100% student satisfaction scores across multiple units (ISYS3015, ISYS2001, ISYS6018) with consistent "effective teacher" ratings
+  - Technical Innovation - Creator of multiple AI-powered educational tools including Reality Reigns, Talk Buddy, and Curriculum Curator with 290+ downloads
+  - Industry Impact - Executive education training delivered to 100+ professionals across 15+ companies in academics, education, agriculture and mining sectors
+  - Assessment Innovation - Developed award-winning "Cloud Core" virtual company simulation providing authentic industry experience
+  - Research Excellence - 6+ peer-reviewed publications in computer vision and machine learning with focus on mobile mapping systems
+  - Open Source Contribution - Lead developer for Image Processing for Orange, serving the broader scientific community
+  - Military Leadership - Managed critical defence projects including military messaging systems and submarine IT infrastructure
+
+experience:
+  - title: Lecturer — School of Marketing and Management
+    organization: Curtin University
+    location: Perth, WA
+    period: Feb 2016 – Present
+    responsibilities:
+      - AI Program Leadership - AI Leader for the School, developing new AI programs within undergraduate and postgraduate curricula
+      - Technical Leadership - Technical Lead for the Business AI Research Group
+      - Core Teaching Areas - AI, Programming (Python), and Cyber Security
+      - Curriculum Development - Backbone developer for Python and Web development programs
+      - Cyber Security - Lead lecturer for cyber security programs with advanced digital forensics curriculum
+      - Educational Innovation - Pioneer in AI-enhanced pedagogy and interactive learning methodologies, with teaching philosophy grounded in Caring, Competence, and Passion
+      - Student Engagement - Achieved 100% student satisfaction scores through innovative assessment design including "Cloud Core" virtual company simulation
+      - Executive Education - Providing AI training to academics, education professionals, agriculture and mining industry executives
+
+  - title: Course Leadership & Development
+    organization: Curtin University
+    location: Perth, WA
+    period: Ongoing
+    responsibilities:
+      - Course Lead for Information Systems undergraduate and postgraduate degree programs
+      - Unit coordination across multiple levels - postgraduate, undergraduate, core, non-core, and service units (domestic and international)
+      - Advanced Canvas LMS and Blackboard development and customization
+      - Creator of interactive educational tools and assessment frameworks
+
+  - title: Associate Lecturer
+    organization: Curtin University
+    location: Perth, WA
+    period: Jan 2001 – Dec 2007
+    responsibilities:
+      - Academic Leadership - Provided departmental representation on institutional committees
+      - Program Development - Developed and delivered comprehensive course material for Software Engineering and Computer Science degrees
+      - International Coordination - Managed unit coordination across domestic and international campuses
+
+  - title: AI, IS & Educational Technology Consultant
+    organization: Self-Employed
+    location: Perth, WA
+    period: Jan 2016 – Present
+    responsibilities:
+      - AI strategy and implementation consultation
+      - IS/IT consultation and analysis
+      - Educational technology consulting and training
+      - Executive education training in AI for academics, education professionals, agriculture and mining industries
+    projects:
+      - Stanley College, IT Consultant (2019)
+      - "Web Agency Projects: Progressive Changes Psychology Services, Mindarie Mind and Body, Coastal Warriors Martial Arts, Yanchep Martial Arts (2017-2019)"
+
+  - title: Researcher
+    organization: Curtin University
+    location: Perth, WA
+    period: Mar 2018 – 2019
+    responsibilities:
+      - Advanced AI Research - Investigation and development of CNN models and their application to the maritime environment
+      - Applied Machine Learning - Focused research on computer vision applications for marine and coastal monitoring
+
+  - title: Software Contractor
+    organization: CRCSI & Landgate WA
+    location: Perth, WA
+    period: Mar 2015 – Jan 2016
+    responsibilities:
+      - Computer Vision Innovation - Developed automated detection and recognition systems for street sign inventory
+      - Technical Expertise - Provided specialized skills in machine learning and image processing for government applications
+
+  - title: IT Consultant — Owner
+    organization: Bital IT Consulting Services
+    location: Perth, WA
+    period: Jan 2008 – Jan 2011
+    responsibilities:
+      - Business Analysis - Provided comprehensive business and technical analysis to diverse client base
+      - Infrastructure Development - Developed and supported critical backup and monitoring solutions for servers and databases
+
+  - title: IT Manager
+    organization: Submarine Systems Centre, RAN
+    location: Perth, WA
+    period: Jul 1996 – Jan 2000
+    responsibilities:
+      - Strategic IT Leadership - Managed comprehensive information technology infrastructure supporting submarine operations and maintenance
+      - Executive Advisory - Provided strategic IT guidance to senior military leadership and operational boards
+      - Organisational Impact - Delivered technology solutions that directly supported critical defence capabilities and mission readiness
+
+  - title: Project Manager — Command and Control
+    organization: HQADF
+    location: Canberra, ACT
+    period: Jul 1993 – Dec 1996
+    responsibilities:
+      - Strategic Leadership - Managed development of critical military messaging systems for Australian Defence Force headquarters
+      - Project Excellence - Successfully controlled cost, schedule, and quality across multi-year defense communications project
+      - Cross-functional Coordination - Led technical teams and stakeholder management across multiple defence departments
+
+  - title: Analyst/Programmer — Manpower and Pay Project
+    organization: HQADF
+    location: Canberra, ACT
+    period: Aug 1991 – Jun 1993
+    responsibilities:
+      - Systems Development - Designed and implemented large-scale personnel management systems for defence operations
+      - Technical Excellence - Conducted comprehensive code reviews and built sophisticated models using CASE tools
+      - Full-cycle Development - Led data modeling, process modeling, database design, program design, and interface design
+
+  - title: System Administrator — Manpower and Personnel
+    organization: RAN
+    location: Canberra, ACT
+    period: Mar 1989 – Aug 1993
+    responsibilities:
+      - Infrastructure Management - Installed, configured, and maintained critical network and computer systems for Royal Australian Navy
+      - Crisis Management - Executed rapid recovery procedures during system failures, ensuring minimal operational disruption
+      - Security Operations - Maintained secure computing environments for sensitive military personnel data
+
+education:
+  - degree: Doctor of Philosophy (PhD)
+    field: Computer Science
+    institution: Curtin University
+    year: 2017
+    thesis: "Feature Extraction from Multi-modal Data (GIS, Machine Learning & Computer Vision)"
+
+  - degree: Bachelor of Science (Computer Science) (Honours)
+    field: Computer Science
+    institution: Curtin University
+    year: 2001
+    thesis: "A Bayesian Belief Network Approach to Predicting the Prices of Australian Commonwealth Government Interest Rate Securities"
+
+  - degree: Graduate Diploma in Business
+    field: Business
+    institution: Curtin University
+    year: 2000
+
+  - degree: Bachelor of Science (Computer Science)
+    field: Computer Science
+    institution: Australian National University
+    year: 1994
+
+  - degree: Bachelor of Applied Science (Mathematics)
+    field: Mathematics
+    institution: Queensland University of Technology
+    year: 1989
+
+publications:
+  books:
+    - title: Python Step By Step in an AI World
+      description: Comprehensive guide to Python programming in the context of artificial intelligence
+      license: Creative Commons
+    - title: JumpStart Python in the AI Era
+      description: Accelerated learning approach for Python in AI applications
+      license: Creative Commons
+    - title: "Intentional Prompting: Blending AI and Human Oversight"
+      description: Strategic guide to effective AI interaction and governance
+      license: Creative Commons
+    - title: "Python Dev Book: From Zero to Production"
+      description: Complete development lifecycle guide for Python applications
+      license: Creative Commons
+
+  thesis:
+    - title: Feature Extraction from Multi-modal Data
+      year: 2017
+      type: Doctor of Philosophy (PhD)
+      fields: GIS, Machine Learning & Computer Vision
+      description: Investigates feature extraction methods for imagery and depth data of urban transport corridors from vehicle-based mobile mapping systems
+
+  conferences:
+    - authors: Borck, M., G. West, and T. Tan
+      year: 2014
+      title: Use of multiple low level features to find interesting regions
+      venue: ICPRAM 2014
+      location: Angers, Loire Valley, France
+      publisher: SCITEPRESS
+
+    - authors: Borck, M., R. Palmer, G. West, and T. Tan
+      year: 2014
+      title: Using depth maps to find interesting regions
+      venue: 2014 IEEE Region 10 Symposium (TENSYMP 2014)
+      location: Kuala Lumpur, Malaysia
+      publisher: IEEE
+
+    - authors: Borck, M., G. West, and T. Tan
+      year: 2014
+      title: An image engineering approach to analysing mobile mapping data
+      venue: Research at Locate'14
+      location: Canberra, Australia
+      publisher: CEUR Workshop Proceedings
+
+    - authors: Palmer, R., M. Borck, G. West, and T. Tan
+      year: 2012
+      title: Intensity and Range Based Features for Object Detection in Mobile Mapping Data
+      venue: XXII ISPRS Congress, ISPRS 2012
+      location: Melbourne, Australia
+      publisher: Copernicus GmbH
+
+    - authors: Borck, M.
+      year: 2000
+      title: Industrial Application of Sensor Nets
+      venue: Computer
+      volume: 33(9)
+      pages: 18-26
+
+  honours:
+    - title: A Bayesian Belief Network Approach to Predicting the Prices of Australian Commonwealth Government Interest Rate Securities
+      year: 2001
+      type: Honours
+      institution: School of Computing, Curtin University
+
+projects:
+  - name: Reality Reigns
+    description: Swipe-based decision game providing interactive fiction storytelling from fantasy adventures to educational simulations
+  - name: Talk Buddy
+    description: AI-based audio interface tool for conversation practice (medical diagnoses, HR discussions, English conversation)
+  - name: Curriculum Curator
+    description: AI-based tool for creating, managing and curating learning materials based on unique teaching philosophies
+  - name: Feed Forward System
+    description: AI-based assessment feedback tool for various assessment types
+  - name: Student Feedback Analyzer
+    description: AI tool that analyzes student feedback forms to suggest course improvements
+  - name: Image Processing for Orange
+    year: Ongoing
+  - name: Graph Merging, Scikit Image
+    year: 2015
+  - name: User Guide, imgAnnotation Tool
+    year: 2014
+
+skills:
+  programming:
+    core: [Python, C/C++, C#, Java, JavaScript, Matlab, PHP, CSS, HTML, LaTeX, SQL, Bash]
+    web: [React, Flask, FastAPI, FastHTML, Vanilla JS, WordPress]
+    ai_ml: [Langchain, TensorFlow, PyTorch, Scikit-learn]
+    educational: [Blackboard LMS, Canvas LMS, Interactive Content Development]
+
+certifications:
+  - name: Google AI Course
+    year: 2024
+  - name: Microsoft AI Course
+    year: 2024
+  - name: Cyber Security Training
+    year: 2021
+  - name: Ethics Reviewer Training
+    year: 2021
+  - name: Equal Opportunity Work Essentials
+    year: 2021
+  - name: HDR Supervisors Update
+    year: 2020
+  - name: Curtin Research Integrity
+    year: 2020
+  - name: Provide Advanced First Aid
+    year: 2012–2019
+
+service:
+  profession:
+    - role: Conference Paper Reviewer
+      organization: Australian Conference on Information Systems (International)
+      year: 2019
+
+  community:
+    - role: Lead Developer
+      project: Image Processing for Orange
+      period: 2015-2019
+    - role: User Contribution
+      project: Graph Merging for Scikit Image
+      year: 2015
+    - role: User Contribution
+      project: User Guide, Image Annotation Tool
+      year: 2014
+
+affiliations:
+  - organization: Australian Computer Society (ACS)
+    status: Certified Professional
+    year: 2011
+    note: (ongoing professional development required)
+  - organization: Institute of Electrical and Electronics Engineers (IEEE) UK
+    status: Member
+    year: Current
+
+interests: [Karate, Muay Thai, Krav Maga, Atari 2600 Programming, Astronomy, Photography]
+
+references: Available upon request

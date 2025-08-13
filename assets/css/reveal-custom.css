@@ -1,0 +1,380 @@
+/* Custom CSS for Reveal.js Presentation */
+
+:root {
+  --r-background-color: #ffffff;
+  --r-main-font: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --r-main-font-size: 42px;
+  --r-main-color: #2c3e50;
+  --r-block-margin: 20px;
+  --r-heading-font: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --r-heading-color: #2c3e50;
+  --r-heading-line-height: 1.2;
+  --r-heading-letter-spacing: normal;
+  --r-heading-text-transform: none;
+  --r-heading-text-shadow: none;
+  --r-heading-font-weight: 600;
+  --r-heading1-text-shadow: none;
+  --r-heading1-size: 2.5em;
+  --r-heading2-size: 1.6em;
+  --r-heading3-size: 1.3em;
+  --r-heading4-size: 1em;
+  --r-code-font: 'Source Code Pro', Monaco, Consolas, monospace;
+  --r-link-color: #3498db;
+  --r-link-color-hover: #e74c3c;
+  --r-selection-background-color: #3498db;
+  --r-selection-color: #fff;
+}
+
+/* Title Slide */
+.reveal .slides section.title-slide {
+  text-align: center;
+}
+
+.reveal .slides section.title-slide h1 {
+  color: var(--r-heading-color);
+  font-size: 3em;
+  margin-bottom: 0.3em;
+  font-weight: 700;
+}
+
+.reveal .slides section.title-slide .subtitle {
+  color: #3498db;
+  font-size: 1.5em;
+  font-weight: 400;
+  margin-top: 0;
+}
+
+.reveal .slides section.title-slide .author,
+.reveal .slides section.title-slide .date {
+  margin-top: 2em;
+  font-size: 0.8em;
+  color: #7f8c8d;
+}
+
+/* General Slide Styles */
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  text-transform: none;
+  line-height: 1.2;
+}
+
+.reveal h2 {
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 0.3em;
+  margin-bottom: 0.8em;
+}
+
+.reveal h3 {
+  color: #3498db;
+  margin-top: 0.5em;
+}
+
+/* Lists */
+.reveal ul,
+.reveal ol {
+  display: block;
+  text-align: left;
+  margin-left: 1em;
+}
+
+.reveal ul ul,
+.reveal ol ol {
+  margin-left: 1.5em;
+  font-size: 0.9em;
+}
+
+.reveal li {
+  margin-bottom: 0.5em;
+  line-height: 1.4;
+}
+
+.reveal ul li::marker {
+  color: #3498db;
+}
+
+/* Links */
+.reveal a {
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.reveal a:hover {
+  text-decoration: underline;
+}
+
+/* Contact Slide */
+.reveal .contact-slide ul {
+  list-style: none;
+  padding-left: 0;
+  font-size: 1.2em;
+}
+
+.reveal .contact-slide li {
+  margin-bottom: 0.8em;
+  display: flex;
+  align-items: center;
+}
+
+.reveal .contact-slide li::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #3498db;
+  border-radius: 50%;
+  margin-right: 1em;
+}
+
+/* Key Achievements */
+.reveal .achievements {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+  margin-top: 1em;
+}
+
+.reveal .achievement-item {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1em;
+  border-radius: 10px;
+  font-size: 0.8em;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.reveal .achievement-item strong {
+  display: block;
+  margin-bottom: 0.5em;
+  font-size: 1.1em;
+}
+
+/* Skills Grid */
+.reveal .skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+  margin-top: 1em;
+}
+
+.reveal .skill-category {
+  background-color: #f8f9fa;
+  padding: 0.8em;
+  border-radius: 8px;
+  border-left: 4px solid #3498db;
+}
+
+.reveal .skill-category h4 {
+  margin: 0 0 0.5em 0;
+  color: #2c3e50;
+  font-size: 1em;
+}
+
+.reveal .skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3em;
+}
+
+.reveal .skill-tag {
+  background-color: #3498db;
+  color: white;
+  padding: 0.2em 0.5em;
+  border-radius: 12px;
+  font-size: 0.7em;
+}
+
+/* Experience Timeline */
+.reveal .timeline {
+  position: relative;
+  padding-left: 2em;
+}
+
+.reveal .timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, #3498db, #e74c3c);
+}
+
+.reveal .timeline-item {
+  position: relative;
+  margin-bottom: 1.5em;
+}
+
+.reveal .timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -2.45em;
+  top: 0.3em;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #3498db;
+  border: 3px solid white;
+  box-shadow: 0 0 0 3px #3498db;
+}
+
+.reveal .timeline-date {
+  color: #7f8c8d;
+  font-size: 0.8em;
+  font-style: italic;
+}
+
+/* Blockquotes */
+.reveal blockquote {
+  background-color: #f9f9f9;
+  border-left: 5px solid #3498db;
+  padding: 1em;
+  font-style: italic;
+  margin: 1em 0;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.reveal blockquote::before {
+  content: '"';
+  font-size: 3em;
+  color: #3498db;
+  opacity: 0.3;
+  position: absolute;
+  top: -0.2em;
+  left: 0.1em;
+}
+
+/* Code Blocks */
+.reveal pre {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  font-size: 0.7em;
+  line-height: 1.3;
+}
+
+.reveal code {
+  background-color: #f4f4f4;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: var(--r-code-font);
+}
+
+/* Tables */
+.reveal table {
+  margin: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 0.8em;
+}
+
+.reveal table th {
+  background-color: #3498db;
+  color: white;
+  font-weight: bold;
+  padding: 0.5em 1em;
+}
+
+.reveal table td {
+  padding: 0.5em 1em;
+  border-bottom: 1px solid #ddd;
+}
+
+.reveal table tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Progress Bar */
+.reveal .progress {
+  color: #3498db;
+  height: 5px;
+}
+
+/* Controls */
+.reveal .controls {
+  color: #3498db;
+}
+
+/* Slide Numbers */
+.reveal .slide-number {
+  background-color: rgba(52, 152, 219, 0.1);
+  color: #3498db;
+  padding: 5px 10px;
+  font-size: 0.8em;
+  border-radius: 5px;
+}
+
+/* Fragments Animation */
+.reveal .slides section .fragment {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+}
+
+.reveal .slides section .fragment.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reveal .slides section .fragment.highlight-blue {
+  color: #3498db;
+  font-weight: bold;
+}
+
+/* Image Styles */
+.reveal section img {
+  border: none;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  border-radius: 8px;
+}
+
+/* Special Classes */
+.reveal .accent {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.reveal .highlight {
+  background-color: #fff3cd;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+}
+
+.reveal .center-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Responsive adjustments for different screen sizes */
+@media screen and (max-width: 1024px) {
+  .reveal .achievements,
+  .reveal .skills-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .reveal h1 {
+    font-size: 2em;
+  }
+  
+  .reveal h2 {
+    font-size: 1.4em;
+  }
+}
+
+/* Print styles */
+@media print {
+  .reveal .slides section {
+    page-break-after: always;
+  }
+  
+  .reveal .progress,
+  .reveal .controls,
+  .reveal .slide-number {
+    display: none;
+  }
+}

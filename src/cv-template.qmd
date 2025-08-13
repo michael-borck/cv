@@ -1,0 +1,241 @@
+---
+title: "{{< meta personal.name >}}"
+subtitle: |
+  ::: {.content-visible when-format="revealjs"}
+  AI Leader & Educational Innovator
+  :::
+author: "{{< meta personal.name >}}"
+date: today
+date-format: "MMMM YYYY"
+embed-resources: true
+---
+
+```{r setup, include=FALSE}
+library(yaml)
+cv_data <- read_yaml("../data/cv-data.yml")
+```
+
+::: {.content-visible unless-format="revealjs"}
+## Contact Information
+
+{{< meta personal.email >}} | {{< meta personal.phone >}}  
+[LinkedIn]({{< meta personal.linkedin >}}) | [GitHub]({{< meta personal.github >}}) | [Portfolio]({{< meta personal.portfolio >}}) | [Education Platform]({{< meta personal.education_platform >}})
+:::
+
+::: {.content-visible when-format="revealjs"}
+## Contact
+
+- 📧 {{< meta personal.email >}}
+- 📱 {{< meta personal.phone >}}
+- 🔗 [LinkedIn]({{< meta personal.linkedin >}})
+- 💻 [GitHub]({{< meta personal.github >}})
+- 🌐 [Portfolio]({{< meta personal.portfolio >}})
+:::
+
+## Teaching Excellence & Innovation {.content-visible when-format="html"}
+
+### Teaching Philosophy & Approach
+
+- **Core Philosophy:** {{< meta teaching.philosophy.core >}}
+- **Conceptual Framework:** {{< meta teaching.philosophy.framework >}}
+- **Pedagogical Approach:** {{< meta teaching.philosophy.approach >}}
+
+### Student Satisfaction & Impact
+
+```{r satisfaction, echo=FALSE, results='asis'}
+for (item in cv_data$teaching$satisfaction) {
+  cat(paste0("- **", item$metric, ":** ", item$details, "\n"))
+}
+```
+
+### Student Feedback Highlights
+
+```{r feedback, echo=FALSE, results='asis'}
+for (quote in cv_data$teaching$feedback) {
+  cat(paste0("- *\"", quote, "\"*\n"))
+}
+```
+
+## Professional Summary
+
+{{< meta summary.main >}}
+
+## Key Achievements
+
+```{r achievements, echo=FALSE, results='asis'}
+for (achievement in cv_data$achievements) {
+  cat(paste0("- **", achievement, "**\n"))
+}
+```
+
+## Leadership & Academic Experience
+
+```{r experience, echo=FALSE, results='asis'}
+for (job in cv_data$experience) {
+  cat(paste0("\n### ", job$title))
+  if (!is.null(job$organization)) {
+    cat(paste0(" — ", job$organization))
+  }
+  cat("\n")
+  cat(paste0("*", job$period, " | ", job$location, "*\n\n"))
+  
+  if (!is.null(job$responsibilities)) {
+    for (resp in job$responsibilities) {
+      cat(paste0("- ", resp, "\n"))
+    }
+  }
+  
+  if (!is.null(job$projects)) {
+    cat("\n**Recent Projects:**\n")
+    for (project in job$projects) {
+      cat(paste0("- ", project, "\n"))
+    }
+  }
+}
+```
+
+## Publications
+
+::: {.content-visible unless-format="revealjs"}
+### Books (Self-Published, Creative Commons Licensed)
+
+```{r books, echo=FALSE, results='asis'}
+for (book in cv_data$publications$books) {
+  cat(paste0("- **", book$title, "** – ", book$description, "\n"))
+}
+```
+
+### Doctoral Thesis
+
+```{r thesis, echo=FALSE, results='asis'}
+for (thesis in cv_data$publications$thesis) {
+  cat(paste0("- **", thesis$title, "** (", thesis$year, ") – ", thesis$type, ", ", thesis$fields, ". ", thesis$description, "\n"))
+}
+```
+
+### Conference Publications
+
+```{r conferences, echo=FALSE, results='asis'}
+for (conf in cv_data$publications$conferences) {
+  cat(paste0("- ", conf$authors, " (", conf$year, "). \"", conf$title, ".\" *", conf$venue, "*, ", conf$location))
+  if (!is.null(conf$publisher)) {
+    cat(paste0(": ", conf$publisher))
+  }
+  if (!is.null(conf$volume)) {
+    cat(paste0(" ", conf$volume))
+  }
+  if (!is.null(conf$pages)) {
+    cat(paste0(", ", conf$pages))
+  }
+  cat(".\n")
+}
+```
+:::
+
+::: {.content-visible when-format="revealjs"}
+### Selected Publications
+
+- **4 Technical Books** (Creative Commons Licensed)
+- **PhD Thesis:** Feature Extraction from Multi-modal Data (2017)
+- **6+ Peer-reviewed Conference Papers** in Computer Vision & ML
+:::
+
+## Open Source Projects & Educational Tools
+
+```{r projects, echo=FALSE, results='asis'}
+for (project in cv_data$projects) {
+  if (!is.null(project$description)) {
+    cat(paste0("- **", project$name, "** – ", project$description))
+  } else {
+    cat(paste0("- **", project$name, "**"))
+  }
+  if (!is.null(project$year)) {
+    cat(paste0(" – ", project$year))
+  }
+  cat("\n")
+}
+```
+
+## Education
+
+```{r education, echo=FALSE, results='asis'}
+for (edu in cv_data$education) {
+  cat(paste0("- **", edu$degree, "**, ", edu$field, ", ", edu$institution, ", ", edu$year))
+  if (!is.null(edu$thesis)) {
+    cat(paste0("  \n  *", edu$thesis, "*"))
+  }
+  cat("\n")
+}
+```
+
+## Programming Skills
+
+::: {.content-visible unless-format="revealjs"}
+```{r skills, echo=FALSE, results='asis'}
+cat(paste0("**Core Technologies:** ", paste(cv_data$skills$programming$core, collapse=" • "), "\n"))
+cat(paste0("**Web Stack:** ", paste(cv_data$skills$programming$web, collapse=" • "), "\n"))
+cat(paste0("**AI/ML Stack:** ", paste(cv_data$skills$programming$ai_ml, collapse=" • "), "\n"))
+cat(paste0("**Educational Tech:** ", paste(cv_data$skills$programming$educational, collapse=" • "), "\n"))
+```
+:::
+
+::: {.content-visible when-format="revealjs"}
+### Technical Stack
+
+- **Languages:** Python, C/C++, Java, JavaScript, SQL
+- **Web:** React, Flask, FastAPI
+- **AI/ML:** Langchain, TensorFlow, PyTorch
+- **Educational:** Canvas LMS, Blackboard LMS
+:::
+
+## Training & Certifications {.content-visible unless-format="revealjs"}
+
+```{r certifications, echo=FALSE, results='asis'}
+for (cert in cv_data$certifications) {
+  cat(paste0("- ", cert$name, ", ", cert$year, "\n"))
+}
+```
+
+## Professional Service {.content-visible unless-format="revealjs"}
+
+### Service to the Profession
+
+```{r service-profession, echo=FALSE, results='asis'}
+for (service in cv_data$service$profession) {
+  cat(paste0("- **", service$role, ":** ", service$organization, ", ", service$year, "\n"))
+}
+```
+
+### Service to the Community
+
+```{r service-community, echo=FALSE, results='asis'}
+for (service in cv_data$service$community) {
+  cat(paste0("- **", service$role, ":** ", service$project))
+  if (!is.null(service$period)) {
+    cat(paste0(" (", service$period, ")"))
+  } else if (!is.null(service$year)) {
+    cat(paste0(" (", service$year, ")"))
+  }
+  cat("\n")
+}
+```
+
+## Affiliations {.content-visible unless-format="revealjs"}
+
+```{r affiliations, echo=FALSE, results='asis'}
+for (affil in cv_data$affiliations) {
+  cat(paste0("- **", affil$status, "**, ", affil$organization, ", ", affil$year))
+  if (!is.null(affil$note)) {
+    cat(paste0(" ", affil$note))
+  }
+  cat("\n")
+}
+```
+
+## Personal Interests {.content-visible unless-format="revealjs"}
+
+{{< meta interests >}}
+
+## References
+
+{{< meta references >}}

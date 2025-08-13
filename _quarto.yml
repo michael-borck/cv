@@ -1,0 +1,80 @@
+project:
+  type: default
+  output-dir: output
+
+metadata-files:
+  - data/cv-data.yml
+
+format:
+  pdf:
+    documentclass: article
+    papersize: a4
+    margin-left: 2cm
+    margin-right: 2cm
+    margin-top: 2cm
+    margin-bottom: 2cm
+    fontfamily: sourcesanspro
+    fontfamilyoptions: default,osf,scale=0.95
+    fontsize: 11pt
+    linestretch: 1.15
+    colorlinks: true
+    linkcolor: blue
+    urlcolor: blue
+    toc: false
+    embed-resources: true
+    pdf-engine: xelatex
+    include-in-header:
+      text: |
+        \usepackage{enumitem}
+        \setlist{noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt}
+        \usepackage{titlesec}
+        \titlespacing{\section}{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+        \titlespacing{\subsection}{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+        \titlespacing{\subsubsection}{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+
+  html:
+    theme: 
+      - cosmo
+      - assets/css/custom.css
+    toc: true
+    toc-location: left
+    toc-depth: 2
+    embed-resources: true
+    smooth-scroll: true
+    link-external-icon: true
+    link-external-newwindow: true
+    fontsize: 1.1em
+    linestretch: 1.5
+    mainfont: "Source Sans Pro, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif"
+    monofont: "Source Code Pro, Monaco, Consolas, monospace"
+
+  revealjs:
+    theme: [default, assets/css/reveal-custom.css]
+    slide-number: true
+    chalkboard: false
+    embed-resources: true
+    width: 1920
+    height: 1080
+    margin: 0.05
+    center: true
+    navigationMode: linear
+    controlsLayout: bottom-right
+    controlsTutorial: false
+    hash: true
+    history: false
+    transition: slide
+    transition-speed: default
+    background-transition: fade
+    fontfamily: "Source Sans Pro"
+    
+execute:
+  echo: false
+  warning: false
+  message: false
+
+knitr:
+  opts_chunk:
+    echo: false
+    warning: false
+    message: false
+    comment: ''
