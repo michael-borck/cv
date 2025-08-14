@@ -6,8 +6,6 @@
 set -e  # Exit on error
 
 # Configuration
-REPO_URL="https://github.com/michael-borck/resume.michaelborck.dev.git"
-DEPLOY_DIR="$HOME/resume-api"
 CONTAINER_NAME="resume-api"
 
 # Colors for output
@@ -18,17 +16,18 @@ NC='\033[0m' # No Color
 
 echo -e "${GREEN}Starting Resume API Docker Deployment...${NC}"
 
-# 1. Clone or update repository
-echo -e "${YELLOW}Step 1: Setting up repository...${NC}"
-if [ -d "$DEPLOY_DIR" ]; then
-    echo "Repository exists, pulling latest changes..."
-    cd $DEPLOY_DIR
-    git pull origin main
-else
-    echo "Cloning repository..."
-    git clone $REPO_URL $DEPLOY_DIR
-    cd $DEPLOY_DIR
+# 1. Verify we're in the right directory
+echo -e "${YELLOW}Step 1: Checking current directory...${NC}"
+if [ ! -f "api/docker-compose.vps.yml" ]; then
+    echo -e "${RED}Error: Not in the resume-api directory or files are missing${NC}"
+    echo "Please run this script from the resume-api root directory"
+    exit 1
 fi
+echo -e "${GREEN}Found API files in current directory${NC}"
+
+# Optional: Pull latest changes
+echo -e "${YELLOW}Pulling latest changes from git...${NC}"
+git pull origin main || echo "Could not pull latest changes (may not be needed)"
 
 # 2. Check Docker network
 echo -e "${YELLOW}Step 2: Checking Docker network...${NC}"
