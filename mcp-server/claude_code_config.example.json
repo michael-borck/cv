@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "resume": {
+      "command": "node",
+      "args": ["/home/michael/projects/cv/mcp-server/dist/index.js"],
+      "env": {
+        "RESUME_API_URL": "https://api.resume.michaelborck.dev"
+      }
+    }
+  }
+}

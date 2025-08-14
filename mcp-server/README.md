@@ -21,16 +21,23 @@ npm install
 npm run build
 ```
 
-### For Claude Desktop
+### For Claude Code
 
 1. Build the server:
 ```bash
 cd mcp-server
-npm install
-npm run build
+./setup-claude-code.sh  # This will build and show you the config
 ```
 
-2. Add to Claude Desktop configuration:
+2. Add to Claude Code configuration:
+
+**On macOS**: `~/Library/Application Support/Claude/claude_code_config.json`
+**On Linux**: `~/.config/Claude/claude_code_config.json`
+**On Windows**: `%APPDATA%\Claude\claude_code_config.json`
+
+### For Claude Desktop
+
+Use the same configuration but in:
 
 **On macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
 **On Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
