@@ -1,10 +1,10 @@
 # Makefile for CV Generation
 # Single source of truth CV system using Quarto
 
-.PHONY: all pdf pdf-latex html slides interactive quest terminal magazine clean install help watch serve validate edit preview commit push
+.PHONY: all pdf pdf-latex html slides quest terminal magazine api chatbot clean install help watch serve validate edit preview commit push
 
 # Default target
-all: pdf html slides interactive
+all: pdf html slides
 
 # Install dependencies
 install:
@@ -68,25 +68,8 @@ slides:
 	@test -d output/src && rm -rf output/src || true
 	@echo "Reveal.js presentation generated: output/cv-michael-borck-slides.html"
 
-# Generate Interactive HTML CV
-interactive:
-	@echo "Generating Interactive CV..."
-	@mkdir -p output
-	@cd src && quarto render cv-template-interactive.qmd --to html --output cv-michael-borck-interactive.html
-	@test -f output/src/cv-michael-borck-interactive.html && mv output/src/cv-michael-borck-interactive.html output/ || true
-	@test -d output/src && rm -rf output/src || true
-	@echo "Interactive CV generated: output/cv-michael-borck-interactive.html"
 
-# Generate CV Quest - Swipe Card Adventure Game (Quarto version - deprecated)
-quest-old:
-	@echo "Generating CV Quest - Swipe Card Adventure (Quarto version)..."
-	@mkdir -p output
-	@cd src && quarto render cv-quest.qmd --to html --output cv-quest.html
-	@test -f output/src/cv-quest.html && mv output/src/cv-quest.html output/ || true
-	@test -d output/src && rm -rf output/src || true
-	@echo "CV Quest generated: output/cv-quest.html"
-
-# Generate CV Quest - Standalone Multi-File Version
+# Generate CV Quest - Standalone Swipe Card Adventure Game
 quest:
 	@echo "Generating CV Quest - Standalone Version..."
 	@python3 scripts/generate_cv_cards.py
@@ -94,23 +77,37 @@ quest:
 	@echo "  - Open creative/quest/index.html in a browser to play"
 	@echo "  - Or serve with: cd creative/quest && python3 -m http.server 8000"
 
-# Generate Terminal CV - Zork-like Text Adventure
+# Generate Terminal CV - Standalone Zork-like Text Adventure
 terminal:
-	@echo "Generating Terminal CV - Text Adventure..."
-	@mkdir -p output
-	@cd src && quarto render cv-terminal.qmd --to html --output cv-terminal.html
-	@test -f output/src/cv-terminal.html && mv output/src/cv-terminal.html output/ || true
-	@test -d output/src && rm -rf output/src || true
-	@echo "Terminal CV generated: output/cv-terminal.html"
+	@echo "Generating Terminal CV - Standalone Version..."
+	@python3 scripts/generate_terminal_data.py
+	@echo "Terminal CV Standalone ready: creative/terminal/index.html"
+	@echo "  - Open creative/terminal/index.html in a browser to play"
+	@echo "  - Or serve with: cd creative/terminal && python3 -m http.server 8001"
 
-# Generate Magazine CV - Interactive Publication
+# Generate Magazine CV - Standalone Professional Publication
 magazine:
-	@echo "Generating TechLife Magazine CV..."
-	@mkdir -p output
-	@cd src && quarto render cv-magazine.qmd --to html --output cv-magazine.html
-	@test -f output/src/cv-magazine.html && mv output/src/cv-magazine.html output/ || true
-	@test -d output/src && rm -rf output/src || true
-	@echo "Magazine CV generated: output/cv-magazine.html"
+	@echo "Generating Magazine CV - Standalone Version..."
+	@python3 scripts/generate_magazine_data.py
+	@echo "Magazine CV Standalone ready: creative/magazine/index.html"
+	@echo "  - Open creative/magazine/index.html in a browser to view"
+	@echo "  - Or serve with: cd creative/magazine && python3 -m http.server 8002"
+
+# Generate API CV - Swagger-style Documentation Interface  
+api:
+	@echo "Generating API CV - Standalone Version..."
+	@python3 scripts/generate_api_data.py
+	@echo "API CV Standalone ready: creative/api/index.html"
+	@echo "  - Open creative/api/index.html in a browser to view"
+	@echo "  - Or serve with: cd creative/api && python3 -m http.server 8003"
+
+# Generate Chatbot CV - Conversational Interface
+chatbot:
+	@echo "Generating Chatbot CV - Standalone Version..."
+	@python3 scripts/generate_chatbot_data.py
+	@echo "Chatbot CV Standalone ready: creative/chatbot/index.html"
+	@echo "  - Open creative/chatbot/index.html in a browser to view"
+	@echo "  - Or serve with: cd creative/chatbot && python3 -m http.server 8004"
 
 # Watch for changes and auto-rebuild
 watch:
@@ -164,16 +161,16 @@ push: commit
 help:
 	@echo "CV Generation System - Available Commands:"
 	@echo "=========================================="
-	@echo "  make all        - Generate all output formats (PDF, HTML, Reveal.js, Interactive)"
+	@echo "  make all        - Generate all output formats (PDF, HTML, Reveal.js)"
 	@echo "  make pdf        - Generate PDF from HTML (uses Playwright/wkhtmltopdf/weasyprint)"
 	@echo "  make pdf-latex  - Generate PDF via LaTeX (traditional method)"
 	@echo "  make html       - Generate HTML version only"
 	@echo "  make slides     - Generate Reveal.js presentation only"
-	@echo "  make interactive - Generate interactive HTML CV with animations & filtering"
 	@echo "  make quest      - Generate CV Quest - standalone swipe card adventure game"
-	@echo "  make quest-old  - Generate CV Quest - Quarto version (deprecated)"
-	@echo "  make terminal   - Generate Terminal CV - Zork-like text adventure"
-	@echo "  make magazine   - Generate TechLife Magazine - interactive publication format"
+	@echo "  make terminal   - Generate Terminal CV - standalone Zork-like text adventure"
+	@echo "  make magazine   - Generate Magazine CV - standalone professional publication"
+	@echo "  make api        - Generate API CV - Swagger-style documentation interface"
+	@echo "  make chatbot    - Generate Chatbot CV - conversational interface"
 	@echo "  make watch      - Watch for changes and auto-rebuild HTML"
 	@echo "  make serve      - Serve HTML version locally on port 8008"
 	@echo "  make clean      - Remove all generated files"

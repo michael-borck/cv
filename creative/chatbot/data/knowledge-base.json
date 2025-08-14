@@ -1,0 +1,520 @@
+{
+  "profile": {
+    "name": "Michael Borck",
+    "title": "AI Leader & Cyber Security Expert",
+    "email": "michael.borck@curtin.edu.au",
+    "phone": "0402 297 573",
+    "location": "Perth, WA",
+    "linkedin": "https://linkedin.com/in/michaelborck",
+    "github": "https://github.com/michael-borck",
+    "portfolio": "https://michaelborck.dev",
+    "education_platform": "https://michaelborck.education",
+    "summary": "AI Leader and Cyber Security expert with 25+ years spanning military → academia → industry consulting transition. Author of 4 technical books (Creative Commons licensed), creator of innovative educational AI tools, and pioneer in AI-enhanced pedagogy serving academics, education, agriculture and mining sectors. Technical Lead for Business AI Research Group with a rare combination of technical depth and educational innovation expertise. Teaching philosophy grounded in three conceptual pillars - Caring, Competence, and Passion, with a core principle of \"Make Contact Count.\"",
+    "tagline": "Make Contact Count - maximising impact through every student interaction"
+  },
+  "teaching_philosophy": {
+    "core": "Make Contact Count - maximising impact through every student interaction",
+    "framework": "Built on three pillars - Caring, Competence, and Passion",
+    "approach": "Grounded in Constructivist learning theory, Bloom's Taxonomy, and Universal Design for Learning (UDL)",
+    "satisfaction": [
+      {
+        "metric": "100% Satisfaction Scores",
+        "details": "Achieved across ISYS3015 Business Application Development, ISYS2001 Introduction to Business Programming, and ISYS6018 Information Security"
+      },
+      {
+        "metric": "100% 'Effective Teacher' Ratings",
+        "details": "Across Enterprise Network Security, Business Systems Selection, and Introduction to Programming units"
+      }
+    ],
+    "feedback": [
+      "Michael is an absolute legend, I love his teaching style",
+      "He really did feel like he cared about my learning",
+      "The unit was hard, but fun, because he clearly cared about our learning",
+      "Michael made it easy for me to gain information"
+    ],
+    "innovations": [
+      {
+        "name": "Cloud Core Simulation",
+        "description": "Created complete virtual company with IT infrastructure, policies, and staff chatbot for authentic audit experiences"
+      },
+      {
+        "name": "Real-World Integration",
+        "description": "Students report assessments prepare them for 'workplace environment'"
+      },
+      {
+        "name": "Student Impact",
+        "description": "The environment created while performing the assignment is nothing less than working in real-time"
+      }
+    ]
+  },
+  "experience": [
+    {
+      "id": "exp_0",
+      "organization": "Curtin University",
+      "title": "Lecturer — School of Marketing and Management",
+      "location": "Perth, WA",
+      "period": "Feb 2016 – Present",
+      "responsibilities": [
+        "AI Program Leadership - AI Leader for the School, developing new AI programs within undergraduate and postgraduate curricula",
+        "Technical Leadership - Technical Lead for the Business AI Research Group",
+        "Core Teaching Areas - AI, Programming (Python), and Cyber Security",
+        "Curriculum Development - Backbone developer for Python and Web development programs",
+        "Cyber Security - Lead lecturer for cyber security programs with advanced digital forensics curriculum",
+        "Educational Innovation - Pioneer in AI-enhanced pedagogy and interactive learning methodologies, with teaching philosophy grounded in Caring, Competence, and Passion",
+        "Student Engagement - Achieved 100% student satisfaction scores through innovative assessment design including \"Cloud Core\" virtual company simulation",
+        "Executive Education - Providing AI training to academics, education professionals, agriculture and mining industry executives"
+      ],
+      "projects": [],
+      "type": "academic"
+    },
+    {
+      "id": "exp_1",
+      "organization": "Curtin University",
+      "title": "Course Leadership & Development",
+      "location": "Perth, WA",
+      "period": "Ongoing",
+      "responsibilities": [
+        "Course Lead for Information Systems undergraduate and postgraduate degree programs",
+        "Unit coordination across multiple levels - postgraduate, undergraduate, core, non-core, and service units (domestic and international)",
+        "Advanced Canvas LMS and Blackboard development and customization",
+        "Creator of interactive educational tools and assessment frameworks"
+      ],
+      "projects": [],
+      "type": "academic"
+    },
+    {
+      "id": "exp_2",
+      "organization": "Curtin University",
+      "title": "Associate Lecturer",
+      "location": "Perth, WA",
+      "period": "Jan 2001 – Dec 2007",
+      "responsibilities": [
+        "Academic Leadership - Provided departmental representation on institutional committees",
+        "Program Development - Developed and delivered comprehensive course material for Software Engineering and Computer Science degrees",
+        "International Coordination - Managed unit coordination across domestic and international campuses"
+      ],
+      "projects": [],
+      "type": "academic"
+    },
+    {
+      "id": "exp_3",
+      "organization": "Self-Employed",
+      "title": "AI, IS & Educational Technology Consultant",
+      "location": "Perth, WA",
+      "period": "Jan 2016 – Present",
+      "responsibilities": [
+        "AI strategy and implementation consultation",
+        "IS/IT consultation and analysis",
+        "Educational technology consulting and training",
+        "Executive education training in AI for academics, education professionals, agriculture and mining industries"
+      ],
+      "projects": [
+        "Stanley College, IT Consultant (2019)",
+        "Web Agency Projects: Progressive Changes Psychology Services, Mindarie Mind and Body, Coastal Warriors Martial Arts, Yanchep Martial Arts (2017-2019)"
+      ],
+      "type": "consulting"
+    },
+    {
+      "id": "exp_4",
+      "organization": "Curtin University",
+      "title": "Researcher",
+      "location": "Perth, WA",
+      "period": "Mar 2018 – 2019",
+      "responsibilities": [
+        "Advanced AI Research - Investigation and development of CNN models and their application to the maritime environment",
+        "Applied Machine Learning - Focused research on computer vision applications for marine and coastal monitoring"
+      ],
+      "projects": [],
+      "type": "academic"
+    },
+    {
+      "id": "exp_5",
+      "organization": "CRCSI & Landgate WA",
+      "title": "Software Contractor",
+      "location": "Perth, WA",
+      "period": "Mar 2015 – Jan 2016",
+      "responsibilities": [
+        "Computer Vision Innovation - Developed automated detection and recognition systems for street sign inventory",
+        "Technical Expertise - Provided specialized skills in machine learning and image processing for government applications"
+      ],
+      "projects": [],
+      "type": "consulting"
+    },
+    {
+      "id": "exp_6",
+      "organization": "Bital IT Consulting Services",
+      "title": "IT Consultant — Owner",
+      "location": "Perth, WA",
+      "period": "Jan 2008 – Jan 2011",
+      "responsibilities": [
+        "Business Analysis - Provided comprehensive business and technical analysis to diverse client base",
+        "Infrastructure Development - Developed and supported critical backup and monitoring solutions for servers and databases"
+      ],
+      "projects": [],
+      "type": "consulting"
+    },
+    {
+      "id": "exp_7",
+      "organization": "Submarine Systems Centre, RAN",
+      "title": "IT Manager",
+      "location": "Perth, WA",
+      "period": "Jul 1996 – Jan 2000",
+      "responsibilities": [
+        "Strategic IT Leadership - Managed comprehensive information technology infrastructure supporting submarine operations and maintenance",
+        "Executive Advisory - Provided strategic IT guidance to senior military leadership and operational boards",
+        "Organisational Impact - Delivered technology solutions that directly supported critical defence capabilities and mission readiness"
+      ],
+      "projects": [],
+      "type": "consulting"
+    },
+    {
+      "id": "exp_8",
+      "organization": "HQADF",
+      "title": "Project Manager — Command and Control",
+      "location": "Canberra, ACT",
+      "period": "Jul 1993 – Dec 1996",
+      "responsibilities": [
+        "Strategic Leadership - Managed development of critical military messaging systems for Australian Defence Force headquarters",
+        "Project Excellence - Successfully controlled cost, schedule, and quality across multi-year defense communications project",
+        "Cross-functional Coordination - Led technical teams and stakeholder management across multiple defence departments"
+      ],
+      "projects": [],
+      "type": "consulting"
+    },
+    {
+      "id": "exp_9",
+      "organization": "HQADF",
+      "title": "Analyst/Programmer — Manpower and Pay Project",
+      "location": "Canberra, ACT",
+      "period": "Aug 1991 – Jun 1993",
+      "responsibilities": [
+        "Systems Development - Designed and implemented large-scale personnel management systems for defence operations",
+        "Technical Excellence - Conducted comprehensive code reviews and built sophisticated models using CASE tools",
+        "Full-cycle Development - Led data modeling, process modeling, database design, program design, and interface design"
+      ],
+      "projects": [],
+      "type": "consulting"
+    },
+    {
+      "id": "exp_10",
+      "organization": "RAN",
+      "title": "System Administrator — Manpower and Personnel",
+      "location": "Canberra, ACT",
+      "period": "Mar 1989 – Aug 1993",
+      "responsibilities": [
+        "Infrastructure Management - Installed, configured, and maintained critical network and computer systems for Royal Australian Navy",
+        "Crisis Management - Executed rapid recovery procedures during system failures, ensuring minimal operational disruption",
+        "Security Operations - Maintained secure computing environments for sensitive military personnel data"
+      ],
+      "projects": [],
+      "type": "consulting"
+    }
+  ],
+  "skills": {
+    "programming": {
+      "languages": [],
+      "frameworks": []
+    },
+    "ai_ml": [
+      "TensorFlow",
+      "PyTorch",
+      "Scikit-learn",
+      "Pandas",
+      "NumPy",
+      "OpenCV"
+    ],
+    "databases": [
+      "PostgreSQL",
+      "MySQL",
+      "SQLite",
+      "MongoDB"
+    ],
+    "cloud": [
+      "AWS",
+      "Azure",
+      "Google Cloud"
+    ],
+    "tools": [
+      "Git",
+      "Docker",
+      "Linux",
+      "Jupyter",
+      "VS Code",
+      "LaTeX"
+    ],
+    "domain_expertise": [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Cybersecurity",
+      "Educational Technology",
+      "Research Methodology",
+      "Technical Writing"
+    ]
+  },
+  "education": [
+    {
+      "degree": "Doctor of Philosophy (PhD)",
+      "institution": "Curtin University",
+      "year": 2017,
+      "focus": "",
+      "grade": "",
+      "thesis": "Feature Extraction from Multi-modal Data (GIS, Machine Learning & Computer Vision)"
+    },
+    {
+      "degree": "Bachelor of Science (Computer Science) (Honours)",
+      "institution": "Curtin University",
+      "year": 2001,
+      "focus": "",
+      "grade": "",
+      "thesis": "A Bayesian Belief Network Approach to Predicting the Prices of Australian Commonwealth Government Interest Rate Securities"
+    },
+    {
+      "degree": "Graduate Diploma in Business",
+      "institution": "Curtin University",
+      "year": 2000,
+      "focus": "",
+      "grade": "",
+      "thesis": ""
+    },
+    {
+      "degree": "Bachelor of Science (Computer Science)",
+      "institution": "Australian National University",
+      "year": 1994,
+      "focus": "",
+      "grade": "",
+      "thesis": ""
+    },
+    {
+      "degree": "Bachelor of Applied Science (Mathematics)",
+      "institution": "Queensland University of Technology",
+      "year": 1989,
+      "focus": "",
+      "grade": "",
+      "thesis": ""
+    }
+  ],
+  "projects": [
+    {
+      "name": "Reality Reigns",
+      "description": "Swipe-based decision game providing interactive fiction storytelling from fantasy adventures to educational simulations",
+      "tech": [],
+      "status": "completed",
+      "impact": "",
+      "url": "",
+      "github": ""
+    },
+    {
+      "name": "Talk Buddy",
+      "description": "AI-based audio interface tool for conversation practice (medical diagnoses, HR discussions, English conversation)",
+      "tech": [],
+      "status": "completed",
+      "impact": "",
+      "url": "",
+      "github": ""
+    },
+    {
+      "name": "Curriculum Curator",
+      "description": "AI-based tool for creating, managing and curating learning materials based on unique teaching philosophies",
+      "tech": [],
+      "status": "completed",
+      "impact": "",
+      "url": "",
+      "github": ""
+    },
+    {
+      "name": "Feed Forward System",
+      "description": "AI-based assessment feedback tool for various assessment types",
+      "tech": [],
+      "status": "completed",
+      "impact": "",
+      "url": "",
+      "github": ""
+    },
+    {
+      "name": "Student Feedback Analyzer",
+      "description": "AI tool that analyzes student feedback forms to suggest course improvements",
+      "tech": [],
+      "status": "completed",
+      "impact": "",
+      "url": "",
+      "github": ""
+    },
+    {
+      "name": "Image Processing for Orange",
+      "description": "",
+      "tech": [],
+      "status": "completed",
+      "impact": "",
+      "url": "",
+      "github": ""
+    },
+    {
+      "name": "Graph Merging, Scikit Image",
+      "description": "",
+      "tech": [],
+      "status": "completed",
+      "impact": "",
+      "url": "",
+      "github": ""
+    },
+    {
+      "name": "User Guide, imgAnnotation Tool",
+      "description": "",
+      "tech": [],
+      "status": "completed",
+      "impact": "",
+      "url": "",
+      "github": ""
+    }
+  ],
+  "publications": [
+    {
+      "title": "Python Step By Step in an AI World",
+      "year": "",
+      "type": "Book",
+      "publisher": "",
+      "description": "Comprehensive guide to Python programming in the context of artificial intelligence",
+      "url": "",
+      "isbn": ""
+    },
+    {
+      "title": "JumpStart Python in the AI Era",
+      "year": "",
+      "type": "Book",
+      "publisher": "",
+      "description": "Accelerated learning approach for Python in AI applications",
+      "url": "",
+      "isbn": ""
+    },
+    {
+      "title": "Intentional Prompting: Blending AI and Human Oversight",
+      "year": "",
+      "type": "Book",
+      "publisher": "",
+      "description": "Strategic guide to effective AI interaction and governance",
+      "url": "",
+      "isbn": ""
+    },
+    {
+      "title": "Python Dev Book: From Zero to Production",
+      "year": "",
+      "type": "Book",
+      "publisher": "",
+      "description": "Complete development lifecycle guide for Python applications",
+      "url": "",
+      "isbn": ""
+    }
+  ],
+  "military_background": {
+    "service": "Royal Australian Navy",
+    "duration": "12 years",
+    "role": "Electronics Technician",
+    "specializations": [
+      "Submarine Electronics Systems",
+      "Combat Systems Operation",
+      "Naval Communications",
+      "Technical Leadership"
+    ],
+    "security_clearance": "Top Secret",
+    "skills_developed": [
+      "Precision and attention to detail",
+      "Working under pressure",
+      "Technical troubleshooting",
+      "Leadership and team management",
+      "Protocol adherence"
+    ]
+  },
+  "achievements": [
+    "Educational Leadership - AI Leader for School of Marketing and Management, led development of AI curriculum serving 500+ students across undergraduate and postgraduate programs",
+    "Teaching Excellence - Achieved 100% student satisfaction scores across multiple units (ISYS3015, ISYS2001, ISYS6018) with consistent \"effective teacher\" ratings",
+    "Technical Innovation - Creator of multiple AI-powered educational tools including Reality Reigns, Talk Buddy, and Curriculum Curator with 290+ downloads",
+    "Industry Impact - Executive education training delivered to 100+ professionals across 15+ companies in academics, education, agriculture and mining sectors",
+    "Assessment Innovation - Developed award-winning \"Cloud Core\" virtual company simulation providing authentic industry experience",
+    "Research Excellence - 6+ peer-reviewed publications in computer vision and machine learning with focus on mobile mapping systems",
+    "Open Source Contribution - Lead developer for Image Processing for Orange, serving the broader scientific community",
+    "Military Leadership - Managed critical defence projects including military messaging systems and submarine IT infrastructure"
+  ],
+  "consulting_services": {
+    "ai_strategy": [
+      "AI readiness assessments",
+      "Machine learning solution design",
+      "AI ethics and responsible deployment",
+      "Educational AI integration"
+    ],
+    "educational_technology": [
+      "Curriculum development for AI/tech programs",
+      "Interactive learning tool creation",
+      "Assessment innovation and design",
+      "Faculty training and development"
+    ],
+    "cybersecurity": [
+      "Information security assessments",
+      "Security framework implementation",
+      "Cyber awareness training"
+    ],
+    "industries_served": [
+      "Academics",
+      "Education",
+      "Agriculture",
+      "Mining"
+    ]
+  },
+  "ai_expertise": {
+    "specializations": [
+      "Educational AI",
+      "Computer Vision",
+      "AI Ethics",
+      "Business AI"
+    ],
+    "technical_stack": {
+      "frameworks": [
+        "TensorFlow",
+        "PyTorch",
+        "Scikit-learn"
+      ],
+      "languages": [
+        "Python",
+        "Matlab"
+      ],
+      "tools": [
+        "Jupyter",
+        "Pandas",
+        "NumPy",
+        "OpenCV"
+      ]
+    },
+    "research_focus": "CNN models and maritime environment applications",
+    "educational_tools": [
+      "Reality Reigns - AI-powered learning platform",
+      "Talk Buddy - Conversational AI for engagement",
+      "Curriculum Curator - AI content organization tool"
+    ],
+    "downloads": "290+"
+  },
+  "cybersecurity_expertise": {
+    "academic_leadership": [
+      "Lead lecturer for cybersecurity programs",
+      "Advanced digital forensics curriculum",
+      "Information Security unit coordination",
+      "100% student satisfaction in security courses"
+    ],
+    "military_foundation": [
+      "12 years Royal Australian Navy",
+      "Top Secret security clearance",
+      "Combat systems and secure communications",
+      "Critical defense project management"
+    ],
+    "technical_areas": [
+      "Information Security framework design",
+      "Digital Forensics investigation",
+      "Risk Assessment and evaluation",
+      "Security Awareness training"
+    ],
+    "impact": "Cybersecurity assessment frameworks used by 5+ universities"
+  },
+  "metadata": {
+    "generated_at": "2025-08-14T13:43:21.738543",
+    "version": "1.0.0",
+    "source": "cv-data.yml"
+  }
+}

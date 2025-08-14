@@ -1,0 +1,304 @@
+/* Terminal CV - Retro Terminal Styling */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0c0c0c;
+    color: #00ff00;
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.4;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Phosphor CRT effect */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 0, 0.03),
+        rgba(0, 255, 0, 0.03) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(0, 255, 0, 0) 0%,
+        rgba(0, 0, 0, 0.4) 100%
+    );
+    pointer-events: none;
+    z-index: 2;
+}
+
+.terminal-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 3;
+}
+
+.terminal-header {
+    background: #1a1a1a;
+    padding: 10px;
+    border-bottom: 2px solid #00ff00;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.terminal-title {
+    color: #00ff00;
+    font-weight: 600;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.term-btn {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #00ff00;
+    background: transparent;
+    color: #00ff00;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.term-btn:hover {
+    background: #00ff00;
+    color: #0c0c0c;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+.terminal-body {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: #0a0a0a;
+    position: relative;
+}
+
+/* Custom scrollbar */
+.terminal-body::-webkit-scrollbar {
+    width: 10px;
+}
+
+.terminal-body::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+    background: #00ff00;
+    border: 1px solid #0a0a0a;
+}
+
+.terminal-output {
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.terminal-input-line {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.prompt {
+    color: #00ff00;
+    margin-right: 10px;
+    font-weight: 600;
+    text-shadow: 0 0 3px #00ff00;
+}
+
+.terminal-input {
+    background: transparent;
+    border: none;
+    color: #00ff00;
+    font-family: inherit;
+    font-size: inherit;
+    flex: 1;
+    outline: none;
+    caret-color: transparent;
+}
+
+.cursor {
+    color: #00ff00;
+    animation: blink 1s infinite;
+    margin-left: 2px;
+    font-weight: 600;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.terminal-statusbar {
+    background: #1a1a1a;
+    padding: 8px 20px;
+    border-top: 1px solid #00ff00;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    user-select: none;
+}
+
+.terminal-statusbar span {
+    color: #00ff00;
+    text-shadow: 0 0 3px #00ff00;
+}
+
+/* Text colors for output */
+.green { color: #00ff00; }
+.yellow { color: #ffff00; }
+.cyan { color: #00ffff; }
+.red { color: #ff0040; }
+.white { color: #ffffff; }
+.dim { opacity: 0.7; }
+
+/* ASCII art styling */
+.ascii-art {
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff;
+    margin: 10px 0;
+    line-height: 1.2;
+    font-size: 12px;
+}
+
+/* Room title styling */
+.room-title {
+    color: #00ffff;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 10px 0;
+    text-shadow: 0 0 8px #00ffff;
+}
+
+/* Item styling */
+.item {
+    color: #ffff00;
+    font-weight: 600;
+}
+
+/* Achievement notification */
+.achievement {
+    color: #00ff00;
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid #00ff00;
+    padding: 10px;
+    margin: 10px 0;
+    animation: achievementPulse 2s ease;
+}
+
+@keyframes achievementPulse {
+    0% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7); }
+    50% { box-shadow: 0 0 20px 10px rgba(0, 255, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); }
+}
+
+/* Error message */
+.error {
+    color: #ff0040;
+    font-style: italic;
+}
+
+/* Help command styling */
+.help-command {
+    color: #00ffff;
+    font-weight: 600;
+}
+
+.help-description {
+    color: #00ff00;
+    margin-left: 20px;
+}
+
+/* Experience timeline */
+.timeline-entry {
+    border-left: 2px solid #00ff00;
+    padding-left: 15px;
+    margin: 10px 0;
+}
+
+.timeline-year {
+    color: #ffff00;
+    font-weight: 600;
+}
+
+/* Flicker effect for authenticity */
+@keyframes flicker {
+    0% { opacity: 1; }
+    4% { opacity: 0.9; }
+    6% { opacity: 0.85; }
+    8% { opacity: 0.95; }
+    10% { opacity: 1; }
+    11% { opacity: 0.94; }
+    12% { opacity: 1; }
+    14% { opacity: 0.9; }
+    16% { opacity: 1; }
+    100% { opacity: 1; }
+}
+
+.terminal-container {
+    animation: flicker 10s infinite;
+}
+
+/* Text glow effect */
+.glow {
+    text-shadow: 0 0 10px currentColor;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .terminal-body {
+        padding: 15px;
+    }
+    
+    body {
+        font-size: 12px;
+    }
+    
+    .ascii-art {
+        font-size: 10px;
+    }
+    
+    .terminal-statusbar {
+        font-size: 11px;
+    }
+}

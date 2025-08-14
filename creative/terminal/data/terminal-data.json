@@ -1,0 +1,331 @@
+{
+  "rooms": {
+    "lobby": {
+      "name": "Career Lobby",
+      "description": "You stand in the grand lobby of Michael Borck's career. Digital displays show streaming data of achievements and experiences. Corridors lead to different career phases.",
+      "ascii": "\n    \u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n    \u2551       CAREER LOBBY            \u2551\n    \u2551   11+ Years of Experience     \u2551\n    \u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n            ",
+      "exits": {
+        "north": "military",
+        "east": "academic",
+        "south": "consulting",
+        "west": "education"
+      },
+      "items": [
+        "terminal",
+        "readme"
+      ]
+    },
+    "military": {
+      "name": "Military Command Center",
+      "description": "RAN Submarine Systems Centre. Security clearance required. The walls are lined with classified project files and strategic communications equipment.",
+      "ascii": "\n    \u2694\ufe0f  MILITARY SERVICE  \u2694\ufe0f\n    1989-2000 | Leadership & IT\n            ",
+      "exits": {
+        "south": "lobby"
+      },
+      "items": [
+        "security_badge",
+        "project_files"
+      ]
+    },
+    "academic": {
+      "name": "University Lecture Hall",
+      "description": "Curtin University. The hall echoes with the sound of engaged students. Whiteboards covered with AI algorithms and system designs.",
+      "ascii": "\n    \ud83c\udf93 ACADEMIC EXCELLENCE \ud83c\udf93\n    100% Student Satisfaction\n            ",
+      "exits": {
+        "west": "lobby",
+        "north": "research_lab"
+      },
+      "items": [
+        "teaching_award",
+        "feedback_forms"
+      ]
+    },
+    "research_lab": {
+      "name": "AI Research Laboratory",
+      "description": "State-of-the-art AI research facility. Neural networks train on massive datasets. Computer vision algorithms process imagery in real-time.",
+      "ascii": "\n    \ud83e\udde0 AI RESEARCH LAB \ud83e\udde0\n    Computer Vision | Machine Learning\n            ",
+      "exits": {
+        "south": "academic"
+      },
+      "items": [
+        "thesis",
+        "publications"
+      ]
+    },
+    "consulting": {
+      "name": "Consulting Office",
+      "description": "A modern workspace filled with client projects and innovative solutions. Multiple monitors display dashboards and development environments.",
+      "ascii": "\n    \ud83d\udcbc CONSULTING SERVICES \ud83d\udcbc\n    AI Strategy | EdTech | Systems\n            ",
+      "exits": {
+        "north": "lobby",
+        "east": "innovation_lab"
+      },
+      "items": [
+        "client_portfolio",
+        "consulting_toolkit"
+      ]
+    },
+    "education": {
+      "name": "Education Center",
+      "description": "Shelves lined with technical books and educational materials. A place of continuous learning and knowledge sharing.",
+      "ascii": "\n    \ud83d\udcda EDUCATION HUB \ud83d\udcda\n    PhD | BSc | Grad Dip\n            ",
+      "exits": {
+        "east": "lobby"
+      },
+      "items": [
+        "books",
+        "python_textbook",
+        "certificates"
+      ]
+    },
+    "innovation_lab": {
+      "name": "Innovation Laboratory",
+      "description": "Where ideas become reality. Prototypes and proof-of-concepts everywhere. The latest AI tools and frameworks ready for experimentation.",
+      "ascii": "\n    \u26a1 INNOVATION LAB \u26a1\n    Creating Tomorrow's Solutions\n            ",
+      "exits": {
+        "west": "consulting"
+      },
+      "items": [
+        "reality_reigns",
+        "talk_buddy",
+        "cloud_core_sim"
+      ]
+    }
+  },
+  "items": {
+    "terminal": {
+      "description": "A retro terminal displaying contact information:\nEmail: michael.borck@curtin.edu.au\nLinkedIn: https://linkedin.com/in/michaelborck\nGitHub: https://github.com/michael-borck",
+      "takeable": false,
+      "points": 0
+    },
+    "readme": {
+      "description": "A README file that says:\n'Welcome, traveler. Type HELP for commands. Your journey through this career awaits.'",
+      "takeable": true,
+      "points": 5
+    },
+    "project_files": {
+      "description": "Military messaging system documentation. Critical infrastructure that connected defense communications.",
+      "takeable": true,
+      "points": 10
+    },
+    "security_badge": {
+      "description": "IT Manager - Submarine Systems Centre, RAN. Jul 1996 - Jan 2000. Level: CLASSIFIED",
+      "takeable": true,
+      "points": 15
+    },
+    "python_textbook": {
+      "description": "'Python Step By Step in an AI World' - A comprehensive guide authored by Michael Borck",
+      "takeable": true,
+      "points": 10
+    },
+    "teaching_award": {
+      "description": "Certificate of Excellence: 100% Student Satisfaction Score - ISYS3015, ISYS2001, ISYS6018",
+      "takeable": true,
+      "points": 20
+    },
+    "thesis": {
+      "description": "PhD Thesis (2017): 'Feature Extraction from Multi-modal Data' - Combining GIS, Machine Learning & Computer Vision",
+      "takeable": false,
+      "points": 0
+    },
+    "reality_reigns": {
+      "description": "Swipe-based decision game providing interactive fiction storytelling. 290+ downloads and growing!",
+      "takeable": false,
+      "points": 0
+    },
+    "talk_buddy": {
+      "description": "AI-based audio interface for conversation practice. Used for medical diagnoses, HR discussions, and language learning.",
+      "takeable": false,
+      "points": 0
+    },
+    "cloud_core_sim": {
+      "description": "Complete virtual company simulation with IT infrastructure, policies, and chatbot staff. Students love it!",
+      "takeable": false,
+      "points": 0
+    },
+    "feedback_forms": {
+      "description": "Student feedback: 'Michael is an absolute legend', 'He really cared about my learning', 'Hard but fun!'",
+      "takeable": true,
+      "points": 15
+    },
+    "books": {
+      "description": "Four published books (Creative Commons):\n- Python Step By Step in an AI World\n- JumpStart Python in the AI Era\n- Intentional Prompting: Blending AI and Human Oversight\n- Python Dev Book: From Zero to Production",
+      "takeable": false,
+      "points": 0
+    },
+    "publications": {
+      "description": "Academic publications:\n- 6+ peer-reviewed papers on computer vision and machine learning\n- Conference presentations on AI in education\n- Research on automated feature extraction",
+      "takeable": true,
+      "points": 10
+    },
+    "certificates": {
+      "description": "Educational qualifications:\n- PhD Computer Science (2017)\n- BSc Computer Science Honours (2001)\n- Graduate Diploma in Business (2000)",
+      "takeable": true,
+      "points": 15
+    },
+    "client_portfolio": {
+      "description": "Consulting clients include:\n- CRCSI & Landgate WA (Computer Vision)\n- Educational institutions (AI Strategy)\n- Various startups (Technical Advisory)",
+      "takeable": true,
+      "points": 10
+    },
+    "consulting_toolkit": {
+      "description": "Essential consulting tools:\n- AI/ML frameworks and platforms\n- Educational technology solutions\n- System architecture templates",
+      "takeable": false,
+      "points": 0
+    }
+  },
+  "skills": {
+    "programming": [
+      "Python",
+      "C/C++",
+      "C#",
+      "Java",
+      "JavaScript",
+      "Matlab",
+      "PHP",
+      "CSS",
+      "HTML",
+      "LaTeX",
+      "SQL",
+      "Bash"
+    ],
+    "web": [
+      "React",
+      "Flask",
+      "FastAPI",
+      "FastHTML",
+      "Vanilla JS",
+      "WordPress"
+    ],
+    "ai_ml": [
+      "Langchain",
+      "TensorFlow",
+      "PyTorch",
+      "Scikit-learn"
+    ],
+    "educational": [
+      "Blackboard LMS",
+      "Canvas LMS",
+      "Interactive Content Development"
+    ],
+    "soft_skills": [
+      "Leadership",
+      "Teaching",
+      "Problem Solving",
+      "Innovation",
+      "Communication"
+    ]
+  },
+  "achievements": [
+    {
+      "id": "explorer",
+      "name": "Career Explorer",
+      "description": "Visit all rooms in the career journey",
+      "condition": "visited_all_rooms",
+      "points": 50
+    },
+    {
+      "id": "collector",
+      "name": "Knowledge Collector",
+      "description": "Collect 5 or more items",
+      "condition": "items_collected_5",
+      "points": 30
+    },
+    {
+      "id": "scholar",
+      "name": "Academic Scholar",
+      "description": "Examine the thesis and publications",
+      "condition": "examined_research",
+      "points": 25
+    },
+    {
+      "id": "innovator",
+      "name": "Innovation Enthusiast",
+      "description": "Explore all projects in the Innovation Lab",
+      "condition": "explored_innovations",
+      "points": 35
+    },
+    {
+      "id": "networker",
+      "name": "Professional Networker",
+      "description": "Find and examine contact information",
+      "condition": "found_contacts",
+      "points": 20
+    }
+  ],
+  "commands": {
+    "help": "Show available commands",
+    "look": "Look around the current room",
+    "go [direction]": "Move in a direction (north, south, east, west)",
+    "examine [item]": "Examine an item in detail",
+    "take [item]": "Take an item",
+    "inventory": "Show your inventory",
+    "score": "Show your current score",
+    "achievements": "Show available achievements",
+    "skills": "Display technical skills",
+    "experience": "Show work experience timeline",
+    "contact": "Display contact information",
+    "clear": "Clear the terminal screen",
+    "restart": "Restart the adventure",
+    "about": "About this terminal CV"
+  },
+  "personal": {
+    "name": "Michael Borck",
+    "email": "michael.borck@curtin.edu.au",
+    "phone": "0402 297 573",
+    "linkedin": "https://linkedin.com/in/michaelborck",
+    "github": "https://github.com/michael-borck",
+    "portfolio": "https://michaelborck.dev",
+    "education_platform": "https://michaelborck.education",
+    "location": "Perth, WA"
+  },
+  "experience": [
+    {
+      "title": "Lecturer \u2014 School of Marketing and Management",
+      "organization": "Curtin University",
+      "period": "Feb 2016 \u2013 Present"
+    },
+    {
+      "title": "Course Leadership & Development",
+      "organization": "Curtin University",
+      "period": "Ongoing"
+    },
+    {
+      "title": "Associate Lecturer",
+      "organization": "Curtin University",
+      "period": "Jan 2001 \u2013 Dec 2007"
+    },
+    {
+      "title": "AI, IS & Educational Technology Consultant",
+      "organization": "Self-Employed",
+      "period": "Jan 2016 \u2013 Present"
+    },
+    {
+      "title": "Researcher",
+      "organization": "Curtin University",
+      "period": "Mar 2018 \u2013 2019"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Reality Reigns",
+      "description": "Swipe-based decision game providing interactive fiction storytelling from fantasy adventures to educational simulations"
+    },
+    {
+      "name": "Talk Buddy",
+      "description": "AI-based audio interface tool for conversation practice (medical diagnoses, HR discussions, English conversation)"
+    },
+    {
+      "name": "Curriculum Curator",
+      "description": "AI-based tool for creating, managing and curating learning materials based on unique teaching philosophies"
+    },
+    {
+      "name": "Feed Forward System",
+      "description": "AI-based assessment feedback tool for various assessment types"
+    },
+    {
+      "name": "Student Feedback Analyzer",
+      "description": "AI tool that analyzes student feedback forms to suggest course improvements"
+    }
+  ]
+}

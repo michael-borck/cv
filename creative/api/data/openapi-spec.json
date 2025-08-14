@@ -1,0 +1,400 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Michael Borck API",
+    "version": "1.0.0",
+    "description": "Professional REST API for exploring Michael Borck's career profile, skills, and experience through standardized endpoints.",
+    "contact": {
+      "name": "Michael Borck",
+      "email": "michael.borck@curtin.edu.au",
+      "url": "https://linkedin.com/in/https://linkedin.com/in/michaelborck"
+    },
+    "license": {
+      "name": "Creative Commons",
+      "url": "https://creativecommons.org/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.michael-borck.dev/v1",
+      "description": "Production API"
+    },
+    {
+      "url": "https://staging-api.michael-borck.dev/v1",
+      "description": "Staging environment"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/profile": {
+      "get": {
+        "summary": "Get basic profile information",
+        "description": "Returns basic profile information including name, title, location, and contact details.",
+        "tags": [
+          "Profile"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/experience": {
+      "get": {
+        "summary": "Get all work experience",
+        "description": "Returns complete work history with roles, responsibilities, and achievements.",
+        "tags": [
+          "Experience"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "academic",
+                "military",
+                "industry",
+                "consulting"
+              ]
+            },
+            "description": "Filter by experience type"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            },
+            "description": "Maximum number of records to return"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExperienceList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/experience/{id}": {
+      "get": {
+        "summary": "Get specific experience by ID",
+        "description": "Returns detailed information about a specific work experience.",
+        "tags": [
+          "Experience"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Experience record ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Experience"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Experience not found"
+          }
+        }
+      }
+    },
+    "/skills": {
+      "get": {
+        "summary": "Get all skills by category",
+        "description": "Returns technical skills organized by category (programming, tools, domain expertise).",
+        "tags": [
+          "Skills"
+        ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "programming",
+                "technologies",
+                "domain_expertise"
+              ]
+            },
+            "description": "Filter by skill category"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Skills"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contact": {
+      "post": {
+        "summary": "Send a contact message",
+        "description": "Submit a contact form message.",
+        "tags": [
+          "Contact"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Message sent successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "linkedin": {
+            "type": "string",
+            "format": "uri"
+          },
+          "github": {
+            "type": "string",
+            "format": "uri"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "years_experience": {
+            "type": "integer"
+          },
+          "books_published": {
+            "type": "integer"
+          }
+        }
+      },
+      "Experience": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "organization": {
+            "type": "string"
+          },
+          "position": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "start_date": {
+            "type": "string"
+          },
+          "end_date": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "key_responsibilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "achievements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ExperienceList": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Experience"
+            }
+          }
+        }
+      },
+      "Skills": {
+        "type": "object",
+        "properties": {
+          "programming": {
+            "type": "object",
+            "properties": {
+              "languages": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "frameworks": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "technologies": {
+            "type": "object",
+            "properties": {
+              "ai_ml": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "databases": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "cloud": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ContactRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "message"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ContactResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

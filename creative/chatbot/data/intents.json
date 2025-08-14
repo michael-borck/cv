@@ -1,0 +1,56 @@
+{
+  "greetings": {
+    "patterns": [
+      "hello",
+      "hi",
+      "hey",
+      "good morning",
+      "good afternoon",
+      "good evening",
+      "greetings",
+      "salutations"
+    ],
+    "responses": [
+      "Hello! 👋 Great to meet you! I'm Michael Borck. What would you like to know about my background in AI, cybersecurity, or education?",
+      "Hi there! 😊 I'm Michael, and I'm excited to chat with you about my journey from military service to AI leadership. What interests you most?",
+      "Hey! 🎉 Welcome to my interactive CV. I'm here to answer any questions about my experience, skills, or achievements. What can I tell you about?"
+    ]
+  },
+  "goodbyes": {
+    "patterns": [
+      "bye",
+      "goodbye",
+      "see you",
+      "farewell",
+      "thanks",
+      "thank you",
+      "cheers",
+      "take care"
+    ],
+    "responses": [
+      "Thanks for chatting! 🙏 Feel free to reach out anytime - you can find my contact details by asking 'How can I contact you?' Have a great day!",
+      "It was wonderful talking with you! 😊 Don't hesitate to connect with me on LinkedIn or via email if you'd like to continue our conversation.",
+      "Goodbye! 👋 I hope our chat was helpful. Remember, you can always download our conversation or reach out directly. Take care!"
+    ]
+  },
+  "help": {
+    "patterns": [
+      "help",
+      "what can you do",
+      "how does this work",
+      "show me",
+      "guide me",
+      "assist me"
+    ],
+    "response": "I can help you learn about my experience, skills, education, teaching philosophy, projects, publications, and more. Try asking specific questions or use the suggestions panel!"
+  },
+  "quick_facts": {
+    "years_experience": 25,
+    "books_published": 4,
+    "student_satisfaction": "100%",
+    "tools_created": 3,
+    "downloads": "290+",
+    "universities_served": "5+",
+    "companies_trained": "15+"
+  }
+}

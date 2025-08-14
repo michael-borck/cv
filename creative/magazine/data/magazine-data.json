@@ -1,0 +1,367 @@
+{
+  "metadata": {
+    "title": "TechLife Magazine",
+    "subtitle": "Michael Borck Special Edition",
+    "issue": "Issue #202508",
+    "date": "August 2025",
+    "author": "Michael Borck",
+    "tagline": "Innovation \u2022 Leadership \u2022 Technology"
+  },
+  "hero": {
+    "title": "The Michael Borck Story",
+    "subtitle": "From Military Service to AI Innovation",
+    "lead": "A journey through technology, education, and innovation spanning over two decades",
+    "image": "https://source.unsplash.com/1600x900/?technology,innovation",
+    "stats": [
+      {
+        "value": "11+",
+        "label": "Years Experience"
+      },
+      {
+        "value": "100%",
+        "label": "Student Satisfaction"
+      },
+      {
+        "value": "4",
+        "label": "Published Books"
+      },
+      {
+        "value": "290+",
+        "label": "App Downloads"
+      }
+    ]
+  },
+  "cover_story": {
+    "title": "The Evolution of a Tech Leader",
+    "subtitle": "From submarine systems to AI education",
+    "image": "https://source.unsplash.com/800x1200/?artificial-intelligence,education",
+    "content": [
+      {
+        "type": "intro",
+        "text": "Meet Michael Borck, a technologist whose career spans military service, academia, and cutting-edge AI innovation."
+      },
+      {
+        "type": "chapter",
+        "title": "Military Foundations",
+        "text": "Beginning in the Royal Australian Navy, Michael managed critical submarine systems and military communications infrastructure, laying the groundwork for a career built on precision and reliability.",
+        "highlight": "IT Manager for Submarine Systems Centre, handling classified defense projects"
+      },
+      {
+        "type": "chapter",
+        "title": "Academic Excellence",
+        "text": "Transitioning to academia, Michael became a beloved educator at Curtin University, achieving the rare feat of 100% student satisfaction across multiple units.",
+        "highlight": "AI Leader for School of Marketing and Management"
+      },
+      {
+        "type": "chapter",
+        "title": "Innovation Drive",
+        "text": "As an innovator, Michael has created multiple AI-powered educational tools, published four technical books, and developed applications that bridge the gap between technology and practical learning.",
+        "highlight": "Creator of Reality Reigns, Talk Buddy, and Cloud Core Sim"
+      }
+    ]
+  },
+  "features": [
+    {
+      "id": "military",
+      "category": "CAREER MILESTONE",
+      "title": "Military Service Excellence",
+      "subtitle": "1989-2000: Building the Foundation",
+      "image": "https://source.unsplash.com/800x600/?military,technology",
+      "content": "A decade of military service provided the discipline and technical expertise that would define a career.",
+      "highlights": [
+        "Submarine Systems IT Management",
+        "Military Messaging Systems",
+        "Strategic Communications"
+      ]
+    },
+    {
+      "id": "education",
+      "category": "ACADEMIC JOURNEY",
+      "title": "The Pursuit of Knowledge",
+      "subtitle": "PhD to Professional Excellence",
+      "image": "https://source.unsplash.com/800x600/?university,research",
+      "content": "From Bachelor's to PhD, a continuous journey of learning and discovery in Computer Science.",
+      "highlights": [
+        "PhD in Computer Science (2017)",
+        "BSc Computer Science Honours (2001)",
+        "Graduate Diploma in Business (2000)"
+      ]
+    },
+    {
+      "id": "teaching",
+      "category": "EDUCATION IMPACT",
+      "title": "Transforming Education with AI",
+      "subtitle": "Making Learning Engaging",
+      "image": "https://source.unsplash.com/800x600/?classroom,teaching",
+      "content": "Pioneering AI integration in education while maintaining the highest student satisfaction scores.",
+      "highlights": [
+        "100% Student Satisfaction",
+        "AI Curriculum Development",
+        "Interactive Learning Tools"
+      ]
+    },
+    {
+      "id": "innovation",
+      "category": "TECH INNOVATION",
+      "title": "Building Tomorrow's Tools",
+      "subtitle": "From Concept to Reality",
+      "image": "https://source.unsplash.com/800x600/?startup,innovation",
+      "content": "Creating practical applications that solve real-world problems in education and beyond.",
+      "highlights": [
+        "Reality Reigns Game",
+        "Talk Buddy AI Interface",
+        "Cloud Core Simulator"
+      ]
+    }
+  ],
+  "spotlight": {
+    "title": "Project Spotlight",
+    "projects": [
+      {
+        "name": "Reality Reigns",
+        "description": "Swipe-based decision game providing interactive fiction storytelling from fantasy adventures to educational simulations",
+        "image": "https://source.unsplash.com/400x300/?reality,reigns,technology",
+        "tech": "Python, AI/ML",
+        "impact": "Innovative solution"
+      },
+      {
+        "name": "Talk Buddy",
+        "description": "AI-based audio interface tool for conversation practice (medical diagnoses, HR discussions, English conversation)",
+        "image": "https://source.unsplash.com/400x300/?talk,buddy,technology",
+        "tech": "Python, AI/ML",
+        "impact": "Innovative solution"
+      },
+      {
+        "name": "Curriculum Curator",
+        "description": "AI-based tool for creating, managing and curating learning materials based on unique teaching philosophies",
+        "image": "https://source.unsplash.com/400x300/?curriculum,curator,technology",
+        "tech": "Python, AI/ML",
+        "impact": "Innovative solution"
+      },
+      {
+        "name": "Feed Forward System",
+        "description": "AI-based assessment feedback tool for various assessment types",
+        "image": "https://source.unsplash.com/400x300/?feed,forward,system,technology",
+        "tech": "Python, AI/ML",
+        "impact": "Innovative solution"
+      }
+    ]
+  },
+  "tech_stack": {
+    "title": "Technology Arsenal",
+    "subtitle": "Tools and Technologies",
+    "categories": [
+      {
+        "name": "Programming Languages",
+        "items": [
+          "Python",
+          "C/C++",
+          "C#",
+          "Java",
+          "JavaScript",
+          "Matlab",
+          "PHP",
+          "CSS",
+          "HTML",
+          "LaTeX",
+          "SQL",
+          "Bash"
+        ],
+        "icon": "\ud83d\udcbb"
+      },
+      {
+        "name": "Web Technologies",
+        "items": [
+          "React",
+          "Flask",
+          "FastAPI",
+          "FastHTML",
+          "Vanilla JS",
+          "WordPress"
+        ],
+        "icon": "\ud83c\udf10"
+      },
+      {
+        "name": "AI & Machine Learning",
+        "items": [
+          "Langchain",
+          "TensorFlow",
+          "PyTorch",
+          "Scikit-learn"
+        ],
+        "icon": "\ud83e\udd16"
+      },
+      {
+        "name": "Educational Tech",
+        "items": [
+          "Blackboard LMS",
+          "Canvas LMS",
+          "Interactive Content Development"
+        ],
+        "icon": "\ud83c\udf93"
+      }
+    ]
+  },
+  "timeline": {
+    "title": "Career Timeline",
+    "subtitle": "A Journey Through Tech",
+    "events": [
+      {
+        "year": "Feb 2016",
+        "title": "Lecturer \u2014 School of Marketing and Management",
+        "organization": "Curtin University",
+        "description": "AI Program Leadership - AI Leader for the School, developing new AI programs within undergraduate and postgraduate curricula",
+        "type": "academic"
+      },
+      {
+        "year": "Ongoing",
+        "title": "Course Leadership & Development",
+        "organization": "Curtin University",
+        "description": "Course Lead for Information Systems undergraduate and postgraduate degree programs",
+        "type": "academic"
+      },
+      {
+        "year": "Jan 2001",
+        "title": "Associate Lecturer",
+        "organization": "Curtin University",
+        "description": "Academic Leadership - Provided departmental representation on institutional committees",
+        "type": "academic"
+      },
+      {
+        "year": "Jan 2016",
+        "title": "AI, IS & Educational Technology Consultant",
+        "organization": "Self-Employed",
+        "description": "AI strategy and implementation consultation",
+        "type": "consulting"
+      },
+      {
+        "year": "Mar 2018",
+        "title": "Researcher",
+        "organization": "Curtin University",
+        "description": "Advanced AI Research - Investigation and development of CNN models and their application to the maritime environment",
+        "type": "academic"
+      },
+      {
+        "year": "Mar 2015",
+        "title": "Software Contractor",
+        "organization": "CRCSI & Landgate WA",
+        "description": "Computer Vision Innovation - Developed automated detection and recognition systems for street sign inventory",
+        "type": "consulting"
+      },
+      {
+        "year": "Jan 2008",
+        "title": "IT Consultant \u2014 Owner",
+        "organization": "Bital IT Consulting Services",
+        "description": "Business Analysis - Provided comprehensive business and technical analysis to diverse client base",
+        "type": "consulting"
+      },
+      {
+        "year": "Jul 1996",
+        "title": "IT Manager",
+        "organization": "Submarine Systems Centre, RAN",
+        "description": "Strategic IT Leadership - Managed comprehensive information technology infrastructure supporting submarine operations and maintenance",
+        "type": "military"
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "What Students Say",
+    "quotes": [
+      {
+        "text": "Michael is an absolute legend. His passion for teaching and technology is infectious.",
+        "author": "Anonymous Student",
+        "course": "ISYS3015"
+      },
+      {
+        "text": "He really cared about my learning and made complex topics accessible and fun.",
+        "author": "Graduate Student",
+        "course": "AI & Machine Learning"
+      },
+      {
+        "text": "The best lecturer I've had. Makes you excited about the possibilities of technology.",
+        "author": "Anonymous Student",
+        "course": "ISYS2001"
+      }
+    ]
+  },
+  "publications": {
+    "title": "Published Works",
+    "subtitle": "Books & Research",
+    "books": [
+      {
+        "title": "Python Step By Step in an AI World",
+        "year": "2024",
+        "type": "Technical Book",
+        "description": "A comprehensive guide to Python in the age of AI",
+        "image": "https://source.unsplash.com/300x450/?python,programming,book"
+      },
+      {
+        "title": "JumpStart Python in the AI Era",
+        "year": "2024",
+        "type": "Technical Book",
+        "description": "Fast-track your Python skills for AI development",
+        "image": "https://source.unsplash.com/300x450/?artificial,intelligence,book"
+      },
+      {
+        "title": "Intentional Prompting",
+        "year": "2024",
+        "type": "AI Guide",
+        "description": "Blending AI and Human Oversight for optimal results",
+        "image": "https://source.unsplash.com/300x450/?ai,robot,book"
+      },
+      {
+        "title": "Python Dev Book",
+        "year": "2024",
+        "type": "Technical Book",
+        "description": "From Zero to Production - complete development guide",
+        "image": "https://source.unsplash.com/300x450/?coding,development,book"
+      }
+    ],
+    "research": "6+ peer-reviewed publications in computer vision and machine learning"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Let's Connect",
+    "email": "michael.borck@curtin.edu.au",
+    "phone": "0402 297 573",
+    "linkedin": "https://linkedin.com/in/michaelborck",
+    "github": "https://github.com/michael-borck",
+    "location": "Perth, WA",
+    "image": "https://source.unsplash.com/800x400/?perth,australia,city"
+  },
+  "sidebar": {
+    "quick_facts": [
+      {
+        "label": "Current Role",
+        "value": "Lecturer & AI Leader"
+      },
+      {
+        "label": "Location",
+        "value": "Perth, WA"
+      },
+      {
+        "label": "Specialization",
+        "value": "AI, Education, Innovation"
+      },
+      {
+        "label": "Years Experience",
+        "value": "11+"
+      }
+    ],
+    "achievements": [
+      "\ud83c\udfc6 100% Student Satisfaction",
+      "\ud83d\udcda 4 Published Books",
+      "\ud83e\udd16 AI Program Leader",
+      "\ud83c\udfaf 290+ App Downloads",
+      "\ud83d\udd2c 6+ Research Publications",
+      "\ud83d\udca1 Multiple Innovation Projects"
+    ],
+    "certifications": [
+      "Google AI Course",
+      "Microsoft AI Course",
+      "Cyber Security Training",
+      "Ethics Reviewer Training",
+      "Equal Opportunity Work Essentials"
+    ]
+  }
+}
