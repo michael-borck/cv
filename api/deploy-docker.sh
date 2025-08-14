@@ -18,16 +18,17 @@ echo -e "${GREEN}Starting Resume API Docker Deployment...${NC}"
 
 # 1. Verify we're in the right directory
 echo -e "${YELLOW}Step 1: Checking current directory...${NC}"
-if [ ! -f "api/docker-compose.vps.yml" ]; then
-    echo -e "${RED}Error: Not in the resume-api directory or files are missing${NC}"
-    echo "Please run this script from the resume-api root directory"
+if [ ! -f "docker-compose.vps.yml" ]; then
+    echo -e "${RED}Error: docker-compose.vps.yml not found in current directory${NC}"
+    echo "Please run this script from the api/ directory"
+    echo "Usage: cd api && ./deploy-docker.sh"
     exit 1
 fi
-echo -e "${GREEN}Found API files in current directory${NC}"
+echo -e "${GREEN}Found docker-compose.vps.yml in current directory${NC}"
 
-# Optional: Pull latest changes
+# Optional: Pull latest changes from parent repo
 echo -e "${YELLOW}Pulling latest changes from git...${NC}"
-git pull origin main || echo "Could not pull latest changes (may not be needed)"
+(cd .. && git pull origin main) || echo "Could not pull latest changes (may not be needed)"
 
 # 2. Check Docker network
 echo -e "${YELLOW}Step 2: Checking Docker network...${NC}"
@@ -40,18 +41,18 @@ echo -e "${GREEN}Found network: $CADDY_NETWORK${NC}"
 
 # 3. Update docker-compose file with correct network
 echo -e "${YELLOW}Step 3: Updating Docker network configuration...${NC}"
-sed -i "s/name: caddy_default/name: $CADDY_NETWORK/" api/docker-compose.vps.yml
+sed -i "s/name: caddy_default/name: $CADDY_NETWORK/" docker-compose.vps.yml
 
 # 4. Stop existing container if running
 echo -e "${YELLOW}Step 4: Checking for existing container...${NC}"
 if docker ps -a | grep -q $CONTAINER_NAME; then
     echo "Stopping and removing existing container..."
-    docker-compose -f api/docker-compose.vps.yml down
+    docker-compose -f docker-compose.vps.yml down
 fi
 
 # 5. Build and start container
 echo -e "${YELLOW}Step 5: Building and starting container...${NC}"
-docker-compose -f api/docker-compose.vps.yml up -d --build
+docker-compose -f docker-compose.vps.yml up -d --build
 
 # 6. Wait for container to be healthy
 echo -e "${YELLOW}Step 6: Waiting for container to be healthy...${NC}"
@@ -74,7 +75,7 @@ echo -e "${YELLOW}Step 7: Caddy Configuration${NC}"
 echo -e "${YELLOW}========================================${NC}"
 echo "Add the following to your Caddyfile:"
 echo ""
-cat api/caddy-snippet.txt
+cat caddy-snippet.txt
 echo ""
 echo -e "${YELLOW}========================================${NC}"
 echo "After adding, reload Caddy with:"
@@ -94,9 +95,9 @@ echo ""
 echo "Useful commands:"
 echo "  View logs:         docker logs $CONTAINER_NAME"
 echo "  View logs (live):  docker logs -f $CONTAINER_NAME"
-echo "  Restart API:       docker-compose -f api/docker-compose.vps.yml restart"
-echo "  Stop API:          docker-compose -f api/docker-compose.vps.yml down"
-echo "  Rebuild & start:   docker-compose -f api/docker-compose.vps.yml up -d --build"
+echo "  Restart API:       docker-compose -f docker-compose.vps.yml restart"
+echo "  Stop API:          docker-compose -f docker-compose.vps.yml down"
+echo "  Rebuild & start:   docker-compose -f docker-compose.vps.yml up -d --build"
 echo ""
 echo "Test locally on VPS:"
 echo "  docker exec resume-api curl http://localhost:8000/health"
