@@ -56,6 +56,8 @@ html:
 	@test -f output/src/cv-michael-borck.html && mv output/src/cv-michael-borck.html output/ || true
 	@test -d output/src/cv-michael-borck_files && mv output/src/cv-michael-borck_files output/ || true
 	@test -d output/src && rm -rf output/src || true
+	@echo "Post-processing HTML to inject chat widget..."
+	@python3 scripts/inject_chatbot.py
 	@echo "HTML CV generated: output/cv-michael-borck.html"
 
 # Generate Reveal.js slides
