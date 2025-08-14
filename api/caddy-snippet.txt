@@ -1,0 +1,6 @@
+# Add this to your existing Caddyfile on the VPS
+# This follows the same pattern as n8n (public access, no DNS challenge needed)
+
+api.resume.michaelborck.dev {
+    reverse_proxy resume-api:8000
+}

@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  resume-api:
+    build:
+      context: ..
+      dockerfile: api/Dockerfile
+    container_name: resume-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV=production
+      - LOG_LEVEL=info
+    volumes:
+      # Mount the YAML file as read-only
+      - ../data/cv-data.yml:/app/data/cv-data.yml:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - resume-network
+
+networks:
+  resume-network:
+    driver: bridge

@@ -1,0 +1,40 @@
+# Caddy configuration for Resume API
+# Place this in your VPS's Caddy configuration
+
+api.resume.michaelborck.dev {
+    # Reverse proxy to Docker container
+    reverse_proxy localhost:8000
+    
+    # Enable compression
+    encode gzip
+    
+    # Security headers
+    header {
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        X-XSS-Protection "1; mode=block"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Content-Security-Policy "default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline';"
+    }
+    
+    # CORS headers (handled by FastAPI, but backup)
+    @cors_preflight method OPTIONS
+    handle @cors_preflight {
+        header Access-Control-Allow-Origin "https://michaelborck.dev, https://resume.michaelborck.dev"
+        header Access-Control-Allow-Methods "GET, POST, OPTIONS"
+        header Access-Control-Allow-Headers "Content-Type, Authorization"
+        header Access-Control-Max-Age "86400"
+        respond 204
+    }
+    
+    # Rate limiting (basic)
+    @api_limit {
+        path /api/*
+    }
+    
+    # Logging
+    log {
+        output file /var/log/caddy/api-resume-access.log
+        format json
+    }
+}

@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  resume-api:
+    build:
+      context: ..
+      dockerfile: api/Dockerfile
+    container_name: resume-api
+    hostname: resume-api
+    restart: unless-stopped
+    environment:
+      - ENV=production
+      - LOG_LEVEL=info
+    volumes:
+      # Mount the YAML file as read-only
+      - ../data/cv-data.yml:/app/data/cv-data.yml:ro
+    networks:
+      - caddy_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+# Use external network that Caddy is on
+networks:
+  caddy_network:
+    external: true
+    name: caddy_default  # Update this based on your setup - check with: docker network ls
