@@ -1,0 +1,908 @@
+---
+title: "Michael Borck"
+subtitle: "AI Leader & Educational Innovator"
+author: "Michael Borck"
+date: today
+date-format: "MMMM YYYY"
+format:
+  html:
+    toc: false
+    embed-resources: true
+    standalone: true
+    theme: none
+---
+
+```{python}
+#| include: false
+import yaml
+import json
+
+with open("../data/cv-data.yml", 'r') as f:
+    cv_data = yaml.safe_load(f)
+
+# Convert to JSON for JavaScript
+cv_json = json.dumps(cv_data)
+```
+
+```{python}
+#| output: asis
+print(f"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{cv_data['personal']['name']} - Interactive CV</title>
+    
+    <style>
+        /* CSS Variables for Theming */
+        :root {{
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --text-color: #2c3e50;
+            --bg-color: #ffffff;
+            --card-bg: #f8f9fa;
+            --border-color: #dee2e6;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }}
+        
+        /* Dark Theme */
+        [data-theme="dark"] {{
+            --primary-color: #ecf0f1;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --text-color: #ecf0f1;
+            --bg-color: #1a1a2e;
+            --card-bg: #16213e;
+            --border-color: #0f3460;
+            --shadow: 0 2px 20px rgba(0,0,0,0.5);
+        }}
+        
+        /* Reset and Base Styles */
+        * {{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }}
+        
+        body {{
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+            transition: var(--transition);
+            position: relative;
+        }}
+        
+        /* Progress Bar */
+        .progress-bar {{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            z-index: 9999;
+            transition: width 0.2s ease;
+        }}
+        
+        /* Header */
+        header {{
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }}
+        
+        header::before {{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff20" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            opacity: 0.1;
+        }}
+        
+        h1 {{
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            animation: slideDown 0.8s ease;
+        }}
+        
+        .subtitle {{
+            font-size: 1.5rem;
+            opacity: 0.95;
+            animation: slideUp 0.8s ease;
+        }}
+        
+        /* Theme Toggle */
+        .theme-toggle {{
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            padding: 10px 15px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }}
+        
+        .theme-toggle:hover {{
+            transform: scale(1.1);
+        }}
+        
+        /* Navigation */
+        nav {{
+            position: sticky;
+            top: 0;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }}
+        
+        nav ul {{
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }}
+        
+        nav a {{
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }}
+        
+        nav a::after {{
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: width 0.3s ease;
+        }}
+        
+        nav a:hover::after,
+        nav a.active::after {{
+            width: 100%;
+        }}
+        
+        /* Main Content */
+        .container {{
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }}
+        
+        section {{
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }}
+        
+        section.visible {{
+            opacity: 1;
+            transform: translateY(0);
+        }}
+        
+        h2 {{
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--secondary-color);
+            position: relative;
+        }}
+        
+        /* Contact Section with Copy Buttons */
+        .contact-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }}
+        
+        .contact-item {{
+            background: var(--card-bg);
+            padding: 1rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition);
+        }}
+        
+        .contact-item:hover {{
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }}
+        
+        .copy-btn {{
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }}
+        
+        .copy-btn:hover {{
+            background: var(--accent-color);
+            transform: scale(1.05);
+        }}
+        
+        .copy-btn.copied {{
+            background: var(--success-color);
+        }}
+        
+        .copy-btn.copied::after {{
+            content: 'Copied!';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            animation: popIn 0.3s ease;
+        }}
+        
+        /* Skills with Filtering */
+        .skills-container {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }}
+        
+        .skill-tag {{
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }}
+        
+        .skill-tag::before {{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+            transition: left 0.5s ease;
+        }}
+        
+        .skill-tag:hover::before {{
+            left: 100%;
+        }}
+        
+        .skill-tag:hover,
+        .skill-tag.active {{
+            background: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+            transform: scale(1.05);
+        }}
+        
+        /* Expandable Experience Cards */
+        .experience-card {{
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }}
+        
+        .experience-card::before {{
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--secondary-color);
+            transition: width 0.3s ease;
+        }}
+        
+        .experience-card:hover::before {{
+            width: 8px;
+        }}
+        
+        .experience-card:hover {{
+            box-shadow: var(--shadow);
+            transform: translateX(5px);
+        }}
+        
+        .experience-header {{
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }}
+        
+        .experience-title {{
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }}
+        
+        .experience-period {{
+            color: var(--text-color);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }}
+        
+        .experience-details {{
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }}
+        
+        .experience-card.expanded .experience-details {{
+            max-height: 1000px;
+        }}
+        
+        .expand-icon {{
+            display: inline-block;
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }}
+        
+        .experience-card.expanded .expand-icon {{
+            transform: rotate(180deg);
+        }}
+        
+        /* Animations */
+        @keyframes slideDown {{
+            from {{
+                opacity: 0;
+                transform: translateY(-30px);
+            }}
+            to {{
+                opacity: 1;
+                transform: translateY(0);
+            }}
+        }}
+        
+        @keyframes slideUp {{
+            from {{
+                opacity: 0;
+                transform: translateY(30px);
+            }}
+            to {{
+                opacity: 1;
+                transform: translateY(0);
+            }}
+        }}
+        
+        @keyframes fadeInUp {{
+            to {{
+                opacity: 1;
+                transform: translateY(0);
+            }}
+        }}
+        
+        @keyframes popIn {{
+            0% {{
+                opacity: 0;
+                transform: translateX(-50%) scale(0.8);
+            }}
+            100% {{
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+            }}
+        }}
+        
+        /* Highlight Effect for Filtered Content */
+        .highlighted {{
+            background: yellow;
+            padding: 2px 4px;
+            border-radius: 3px;
+            animation: pulse 1s ease infinite;
+        }}
+        
+        @keyframes pulse {{
+            0%, 100% {{
+                opacity: 1;
+            }}
+            50% {{
+                opacity: 0.7;
+            }}
+        }}
+        
+        /* Publications and Projects Grid */
+        .card-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }}
+        
+        .card {{
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }}
+        
+        .card::after {{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }}
+        
+        .card:hover::after {{
+            transform: scaleX(1);
+        }}
+        
+        .card:hover {{
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }}
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {{
+            h1 {{
+                font-size: 2rem;
+            }}
+            
+            .subtitle {{
+                font-size: 1.2rem;
+            }}
+            
+            nav ul {{
+                gap: 1rem;
+                font-size: 0.9rem;
+            }}
+            
+            .container {{
+                padding: 1rem;
+            }}
+            
+            .experience-header {{
+                flex-direction: column;
+            }}
+        }}
+        
+        /* Print Styles */
+        @media print {{
+            .theme-toggle,
+            .progress-bar,
+            nav,
+            .copy-btn {{
+                display: none !important;
+            }}
+            
+            body {{
+                color: black;
+                background: white;
+            }}
+            
+            .experience-details {{
+                max-height: none !important;
+            }}
+            
+            .card,
+            .experience-card,
+            .contact-item {{
+                break-inside: avoid;
+            }}
+        }}
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">🌙</span>
+    </button>
+    
+    <!-- Header -->
+    <header>
+        <h1>{cv_data['personal']['name']}</h1>
+        <p class="subtitle">AI Leader & Educational Innovator</p>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+            <li><a href="#summary" class="nav-link">Summary</a></li>
+            <li><a href="#experience" class="nav-link">Experience</a></li>
+            <li><a href="#education" class="nav-link">Education</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#publications" class="nav-link">Publications</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Contact Information</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <span>📧 {cv_data['personal']['email']}</span>
+                    <button class="copy-btn" data-copy="{cv_data['personal']['email']}">Copy</button>
+                </div>
+                <div class="contact-item">
+                    <span>📱 {cv_data['personal']['phone']}</span>
+                    <button class="copy-btn" data-copy="{cv_data['personal']['phone']}">Copy</button>
+                </div>
+                <div class="contact-item">
+                    <span>🔗 <a href="{cv_data['personal']['linkedin']}" target="_blank">LinkedIn</a></span>
+                    <button class="copy-btn" data-copy="{cv_data['personal']['linkedin']}">Copy</button>
+                </div>
+                <div class="contact-item">
+                    <span>💻 <a href="{cv_data['personal']['github']}" target="_blank">GitHub</a></span>
+                    <button class="copy-btn" data-copy="{cv_data['personal']['github']}">Copy</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Summary Section -->
+        <section id="summary">
+            <h2>Professional Summary</h2>
+            <p>{cv_data['summary']['main']}</p>
+        </section>
+        
+        <!-- Experience Section -->
+        <section id="experience">
+            <h2>Experience</h2>
+""")
+
+# Generate experience cards
+for job in cv_data['experience']:
+    title = job['title']
+    org = job.get('organization', '')
+    period = job['period']
+    location = job['location']
+    
+    print(f"""
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">
+                            {title}
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div>{org}</div>
+                    </div>
+                    <div class="experience-period">{period}</div>
+                </div>
+                <div class="experience-details">
+                    <p><strong>Location:</strong> {location}</p>
+    """)
+    
+    if 'responsibilities' in job and job['responsibilities']:
+        print("<ul>")
+        for resp in job['responsibilities']:
+            print(f"<li>{resp}</li>")
+        print("</ul>")
+    
+    if 'projects' in job and job['projects']:
+        print("<p><strong>Projects:</strong></p><ul>")
+        for project in job['projects']:
+            print(f"<li>{project}</li>")
+        print("</ul>")
+    
+    print("</div></div>")
+
+print("""
+        </section>
+        
+        <!-- Education Section -->
+        <section id="education">
+            <h2>Education</h2>
+            <div class="card-grid">
+""")
+
+# Generate education cards
+for edu in cv_data['education']:
+    degree = edu['degree']
+    field = edu['field']
+    institution = edu['institution']
+    year = edu['year']
+    thesis = edu.get('thesis', '')
+    
+    print(f"""
+                <div class="card">
+                    <h3>{degree}</h3>
+                    <p><strong>{field}</strong></p>
+                    <p>{institution}, {year}</p>
+                    {f'<p><em>{thesis}</em></p>' if thesis else ''}
+                </div>
+    """)
+
+print("""
+            </div>
+        </section>
+        
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-section">
+                <h3>Programming Languages</h3>
+                <div class="skills-container">
+""")
+
+# Generate skill tags
+for skill in cv_data['skills']['programming']['core']:
+    print(f'<span class="skill-tag" data-skill="{skill}">{skill}</span>')
+
+print("""
+                </div>
+                <h3>Web Technologies</h3>
+                <div class="skills-container">
+""")
+
+for skill in cv_data['skills']['programming']['web']:
+    print(f'<span class="skill-tag" data-skill="{skill}">{skill}</span>')
+
+print("""
+                </div>
+                <h3>AI/ML Stack</h3>
+                <div class="skills-container">
+""")
+
+for skill in cv_data['skills']['programming']['ai_ml']:
+    print(f'<span class="skill-tag" data-skill="{skill}">{skill}</span>')
+
+print("""
+                </div>
+            </div>
+        </section>
+        
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="card-grid">
+""")
+
+# Generate project cards
+for project in cv_data['projects']:
+    name = project['name']
+    description = project.get('description', '')
+    year = project.get('year', '')
+    
+    print(f"""
+                <div class="card">
+                    <h3>{name}</h3>
+                    {f'<p>{description}</p>' if description else ''}
+                    {f'<p><small>{year}</small></p>' if year else ''}
+                </div>
+    """)
+
+print("""
+            </div>
+        </section>
+        
+        <!-- Publications Section -->
+        <section id="publications">
+            <h2>Publications</h2>
+            <h3>Books</h3>
+            <div class="card-grid">
+""")
+
+# Generate book cards
+for book in cv_data['publications']['books']:
+    print(f"""
+                <div class="card">
+                    <h4>{book['title']}</h4>
+                    <p>{book['description']}</p>
+                </div>
+    """)
+
+print("""
+            </div>
+        </section>
+    </div>
+    
+    <script>
+        // Store CV data for filtering
+        const cvData = {cv_json};
+        
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+        
+        // Check for saved theme preference
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', currentTheme);
+        themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        
+        themeToggle.addEventListener('click', () => {{
+            const theme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }});
+        
+        // Progress Bar
+        window.addEventListener('scroll', () => {{
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        }});
+        
+        // Smooth Scrolling for Navigation
+        document.querySelectorAll('.nav-link').forEach(link => {{
+            link.addEventListener('click', (e) => {{
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                targetSection.scrollIntoView({{ behavior: 'smooth' }});
+                
+                // Update active nav
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            }});
+        }});
+        
+        // Intersection Observer for Animations
+        const observerOptions = {{
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        }};
+        
+        const observer = new IntersectionObserver((entries) => {{
+            entries.forEach(entry => {{
+                if (entry.isIntersecting) {{
+                    entry.target.classList.add('visible');
+                    
+                    // Update active nav link
+                    const id = entry.target.getAttribute('id');
+                    if (id) {{
+                        document.querySelectorAll('.nav-link').forEach(link => {{
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === '#' + id) {{
+                                link.classList.add('active');
+                            }}
+                        }});
+                    }}
+                }}
+            }});
+        }}, observerOptions);
+        
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {{
+            observer.observe(section);
+        }});
+        
+        // Copy to Clipboard
+        document.querySelectorAll('.copy-btn').forEach(btn => {{
+            btn.addEventListener('click', async () => {{
+                const textToCopy = btn.getAttribute('data-copy');
+                try {{
+                    await navigator.clipboard.writeText(textToCopy);
+                    btn.classList.add('copied');
+                    setTimeout(() => btn.classList.remove('copied'), 2000);
+                }} catch (err) {{
+                    console.error('Failed to copy:', err);
+                }}
+            }});
+        }});
+        
+        // Expandable Experience Cards
+        document.querySelectorAll('.experience-card').forEach(card => {{
+            card.addEventListener('click', () => {{
+                card.classList.toggle('expanded');
+            }});
+        }});
+        
+        // Skill Filtering
+        let activeSkills = new Set();
+        
+        document.querySelectorAll('.skill-tag').forEach(tag => {{
+            tag.addEventListener('click', () => {{
+                const skill = tag.getAttribute('data-skill');
+                
+                if (activeSkills.has(skill)) {{
+                    activeSkills.delete(skill);
+                    tag.classList.remove('active');
+                    clearHighlights();
+                }} else {{
+                    // Clear previous selections
+                    activeSkills.clear();
+                    document.querySelectorAll('.skill-tag').forEach(t => t.classList.remove('active'));
+                    
+                    // Add new selection
+                    activeSkills.add(skill);
+                    tag.classList.add('active');
+                    highlightSkill(skill);
+                }}
+            }});
+        }});
+        
+        function highlightSkill(skill) {{
+            clearHighlights();
+            
+            // Search through all text content
+            const textElements = document.querySelectorAll('p, li, h3, h4');
+            const regex = new RegExp(`(\\\\b${{skill}}\\\\b)`, 'gi');
+            
+            textElements.forEach(element => {{
+                if (element.innerHTML.match(regex)) {{
+                    element.innerHTML = element.innerHTML.replace(regex, '<span class="highlighted">$1</span>');
+                    
+                    // Scroll to first match
+                    const firstHighlight = document.querySelector('.highlighted');
+                    if (firstHighlight) {{
+                        firstHighlight.scrollIntoView({{ behavior: 'smooth', block: 'center' }});
+                    }}
+                }}
+            }});
+        }}
+        
+        function clearHighlights() {{
+            document.querySelectorAll('.highlighted').forEach(element => {{
+                const parent = element.parentNode;
+                parent.replaceChild(document.createTextNode(element.textContent), element);
+                parent.normalize();
+            }});
+        }}
+        
+        // Add some entrance animations
+        document.addEventListener('DOMContentLoaded', () => {{
+            // Stagger card animations
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {{
+                card.style.animationDelay = `${{index * 0.1}}s`;
+            }});
+            
+            // Stagger skill tags
+            const skills = document.querySelectorAll('.skill-tag');
+            skills.forEach((skill, index) => {{
+                skill.style.animationDelay = `${{index * 0.05}}s`;
+                skill.style.animation = 'fadeInUp 0.5s ease forwards';
+            }});
+        }});
+    </script>
+</body>
+</html>
+""")
+```

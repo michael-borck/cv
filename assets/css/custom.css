@@ -1,4 +1,8 @@
+/*-- scss:defaults --*/
+
 /* Custom CSS for HTML CV */
+
+/*-- scss:rules --*/
 
 :root {
   --primary-color: #2c3e50;
@@ -279,35 +283,127 @@ li {
   }
 }
 
-/* Print Styles */
+/* Print Styles - Optimized for HTML to PDF conversion */
 @media print {
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+  
   body {
     font-size: 10pt;
     line-height: 1.4;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    background: white;
+    color: black;
   }
   
-  .sidebar {
-    display: none;
+  /* Hide navigation and non-essential elements */
+  .sidebar,
+  .toc,
+  nav[role="doc-toc"],
+  .quarto-title-meta {
+    display: none !important;
   }
   
-  h1, h2, h3 {
+  /* Optimize headings for print */
+  h1 {
+    font-size: 20pt;
+    margin-top: 0;
+    margin-bottom: 10pt;
+    border-bottom: 2px solid #2c3e50;
     page-break-after: avoid;
   }
   
+  h2 {
+    font-size: 14pt;
+    margin-top: 12pt;
+    margin-bottom: 8pt;
+    color: #2c3e50;
+    border-bottom: 1px solid #ecf0f1;
+    page-break-after: avoid;
+  }
+  
+  h3 {
+    font-size: 11pt;
+    margin-top: 8pt;
+    margin-bottom: 6pt;
+    color: #34495e;
+    page-break-after: avoid;
+  }
+  
+  /* Keep sections together */
   .experience-entry,
-  .publication-item {
+  .publication-item,
+  .achievement-item,
+  .skill-category {
     page-break-inside: avoid;
   }
   
+  /* Optimize lists */
+  ul, ol {
+    margin: 4pt 0;
+    padding-left: 20pt;
+  }
+  
+  li {
+    margin-bottom: 2pt;
+  }
+  
+  /* Links - show URL only for external links */
   a {
-    color: var(--text-color);
+    color: #2c3e50;
     text-decoration: none;
   }
   
-  a[href]:after {
+  /* Don't show URLs for internal links or email/phone */
+  a[href^="http"]:not([href*="linkedin.com"]):not([href*="github.com"]):after {
     content: " (" attr(href) ")";
     font-size: 8pt;
     color: #666;
+  }
+  
+  /* Professional summary styling */
+  .professional-summary {
+    background: #f8f9fa !important;
+    color: black !important;
+    padding: 10pt !important;
+    border-left: 3px solid #3498db;
+    margin: 10pt 0;
+  }
+  
+  /* Contact info for print */
+  .contact-info {
+    background: none;
+    padding: 0;
+    margin-bottom: 10pt;
+    border-bottom: 1px solid #ecf0f1;
+  }
+  
+  /* Remove animations and transitions */
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  /* Ensure proper spacing */
+  p {
+    margin: 4pt 0;
+    text-align: justify;
+  }
+  
+  /* Skills grid optimization */
+  .skills-grid {
+    display: block;
+  }
+  
+  .skill-category {
+    margin-bottom: 8pt;
+    background: #f8f9fa;
+    padding: 4pt 8pt;
+    border-left: 2px solid #3498db;
   }
 }
 

@@ -1,0 +1,1188 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+    --primary-color: #5ff;
+    --secondary-color: #f5a;
+    --dark-color: #111;
+    --light-color: #fff;
+    --work-color: #f55;
+    --education-color: #55f;
+    --projects-color: #5f5;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #000;
+    color: var(--light-color);
+    font-family: 'Press Start 2P', cursive;
+    line-height: 1.2;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 100vh;
+    max-height: 800px;
+    overflow: hidden;
+    background-color: var(--dark-color);
+    border: 4px solid var(--light-color);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+.story-screen {
+    padding: 20px 20px 60px 20px; /* Increased bottom padding from 20px to 60px */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #000;
+    z-index: 10;
+    transition: opacity 1s ease-in-out;
+    overflow-y: auto; /* Add scrolling if content is too tall */
+}
+
+.story-content {
+    max-width: 80%;
+    animation: fadeIn 2s;
+}
+
+.start-btn {
+    margin-top: 30px;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: #000;
+    border: none;
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.game-header {
+    position: relative;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    border-bottom: 2px solid var(--light-color);
+    background-color: #000;
+    z-index: 5;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.help-btn, .theme-toggle {
+    width: 24px;
+    height: 24px;
+    background-color: var(--primary-color);
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle {
+    background-color: var(--secondary-color);
+    font-size: 14px;
+}
+
+.deck-info {
+    display: flex;
+    align-items: center;
+    font-size: 10px;
+}
+
+.deck-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.deck-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Deck icon backgrounds removed as we're using images now */
+
+.stats-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background-color: #111;
+    border-bottom: 2px solid var(--light-color);
+    font-size: 10px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-value {
+    font-size: 14px;
+    margin-top: 5px;
+    color: var(--primary-color);
+}
+
+.card-area {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+.card {
+    position: absolute;
+    width: 85%;
+    max-width: 350px;
+    height: 72%;
+    min-height: 500px;
+    max-height: 540px;
+    background-color: #222;
+    border: 3px solid #444;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform-style: preserve-3d;
+    cursor: grab;
+    overflow: hidden;
+    user-select: none;
+}
+
+.card.dragging {
+    cursor: grabbing;
+}
+
+.card.swiping-left {
+    transform: translateX(-150%) rotate(-30deg);
+    opacity: 0;
+}
+
+.card.swiping-right {
+    transform: translateX(150%) rotate(30deg);
+    opacity: 0;
+}
+
+.card-header {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #444;
+    text-align: center;
+    font-size: 12px;
+    position: relative;
+}
+
+.card.work .card-header {
+    background-color: var(--work-color);
+    color: #000;
+}
+
+.card.education .card-header {
+    background-color: var(--education-color);
+    color: #000;
+}
+
+.card.projects .card-header {
+    background-color: var(--projects-color);
+    color: #000;
+}
+
+.card-content {
+    padding: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-text {
+    padding: 0 15px;
+    font-size: 10px;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    flex: 1;
+    overflow-y: auto;
+    max-height: 45%;
+}
+
+.card-choices {
+    margin-top: auto;
+    padding: 0 15px 15px;
+    margin-bottom: 5px;
+}
+
+.card-icon {
+    width: 100%;
+    height: 33%;
+    margin: 0 auto 15px;
+    align-self: stretch;
+    image-rendering: pixelated;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #222;
+    border-bottom: 2px solid #444;
+}
+
+.card-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated;
+}
+
+.card-choices {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    padding: 10px 15px 15px;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, #111 0%, rgba(17,17,17,0.8) 50%, transparent 100%);
+    z-index: 10;
+}
+
+.choice-left, .choice-right {
+    width: 45%;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    max-height: 55px;
+    overflow-y: auto;
+    font-size: 10px;
+    cursor: pointer;
+    pointer-events: auto;
+    position: relative;
+    z-index: 20;
+    transition: transform 0.2s;
+}
+
+.choice-left {
+    background-color: #444;
+    color: #fff;
+}
+
+.choice-left:hover {
+    background-color: #333;
+    transform: scale(1.05);
+}
+
+.choice-right {
+    background-color: #555;
+    color: #fff;
+}
+
+.choice-right:hover {
+    background-color: #666;
+    transform: scale(1.05);
+}
+
+.swipe-indicator {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.swipe-left {
+    left: 0;
+    background: linear-gradient(90deg, rgba(255, 100, 100, 0.8), transparent);
+    color: #fff;
+}
+
+.swipe-right {
+    right: 0;
+    background: linear-gradient(270deg, rgba(100, 255, 100, 0.8), transparent);
+    color: #fff;
+}
+
+.inventory {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    gap: 5px;
+    z-index: 5;
+}
+
+.skill-item {
+    width: 24px;
+    height: 24px;
+    background-color: #222;
+    border: 1px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2px;
+    animation: pickup 0.5s;
+    margin-right: 2px;
+    overflow: hidden;
+}
+
+.skill-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@keyframes pickup {
+    0% { transform: scale(0); }
+    70% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.notification {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary-color);
+    color: #000;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 10px;
+    opacity: 0;
+    z-index: 100;
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(10px);
+}
+
+.game-over {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+    text-align: center;
+    padding: 20px;
+}
+
+.game-over.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.restart-btn {
+    margin-top: 30px;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: #000;
+    border: none;
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer;
+}
+
+/* Mini-game styles */
+.mini-game {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+    padding: 20px;
+}
+
+.mini-game.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.game-title {
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.game-image {
+    width: 100%;
+    max-width: 220px;
+    margin: 0 auto 15px;
+    image-rendering: pixelated;
+}
+
+.game-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    image-rendering: pixelated;
+    border: 2px solid #444;
+}
+
+.game-description {
+    font-size: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.game-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.game-btn {
+    padding: 8px 12px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+/* Personal card styling */
+.card.personal .card-header {
+    background-color: var(--secondary-color);
+    color: #000;
+}
+
+/* Additional styles for personal path elements */
+/* Personal deck icon background removed as we're using images now */
+
+/* Help button and screen styling */
+.header-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.help-btn {
+    background-color: var(--primary-color);
+    color: #000;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    margin-right: 10px;
+    cursor: pointer;
+    border: none;
+    font-family: 'Press Start 2P', cursive;
+    padding: 0;
+}
+
+.help-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    overflow-y: auto;
+}
+
+.help-screen.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.help-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.help-header h3 {
+    color: var(--primary-color);
+    font-size: 14px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--light-color);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.help-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.quest-map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.map-node {
+    background-color: #222;
+    border: 2px solid #444;
+    border-radius: 8px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 5px;
+    width: 90px;
+    font-size: 8px;
+    transition: all 0.3s ease;
+}
+
+.map-node.current {
+    box-shadow: 0 0 10px var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.map-node.main {
+    background-color: var(--dark-color);
+    border-color: var(--primary-color);
+}
+
+.map-node.professional {
+    background-color: #333;
+    border-color: var(--work-color);
+}
+
+.map-node.personal {
+    background-color: #333;
+    border-color: var(--secondary-color);
+}
+
+.map-node.work {
+    background-color: #222;
+    border-color: var(--work-color);
+}
+
+.map-node.education {
+    background-color: #222;
+    border-color: var(--education-color);
+}
+
+.map-node.projects {
+    background-color: #222;
+    border-color: var(--projects-color);
+}
+
+.node-label {
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.node-icon {
+    font-size: 16px;
+}
+
+.map-branches {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.branch-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.branch-line {
+    width: 2px;
+    height: 15px;
+    background-color: #444;
+    margin: 3px 0;
+}
+
+.sub-branches {
+    display: flex;
+    gap: 15px;
+}
+
+/* Help content instructions */
+.help-instructions {
+    font-size: 9px;
+    line-height: 1.5;
+    text-align: center;
+    margin-top: 10px;
+    padding: 0 15px;
+}
+
+.game-tip {
+    margin-top: 15px;
+    padding: 8px;
+    background-color: rgba(95, 255, 255, 0.1);
+    border: 1px dashed var(--primary-color);
+    color: var(--primary-color);
+    font-size: 8px;
+}
+
+/* Mobile responsive adjustments for help screen */
+@media (max-width: 400px) {
+    .map-node {
+        width: 70px;
+        font-size: 7px;
+    }
+    
+    .map-branches {
+        gap: 10px;
+    }
+    
+    .sub-branches {
+        gap: 10px;
+    }
+    
+    .help-instructions {
+        font-size: 8px;
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  /* Game container adjustments */
+  .game-container {
+    max-width: 100%;
+    max-height: 100vh;
+    border-width: 2px;
+  }
+  
+  /* Landing page - better vertical spacing */
+ .story-screen {
+    padding: 15px;
+    justify-content: space-between; /* Changed to space-between to push content apart */
+    overflow-y: auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+   /* Make personal cards responsive too */
+    .card.personal .card-text {
+        font-size: 9px;
+        line-height: 1.6;
+    }
+    
+  story-content {
+    max-width: 95%;
+    margin-top: 5vh;
+    margin-bottom: 20px; /* Added margin at bottom */
+  }
+  
+  .story-content h1 {
+    font-size: 18px; /* Increased from 16px */
+    margin-bottom: 15px;
+  }
+  
+  .story-content p {
+    font-size: 10px; /* Increased from 8px */
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+  
+  /* Button now positioned relative to the content */
+  .start-btn {
+    position: relative; /* Changed from fixed to relative */
+    bottom: auto; /* Remove fixed positioning */
+    left: auto;
+    transform: none;
+    margin: 30px auto 60px auto; /* Centered with space below */
+    font-size: 12px; /* Larger font */
+    padding: 8px 16px;
+    width: 200px; /* Wider button */
+  }
+  
+  /* Stats bar always visible in game mode */
+  .stats-bar {
+    position: relative; /* Ensure it stays in the normal document flow */
+    z-index: 6;
+    padding: 5px 10px;
+  }
+  
+  /* Card adjustments */
+  .card {
+    width: 90%;
+    height: 65%;
+    max-height: 65vh; /* Ensure it doesn't get too tall */
+  }
+  
+  .card-icon {
+    height: 120px; /* Fixed height for mobile */
+    min-height: 25%;
+    max-height: 30%;
+  }
+  
+  .card-text {
+    font-size: 8px;
+    line-height: 1.5;
+    padding: 0 10px;
+    margin-bottom: 10px;
+    flex: 1;
+    overflow-y: auto;
+  }
+  
+  .card-choices {
+    padding: 0 10px 10px;
+    margin-top: auto;
+  }
+  
+  .choice-left, .choice-right {
+    min-height: 30px; /* Smaller on mobile */
+  }
+  
+  /* Skills inventory repositioning */
+  .inventory {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    justify-content: center;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-top: 1px solid var(--primary-color);
+    z-index: 10;
+  }
+  
+  .skill-item {
+    width: 20px;
+    height: 20px;
+    margin: 2px;
+  }
+  
+  /* Header adjustments */
+  .game-header {
+    height: 40px;
+    font-size: 8px;
+  }
+  
+  .cards-left {
+    position: relative;
+    z-index: 7; /* Ensure visibility */
+  }
+  
+  /* Make notifications more visible on mobile */
+  .notification {
+    top: 120px; /* Move down to avoid overlap with header */
+    font-size: 9px;
+    padding: 6px 10px;
+    width: 80%;
+    max-width: 300px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 375px) {
+  .story-content h1 {
+    font-size: 16px; /* Adjusted */
+  }
+  
+  .story-content p {
+    font-size: 9px; /* Adjusted */
+  }
+  
+  .start-btn {
+    width: 180px;
+    font-size: 10px;
+    margin-bottom: 40px; /* Less bottom space on small phones */
+  }
+  
+  .card {
+    height: 60%;
+  }
+  
+  .card-icon {
+    height: 100px; /* Even smaller for extra small phones */
+    min-height: 20%;
+    max-height: 25%;
+    margin-bottom: 5px;
+  }
+  
+  .game-header, .stats-bar {
+    font-size: 7px;
+  }
+  
+  .stat-value {
+    font-size: 11px;
+  }
+  
+  .game-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 320px) {
+  .story-content h1 {
+    font-size: 12px;
+  }
+  
+  .card-text {
+    font-size: 7px;
+  }
+  
+  .start-btn {
+    bottom: 30px;
+    width: 140px;
+  }
+}
+
+/* Height adjustments for short screens */
+@media (max-height: 650px) {
+  .story-content {
+    margin-top: 3vh;
+  }
+  
+  .story-content p {
+    margin-top: 5px;
+  }
+  
+  .start-btn {
+    bottom: 25px;
+  }
+  
+  .card {
+    height: 60%;
+  }
+  
+  .card-icon {
+    height: 33%;
+  }
+  
+  .card-text {
+    margin-bottom: 8px;
+    padding: 0 8px;
+  }
+  
+  .card-choices {
+    padding: 0 8px 8px;
+  }
+}
+
+/* Extra short screens (like landscape mode) */
+@media (max-height: 450px) {
+  .story-content {
+    margin-top: 2vh;
+  }
+  
+  .start-btn {
+    bottom: 15px;
+  }
+  
+  .card {
+    height: 70%;
+  }
+  
+  .card-icon {
+    height: 80px; /* Even smaller for landscape */
+    min-height: 15%;
+    max-height: 20%;
+  }
+  
+  .stats-bar {
+    padding: 3px 10px;
+  }
+  
+  .skill-item {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Help screen styles */
+.help-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    display: flex;
+    flex-direction: column;
+    z-index: 30;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    overflow-y: auto;
+}
+
+.help-screen.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.help-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.help-header h3 {
+    color: var(--primary-color);
+    font-size: 14px;
+    margin: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--light-color);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.help-content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.quest-map {
+    width: 90%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.map-node {
+    width: 90px;
+    height: 50px;
+    background-color: #222;
+    border: 2px solid #444;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 8px;
+    padding: 5px;
+    position: relative;
+}
+
+.map-node.main {
+    border-color: var(--primary-color);
+    background-color: #003333;
+}
+
+.map-node.professional {
+    border-color: var(--work-color);
+    background-color: #330000;
+}
+
+.map-node.work {
+    border-color: var(--work-color);
+    background-color: #330000;
+}
+
+.map-node.education {
+    border-color: var(--education-color);
+    background-color: #000033;
+}
+
+.map-node.personal {
+    border-color: var(--secondary-color);
+    background-color: #330033;
+}
+
+.map-node.projects {
+    border-color: var(--projects-color);
+    background-color: #003300;
+}
+
+.map-node.values {
+    border-color: var(--secondary-color);
+    background-color: #330033;
+}
+
+.map-node.current {
+    box-shadow: 0 0 10px 2px var(--primary-color);
+    transform: scale(1.1);
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.node-label {
+    font-size: 8px;
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.node-icon {
+    font-size: 14px;
+}
+
+.map-branches {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.branch-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.branch-line {
+    width: 2px;
+    height: 20px;
+    background-color: #444;
+}
+
+.sub-branches {
+    display: flex;
+    justify-content: space-around;
+    width: 180px;
+    position: relative;
+}
+
+.sub-branches .branch-line {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.help-instructions {
+    width: 90%;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.help-instructions p {
+    font-size: 8px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    color: var(--light-color);
+}
+
+/* Mobile adjustments for help screen */
+@media (max-width: 768px) {
+    .help-header h3 {
+        font-size: 12px;
+    }
+    
+    .map-node {
+        width: 80px;
+        height: 45px;
+        margin: 5px;
+    }
+    
+    .node-label {
+        font-size: 7px;
+    }
+    
+    .node-icon {
+        font-size: 12px;
+    }
+    
+    .sub-branches {
+        width: 160px;
+    }
+    
+    .help-instructions p {
+        font-size: 7px;
+    }
+}

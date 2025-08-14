@@ -1,0 +1,237 @@
+---
+title: "Michael Borck"
+subtitle: |
+  ::: {.content-visible when-format="revealjs"}
+  AI Leader & Educational Innovator
+  :::
+author: "Michael Borck"
+date: today
+date-format: "MMMM YYYY"
+embed-resources: true
+---
+
+```{python}
+#| include: false
+import yaml
+
+with open("../data/cv-data.yml", 'r') as f:
+    cv_data = yaml.safe_load(f)
+```
+
+::: {.content-visible unless-format="revealjs"}
+## Contact Information
+
+{{< meta personal.email >}} | {{< meta personal.phone >}}  
+[LinkedIn]({{< meta personal.linkedin >}}) | [GitHub]({{< meta personal.github >}}) | [Portfolio]({{< meta personal.portfolio >}}) | [Education Platform]({{< meta personal.education_platform >}})
+:::
+
+::: {.content-visible when-format="revealjs"}
+## Contact
+
+- 📧 {{< meta personal.email >}}
+- 📱 {{< meta personal.phone >}}
+- 🔗 [LinkedIn]({{< meta personal.linkedin >}})
+- 💻 [GitHub]({{< meta personal.github >}})
+- 🌐 [Portfolio]({{< meta personal.portfolio >}})
+:::
+
+## Teaching Excellence & Innovation {.content-visible when-format="html"}
+
+### Teaching Philosophy & Approach
+
+- **Core Philosophy:** {{< meta teaching.philosophy.core >}}
+- **Conceptual Framework:** {{< meta teaching.philosophy.framework >}}
+- **Pedagogical Approach:** {{< meta teaching.philosophy.approach >}}
+
+### Student Satisfaction & Impact
+
+```{python}
+#| output: asis
+for item in cv_data['teaching']['satisfaction']:
+    print(f"- **{item['metric']}:** {item['details']}")
+```
+
+### Student Feedback Highlights
+
+```{python}
+#| output: asis
+for quote in cv_data['teaching']['feedback']:
+    print(f"- *\"{quote}\"*")
+```
+
+## Professional Summary
+
+{{< meta summary.main >}}
+
+## Key Achievements
+
+```{python}
+#| output: asis
+for achievement in cv_data['achievements']:
+    print(f"- **{achievement}**")
+```
+
+## Leadership & Academic Experience
+
+```{python}
+#| output: asis
+for job in cv_data['experience']:
+    print(f"\n### {job['title']}", end="")
+    if 'organization' in job and job['organization']:
+        print(f" — {job['organization']}", end="")
+    print()
+    print(f"*{job['period']} | {job['location']}*\n")
+    
+    if 'responsibilities' in job and job['responsibilities']:
+        for resp in job['responsibilities']:
+            print(f"- {resp}")
+    
+    if 'projects' in job and job['projects']:
+        print("\n**Recent Projects:**")
+        for project in job['projects']:
+            print(f"- {project}")
+```
+
+## Publications
+
+::: {.content-visible unless-format="revealjs"}
+### Books (Self-Published, Creative Commons Licensed)
+
+```{python}
+#| output: asis
+for book in cv_data['publications']['books']:
+    print(f"- **{book['title']}** – {book['description']}")
+```
+
+### Doctoral Thesis
+
+```{python}
+#| output: asis
+for thesis in cv_data['publications']['thesis']:
+    print(f"- **{thesis['title']}** ({thesis['year']}) – {thesis['type']}, {thesis['fields']}. {thesis['description']}")
+```
+
+### Conference Publications
+
+```{python}
+#| output: asis
+for conf in cv_data['publications']['conferences']:
+    output = f"- {conf['authors']} ({conf['year']}). \"{conf['title']}.\" *{conf['venue']}*"
+    if 'location' in conf and conf['location']:
+        output += f", {conf['location']}"
+    if 'publisher' in conf and conf['publisher']:
+        output += f": {conf['publisher']}"
+    if 'volume' in conf and conf['volume']:
+        output += f" {conf['volume']}"
+    if 'pages' in conf and conf['pages']:
+        output += f", {conf['pages']}"
+    output += "."
+    print(output)
+```
+:::
+
+::: {.content-visible when-format="revealjs"}
+### Selected Publications
+
+- **4 Technical Books** (Creative Commons Licensed)
+- **PhD Thesis:** Feature Extraction from Multi-modal Data (2017)
+- **6+ Peer-reviewed Conference Papers** in Computer Vision & ML
+:::
+
+## Open Source Projects & Educational Tools
+
+```{python}
+#| output: asis
+for project in cv_data['projects']:
+    output = f"- **{project['name']}**"
+    if 'description' in project and project['description']:
+        output += f" – {project['description']}"
+    if 'year' in project and project['year']:
+        output += f" – {project['year']}"
+    print(output)
+```
+
+## Education
+
+```{python}
+#| output: asis
+for edu in cv_data['education']:
+    output = f"- **{edu['degree']}**, {edu['field']}, {edu['institution']}, {edu['year']}"
+    if 'thesis' in edu and edu['thesis']:
+        output += f"  \n  *{edu['thesis']}*"
+    print(output)
+```
+
+## Programming Skills
+
+::: {.content-visible unless-format="revealjs"}
+```{python}
+#| output: asis
+print(f"**Core Technologies:** {' • '.join(cv_data['skills']['programming']['core'])}")
+print(f"**Web Stack:** {' • '.join(cv_data['skills']['programming']['web'])}")
+print(f"**AI/ML Stack:** {' • '.join(cv_data['skills']['programming']['ai_ml'])}")
+print(f"**Educational Tech:** {' • '.join(cv_data['skills']['programming']['educational'])}")
+```
+:::
+
+::: {.content-visible when-format="revealjs"}
+### Technical Stack
+
+- **Languages:** Python, C/C++, Java, JavaScript, SQL
+- **Web:** React, Flask, FastAPI
+- **AI/ML:** Langchain, TensorFlow, PyTorch
+- **Educational:** Canvas LMS, Blackboard LMS
+:::
+
+## Training & Certifications {.content-visible unless-format="revealjs"}
+
+```{python}
+#| output: asis
+for cert in cv_data['certifications']:
+    print(f"- {cert['name']}, {cert['year']}")
+```
+
+## Professional Service {.content-visible unless-format="revealjs"}
+
+### Service to the Profession
+
+```{python}
+#| output: asis
+for service in cv_data['service']['profession']:
+    print(f"- **{service['role']}:** {service['organization']}, {service['year']}")
+```
+
+### Service to the Community
+
+```{python}
+#| output: asis
+for service in cv_data['service']['community']:
+    output = f"- **{service['role']}:** {service['project']}"
+    if 'period' in service and service['period']:
+        output += f" ({service['period']})"
+    elif 'year' in service and service['year']:
+        output += f" ({service['year']})"
+    print(output)
+```
+
+## Professional Memberships {.content-visible unless-format="revealjs"}
+
+```{python}
+#| output: asis
+for member in cv_data['memberships']:
+    output = f"- **{member['status']}**, {member['organization']}, {member['year']}"
+    if 'note' in member and member['note']:
+        output += f" {member['note']}"
+    print(output)
+```
+
+## Personal Interests {.content-visible unless-format="revealjs"}
+
+```{python}
+#| output: asis
+print(", ".join(cv_data['interests']))
+```
+
+## References
+
+{{< meta references >}}

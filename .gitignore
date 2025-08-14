@@ -80,3 +80,16 @@ Thumbs.db
 notes.md
 TODO.md
 personal/
+
+# Test files
+test_*.html
+debug*.html
+fix_*.py
+generate_creative*.py
+
+# Quarto intermediate files
+*.quarto_ipynb
+
+# HTTP server
+*.pid
+nohup.out

@@ -306,7 +306,7 @@ service:
       project: User Guide, Image Annotation Tool
       year: 2014
 
-affiliations:
+memberships:
   - organization: Australian Computer Society (ACS)
     status: Certified Professional
     year: 2011

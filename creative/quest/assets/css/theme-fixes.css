@@ -1,0 +1,130 @@
+/* Theme-specific fixes and overrides */
+
+/* Prevent text selection and ensure proper click handling */
+.card {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.choice-left, .choice-right {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: auto !important;
+    position: relative !important;
+    z-index: 100 !important;
+}
+
+/* Ensure images never escape their containers */
+.card img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    position: relative !important;
+    display: block !important;
+}
+
+/* Hide any duplicate/escaping images */
+body > img,
+.game-container > img,
+.card-area > img:not(.card img) {
+    display: none !important;
+}
+
+/* Fix skill icons in inventory */
+.skill-item img,
+.skill-icon-img {
+    width: 20px !important;
+    height: 20px !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
+    display: inline-block !important;
+    vertical-align: middle;
+}
+
+/* Prevent any absolute positioned elements from escaping */
+.card * {
+    position: relative;
+}
+
+.card .card-choices {
+    position: absolute !important;
+}
+
+/* Fix any z-index issues */
+.card {
+    z-index: 10;
+}
+
+.card-icon {
+    z-index: 1;
+}
+
+.card-content {
+    z-index: 2;
+}
+
+.card-choices {
+    z-index: 3;
+}
+
+/* Ensure proper overflow handling */
+.game-container {
+    overflow: hidden !important;
+}
+
+.card-area {
+    overflow: hidden !important;
+}
+
+/* Professional theme specific fixes */
+body:has(#theme-stylesheet[href*="professional"]) .card-icon {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Retro theme specific fixes */
+body:has(#theme-stylesheet[href*="styles.css"]:not([href*="professional"])) .card-icon {
+    image-rendering: pixelated;
+}
+
+/* Fix for fragment appearing in top right */
+.game-header::after,
+.game-header::before,
+.stats-bar::after,
+.stats-bar::before {
+    display: none !important;
+}
+
+/* Ensure no images escape the card area */
+.card-area {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* Hide any images that might be absolutely positioned outside cards */
+img:not(.card img):not(.skill-icon-img) {
+    position: relative !important;
+}
+
+/* Fix deck icon in header for both themes */
+.deck-icon {
+    width: 20px !important;
+    height: 20px !important;
+    overflow: hidden !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
+    text-align: center !important;
+}
+
+.deck-icon img {
+    width: 20px !important;
+    height: 20px !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
+    object-fit: contain !important;
+    display: block !important;
+}

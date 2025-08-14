@@ -1,0 +1,1050 @@
+---
+title: "Michael Borck - CV Quest"
+format:
+  html:
+    toc: false
+    embed-resources: true
+    standalone: true
+    theme: none
+---
+
+```{python}
+#| include: false
+import yaml
+import json
+import random
+
+with open("../data/cv-data.yml", 'r') as f:
+    cv_data = yaml.safe_load(f)
+
+# Convert to JSON for JavaScript
+cv_json = json.dumps(cv_data)
+
+# Create structured game data from CV
+def create_game_cards():
+    cards = {
+        'main': [],
+        'military': [],
+        'academia': [],
+        'industry': [],
+        'skills': [],
+        'projects': [],
+        'achievements': []
+    }
+    
+    # Process experience into game cards
+    for exp in cv_data['experience']:
+        if 'RAN' in exp.get('organization', '') or 'HQADF' in exp.get('organization', ''):
+            deck = 'military'
+        elif 'University' in exp.get('organization', ''):
+            deck = 'academia'
+        else:
+            deck = 'industry'
+        
+        cards[deck].append({
+            'title': exp['title'],
+            'org': exp.get('organization', ''),
+            'period': exp['period'],
+            'responsibilities': exp.get('responsibilities', [])[:2]  # First 2 responsibilities
+        })
+    
+    # Add skills
+    all_skills = (cv_data['skills']['programming']['core'] + 
+                  cv_data['skills']['programming']['web'] + 
+                  cv_data['skills']['programming']['ai_ml'])
+    cards['skills'] = all_skills
+    
+    # Add projects
+    for proj in cv_data['projects']:
+        cards['projects'].append({
+            'name': proj['name'],
+            'description': proj.get('description', '')
+        })
+    
+    return cards
+
+game_cards = create_game_cards()
+game_cards_json = json.dumps(game_cards)
+```
+
+```{python}
+#| output: asis
+print(f"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>CV Quest - The Chronicles of {cv_data['personal']['name']}</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+        
+        :root {{
+            --retro-black: #0c0c0c;
+            --retro-dark: #1a1a2e;
+            --retro-blue: #16213e;
+            --retro-accent: #0f3460;
+            --retro-cyan: #00fff0;
+            --retro-pink: #ff006e;
+            --retro-yellow: #ffbe0b;
+            --retro-green: #00f5a0;
+            --retro-purple: #8338ec;
+            --retro-white: #f0f0f0;
+        }}
+        
+        * {{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+        }}
+        
+        body {{
+            font-family: 'VT323', monospace;
+            background: linear-gradient(135deg, var(--retro-dark) 0%, var(--retro-blue) 100%);
+            color: var(--retro-white);
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }}
+        
+        /* Retro CRT effect */
+        body::before {{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }}
+        
+        .game-container {{
+            width: 100%;
+            max-width: 500px;
+            height: 100vh;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }}
+        
+        /* Title Screen */
+        .title-screen {{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--retro-black);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: opacity 0.5s ease;
+        }}
+        
+        .title-screen h1 {{
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2.5rem;
+            color: var(--retro-cyan);
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 0 0 20px var(--retro-cyan);
+            animation: glow 2s ease-in-out infinite;
+        }}
+        
+        @keyframes glow {{
+            0%, 100% {{ text-shadow: 0 0 20px var(--retro-cyan); }}
+            50% {{ text-shadow: 0 0 40px var(--retro-cyan), 0 0 60px var(--retro-cyan); }}
+        }}
+        
+        .title-screen .subtitle {{
+            font-size: 1.5rem;
+            color: var(--retro-yellow);
+            margin-bottom: 3rem;
+            text-align: center;
+        }}
+        
+        .start-button {{
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--retro-pink), var(--retro-purple));
+            border: 3px solid var(--retro-cyan);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }}
+        
+        @keyframes pulse {{
+            0%, 100% {{ transform: scale(1); }}
+            50% {{ transform: scale(1.05); }}
+        }}
+        
+        .start-button:hover {{
+            transform: scale(1.1);
+            box-shadow: 0 0 30px var(--retro-cyan);
+        }}
+        
+        /* Game Header */
+        .game-header {{
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 2px solid var(--retro-cyan);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }}
+        
+        .level-info {{
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            color: var(--retro-yellow);
+        }}
+        
+        .cards-counter {{
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            color: var(--retro-green);
+        }}
+        
+        /* Stats Bar */
+        .stats-bar {{
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: space-around;
+            border-bottom: 1px solid var(--retro-accent);
+        }}
+        
+        .stat {{
+            text-align: center;
+        }}
+        
+        .stat-label {{
+            font-size: 0.8rem;
+            color: var(--retro-cyan);
+            margin-bottom: 0.25rem;
+        }}
+        
+        .stat-value {{
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            color: var(--retro-yellow);
+        }}
+        
+        /* Card Area */
+        .card-area {{
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }}
+        
+        .card {{
+            position: absolute;
+            width: 90%;
+            max-width: 350px;
+            background: linear-gradient(135deg, var(--retro-blue), var(--retro-accent));
+            border: 3px solid var(--retro-cyan);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 255, 240, 0.3);
+            cursor: grab;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }}
+        
+        .card.dragging {{
+            cursor: grabbing;
+            transition: none;
+        }}
+        
+        .card.swiped-left {{
+            transform: translateX(-150%) rotate(-30deg);
+            opacity: 0;
+        }}
+        
+        .card.swiped-right {{
+            transform: translateX(150%) rotate(30deg);
+            opacity: 0;
+        }}
+        
+        .card-title {{
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            color: var(--retro-yellow);
+            margin-bottom: 1rem;
+            text-align: center;
+        }}
+        
+        .card-content {{
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: var(--retro-white);
+            margin-bottom: 2rem;
+            min-height: 150px;
+        }}
+        
+        .card-choices {{
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }}
+        
+        .choice {{
+            flex: 1;
+            padding: 0.5rem;
+            text-align: center;
+            font-size: 1rem;
+            opacity: 0.7;
+        }}
+        
+        .choice.left {{
+            color: var(--retro-pink);
+            border-right: 1px solid var(--retro-accent);
+        }}
+        
+        .choice.right {{
+            color: var(--retro-green);
+        }}
+        
+        .card.tilted-left .choice.left {{
+            opacity: 1;
+            transform: scale(1.1);
+        }}
+        
+        .card.tilted-right .choice.right {{
+            opacity: 1;
+            transform: scale(1.1);
+        }}
+        
+        /* Swipe Indicators */
+        .swipe-indicator {{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }}
+        
+        .swipe-left {{
+            left: 2rem;
+            color: var(--retro-pink);
+        }}
+        
+        .swipe-right {{
+            right: 2rem;
+            color: var(--retro-green);
+        }}
+        
+        .card.tilted-left ~ .swipe-left {{
+            opacity: 1;
+        }}
+        
+        .card.tilted-right ~ .swipe-right {{
+            opacity: 1;
+        }}
+        
+        /* Skills Inventory */
+        .skills-inventory {{
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.8);
+            border-top: 2px solid var(--retro-cyan);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            max-height: 100px;
+            overflow-y: auto;
+        }}
+        
+        .skill-badge {{
+            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+            background: var(--retro-purple);
+            border: 1px solid var(--retro-cyan);
+            border-radius: 5px;
+            animation: skillUnlock 0.5s ease;
+        }}
+        
+        @keyframes skillUnlock {{
+            0% {{
+                transform: scale(0) rotate(180deg);
+                opacity: 0;
+            }}
+            50% {{
+                transform: scale(1.2) rotate(90deg);
+            }}
+            100% {{
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }}
+        }}
+        
+        /* Notification */
+        .notification {{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--retro-black);
+            border: 3px solid var(--retro-yellow);
+            padding: 1rem 2rem;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            color: var(--retro-yellow);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 50;
+        }}
+        
+        .notification.show {{
+            animation: notificationPop 2s ease;
+        }}
+        
+        @keyframes notificationPop {{
+            0% {{
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0);
+            }}
+            20% {{
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2);
+            }}
+            80% {{
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }}
+            100% {{
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }}
+        }}
+        
+        /* Game Over Screen */
+        .game-over {{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            padding: 2rem;
+        }}
+        
+        .game-over.show {{
+            display: flex;
+        }}
+        
+        .game-over h2 {{
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5rem;
+            color: var(--retro-cyan);
+            margin-bottom: 2rem;
+            text-align: center;
+        }}
+        
+        .final-stats {{
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }}
+        
+        .final-stats p {{
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }}
+        
+        .contact-buttons {{
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }}
+        
+        .contact-btn {{
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            padding: 1rem 1.5rem;
+            background: var(--retro-purple);
+            border: 2px solid var(--retro-cyan);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }}
+        
+        .contact-btn:hover {{
+            background: var(--retro-cyan);
+            transform: scale(1.05);
+        }}
+        
+        .restart-btn {{
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            padding: 1rem 2rem;
+            background: var(--retro-pink);
+            border: 2px solid var(--retro-yellow);
+            color: white;
+            cursor: pointer;
+            margin-top: 1rem;
+        }}
+        
+        /* Mini-game overlay */
+        .mini-game {{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 150;
+            padding: 2rem;
+        }}
+        
+        .mini-game.show {{
+            display: flex;
+        }}
+        
+        .mini-game h3 {{
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            color: var(--retro-yellow);
+            margin-bottom: 2rem;
+        }}
+        
+        .mini-game-content {{
+            background: var(--retro-blue);
+            border: 3px solid var(--retro-cyan);
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 100%;
+        }}
+        
+        .code-puzzle {{
+            font-family: 'Courier New', monospace;
+            background: var(--retro-black);
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            color: var(--retro-green);
+        }}
+        
+        .puzzle-options {{
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }}
+        
+        .puzzle-btn {{
+            padding: 0.75rem;
+            background: var(--retro-accent);
+            border: 2px solid var(--retro-cyan);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }}
+        
+        .puzzle-btn:hover {{
+            background: var(--retro-cyan);
+            transform: translateX(5px);
+        }}
+        
+        /* Mobile responsiveness */
+        @media (max-width: 500px) {{
+            .title-screen h1 {{
+                font-size: 1.8rem;
+            }}
+            
+            .card {{
+                width: 85%;
+            }}
+        }}
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- Title Screen -->
+        <div class="title-screen" id="titleScreen">
+            <h1>CV QUEST</h1>
+            <div class="subtitle">The Chronicles of {cv_data['personal']['name']}</div>
+            <button class="start-button" id="startBtn">INSERT COIN</button>
+        </div>
+        
+        <!-- Game Header -->
+        <div class="game-header">
+            <div class="level-info" id="levelInfo">ERA: BEGINNING</div>
+            <div class="cards-counter" id="cardsCounter">CARDS: 20</div>
+        </div>
+        
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-label">SKILLS</div>
+                <div class="stat-value" id="skillsStat">0</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">XP</div>
+                <div class="stat-value" id="xpStat">0</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">ACHIEVE</div>
+                <div class="stat-value" id="achieveStat">0</div>
+            </div>
+        </div>
+        
+        <!-- Card Area -->
+        <div class="card-area" id="cardArea">
+            <div class="swipe-indicator swipe-left">◄</div>
+            <div class="swipe-indicator swipe-right">►</div>
+        </div>
+        
+        <!-- Skills Inventory -->
+        <div class="skills-inventory" id="skillsInventory"></div>
+        
+        <!-- Notification -->
+        <div class="notification" id="notification"></div>
+        
+        <!-- Mini-game Overlay -->
+        <div class="mini-game" id="miniGame">
+            <h3 id="miniGameTitle">SKILL CHALLENGE</h3>
+            <div class="mini-game-content">
+                <p id="miniGameDesc">Test your knowledge!</p>
+                <div class="code-puzzle" id="codePuzzle"></div>
+                <div class="puzzle-options" id="puzzleOptions"></div>
+            </div>
+        </div>
+        
+        <!-- Game Over Screen -->
+        <div class="game-over" id="gameOver">
+            <h2>QUEST COMPLETE!</h2>
+            <div class="final-stats">
+                <p>Journey through {cv_data['personal']['name']}'s career completed!</p>
+                <p>Skills Collected: <span id="finalSkills">0</span></p>
+                <p>Experience Points: <span id="finalXP">0</span></p>
+                <p>Achievements: <span id="finalAchieve">0</span></p>
+            </div>
+            <div class="contact-buttons">
+                <a href="mailto:{cv_data['personal']['email']}" class="contact-btn">📧 Email</a>
+                <a href="{cv_data['personal']['linkedin']}" target="_blank" class="contact-btn">💼 LinkedIn</a>
+                <a href="{cv_data['personal']['github']}" target="_blank" class="contact-btn">💻 GitHub</a>
+            </div>
+            <button class="restart-btn" id="restartBtn">PLAY AGAIN</button>
+        </div>
+    </div>
+    
+    <script>
+        // Game Data from CV
+        const cvData = {cv_json};
+        const gameCards = {game_cards_json};
+        
+        // Game State
+        let gameState = {{
+            currentDeck: 'main',
+            cardsRemaining: 20,
+            stats: {{
+                skills: 0,
+                xp: 0,
+                achievements: 0
+            }},
+            collectedSkills: [],
+            currentCard: null,
+            era: 'BEGINNING'
+        }};
+        
+        // Card Templates
+        const cardTemplates = {{
+            main: [
+                {{
+                    title: "THE JOURNEY BEGINS",
+                    content: "You stand at the entrance of a vast digital archive. Three paths stretch before you, each glowing with different energy. Which era will you explore first?",
+                    leftChoice: "⚔️ Military Era",
+                    rightChoice: "🎓 Academic Path",
+                    leftAction: () => switchEra('military'),
+                    rightAction: () => switchEra('academia')
+                }},
+                {{
+                    title: "CROSSROADS",
+                    content: "The archive shifts, revealing new pathways. Do you seek technical mastery or leadership wisdom?",
+                    leftChoice: "💻 Tech Skills",
+                    rightChoice: "👥 Leadership",
+                    leftAction: () => switchEra('skills'),
+                    rightAction: () => switchEra('industry')
+                }}
+            ],
+            military: gameCards.military.map(exp => ({{
+                title: exp.title,
+                content: `${{exp.org}} (${{exp.period}})\\n\\n${{exp.responsibilities.join('\\n')}}`,
+                leftChoice: "Learn More",
+                rightChoice: "Continue",
+                leftAction: () => addSkillAndContinue(['Leadership', 'Systems']),
+                rightAction: () => nextCard()
+            }})),
+            academia: gameCards.academia.map(exp => ({{
+                title: exp.title,
+                content: `${{exp.org}} (${{exp.period}})\\n\\n${{exp.responsibilities.join('\\n')}}`,
+                leftChoice: "Teach Skills",
+                rightChoice: "Research More",
+                leftAction: () => showMiniGame('teaching'),
+                rightAction: () => addSkillAndContinue(['Python', 'AI/ML'])
+            }})),
+            industry: gameCards.industry.map(exp => ({{
+                title: exp.title,
+                content: `${{exp.org}} (${{exp.period}})\\n\\n${{exp.responsibilities.join('\\n')}}`,
+                leftChoice: "Tech Focus",
+                rightChoice: "Business Focus",
+                leftAction: () => addSkillAndContinue(['Consulting']),
+                rightAction: () => nextCard()
+            }})),
+            skills: [
+                {{
+                    title: "SKILL TREE",
+                    content: "You discover a glowing skill tree. Each branch represents mastery in different technologies. Choose your path of expertise.",
+                    leftChoice: "🐍 Python Path",
+                    rightChoice: "🤖 AI/ML Path",
+                    leftAction: () => showMiniGame('python'),
+                    rightAction: () => showMiniGame('aiml')
+                }},
+                {{
+                    title: "WEB MASTERY",
+                    content: "The web development chamber opens before you. Frontend or backend - where does your power lie?",
+                    leftChoice: "⚛️ React/Frontend",
+                    rightChoice: "🔧 Backend/APIs",
+                    leftAction: () => addSkillAndContinue(['React', 'JavaScript']),
+                    rightAction: () => addSkillAndContinue(['FastAPI', 'Flask'])
+                }}
+            ],
+            projects: gameCards.projects.map(proj => ({{
+                title: proj.name,
+                content: proj.description || "An innovative project showcasing technical expertise.",
+                leftChoice: "Examine Code",
+                rightChoice: "Next Project",
+                leftAction: () => showMiniGame('project'),
+                rightAction: () => nextCard()
+            }}))
+        }};
+        
+        // Initialize game
+        document.addEventListener('DOMContentLoaded', () => {{
+            document.getElementById('startBtn').addEventListener('click', startGame);
+            document.getElementById('restartBtn').addEventListener('click', restartGame);
+        }});
+        
+        function startGame() {{
+            document.getElementById('titleScreen').style.opacity = '0';
+            setTimeout(() => {{
+                document.getElementById('titleScreen').style.display = 'none';
+                createCard(cardTemplates.main[0]);
+            }}, 500);
+        }}
+        
+        function restartGame() {{
+            gameState = {{
+                currentDeck: 'main',
+                cardsRemaining: 20,
+                stats: {{
+                    skills: 0,
+                    xp: 0,
+                    achievements: 0
+                }},
+                collectedSkills: [],
+                currentCard: null,
+                era: 'BEGINNING'
+            }};
+            
+            document.getElementById('gameOver').classList.remove('show');
+            document.getElementById('skillsInventory').innerHTML = '';
+            updateStats();
+            createCard(cardTemplates.main[0]);
+        }}
+        
+        function createCard(cardData) {{
+            if (gameState.cardsRemaining <= 0) {{
+                endGame();
+                return;
+            }}
+            
+            const cardArea = document.getElementById('cardArea');
+            const existingCard = cardArea.querySelector('.card');
+            if (existingCard) {{
+                existingCard.remove();
+            }}
+            
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="card-title">${{cardData.title}}</div>
+                <div class="card-content">${{cardData.content}}</div>
+                <div class="card-choices">
+                    <div class="choice left">${{cardData.leftChoice}}</div>
+                    <div class="choice right">${{cardData.rightChoice}}</div>
+                </div>
+            `;
+            
+            cardArea.appendChild(card);
+            gameState.currentCard = cardData;
+            
+            // Add swipe functionality
+            addSwipeListeners(card);
+            
+            // Update counter
+            gameState.cardsRemaining--;
+            document.getElementById('cardsCounter').textContent = `CARDS: ${{gameState.cardsRemaining}}`;
+        }}
+        
+        function addSwipeListeners(card) {{
+            let startX = null;
+            let currentX = null;
+            let cardBeingDragged = false;
+            
+            // Mouse events
+            card.addEventListener('mousedown', handleStart);
+            document.addEventListener('mousemove', handleMove);
+            document.addEventListener('mouseup', handleEnd);
+            
+            // Touch events
+            card.addEventListener('touchstart', handleStart);
+            document.addEventListener('touchmove', handleMove);
+            document.addEventListener('touchend', handleEnd);
+            
+            function handleStart(e) {{
+                cardBeingDragged = true;
+                card.classList.add('dragging');
+                startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            }}
+            
+            function handleMove(e) {{
+                if (!cardBeingDragged) return;
+                
+                currentX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+                const diffX = currentX - startX;
+                const rotation = diffX * 0.1;
+                
+                card.style.transform = `translateX(${{diffX}}px) rotate(${{rotation}}deg)`;
+                
+                // Add tilt indicators
+                if (diffX < -50) {{
+                    card.classList.add('tilted-left');
+                    card.classList.remove('tilted-right');
+                }} else if (diffX > 50) {{
+                    card.classList.add('tilted-right');
+                    card.classList.remove('tilted-left');
+                }} else {{
+                    card.classList.remove('tilted-left', 'tilted-right');
+                }}
+            }}
+            
+            function handleEnd(e) {{
+                if (!cardBeingDragged) return;
+                
+                cardBeingDragged = false;
+                card.classList.remove('dragging');
+                
+                const diffX = currentX - startX;
+                const threshold = 100;
+                
+                if (Math.abs(diffX) > threshold) {{
+                    // Card was swiped
+                    if (diffX < 0) {{
+                        // Swiped left
+                        card.classList.add('swiped-left');
+                        if (gameState.currentCard.leftAction) {{
+                            setTimeout(() => gameState.currentCard.leftAction(), 300);
+                        }}
+                    }} else {{
+                        // Swiped right
+                        card.classList.add('swiped-right');
+                        if (gameState.currentCard.rightAction) {{
+                            setTimeout(() => gameState.currentCard.rightAction(), 300);
+                        }}
+                    }}
+                }} else {{
+                    // Card was not swiped enough, return to center
+                    card.style.transform = '';
+                    card.classList.remove('tilted-left', 'tilted-right');
+                }}
+            }}
+        }}
+        
+        function switchEra(era) {{
+            gameState.era = era.toUpperCase();
+            document.getElementById('levelInfo').textContent = `ERA: ${{gameState.era}}`;
+            
+            const deck = cardTemplates[era];
+            if (deck && deck.length > 0) {{
+                const randomCard = deck[Math.floor(Math.random() * deck.length)];
+                createCard(randomCard);
+            }} else {{
+                nextCard();
+            }}
+        }}
+        
+        function addSkillAndContinue(skills) {{
+            skills.forEach(skill => {{
+                if (!gameState.collectedSkills.includes(skill)) {{
+                    gameState.collectedSkills.push(skill);
+                    const badge = document.createElement('div');
+                    badge.className = 'skill-badge';
+                    badge.textContent = skill;
+                    document.getElementById('skillsInventory').appendChild(badge);
+                    
+                    gameState.stats.skills++;
+                    showNotification(`SKILL UNLOCKED: ${{skill}}`);
+                }}
+            }});
+            
+            gameState.stats.xp += 10;
+            updateStats();
+            nextCard();
+        }}
+        
+        function showMiniGame(type) {{
+            const miniGame = document.getElementById('miniGame');
+            const title = document.getElementById('miniGameTitle');
+            const desc = document.getElementById('miniGameDesc');
+            const puzzle = document.getElementById('codePuzzle');
+            const options = document.getElementById('puzzleOptions');
+            
+            // Define mini-games based on type
+            const games = {{
+                python: {{
+                    title: "PYTHON CHALLENGE",
+                    desc: "Debug this Python function!",
+                    puzzle: "def calculate_avg(numbers):\\n    total = sum(numbers)\\n    return total / ???",
+                    options: [
+                        {{ text: "len(numbers)", correct: true }},
+                        {{ text: "numbers.length", correct: false }},
+                        {{ text: "count(numbers)", correct: false }}
+                    ]
+                }},
+                aiml: {{
+                    title: "AI/ML QUIZ",
+                    desc: "What type of learning uses labeled data?",
+                    puzzle: "",
+                    options: [
+                        {{ text: "Supervised Learning", correct: true }},
+                        {{ text: "Unsupervised Learning", correct: false }},
+                        {{ text: "Reinforcement Learning", correct: false }}
+                    ]
+                }},
+                teaching: {{
+                    title: "TEACHING MOMENT",
+                    desc: "A student asks: 'What's the difference between a list and a tuple in Python?'",
+                    puzzle: "",
+                    options: [
+                        {{ text: "Lists are mutable, tuples are immutable", correct: true }},
+                        {{ text: "No difference, they're the same", correct: false }},
+                        {{ text: "Tuples are faster but lists are bigger", correct: false }}
+                    ]
+                }},
+                project: {{
+                    title: "PROJECT REVIEW",
+                    desc: "What's the best practice for this scenario?",
+                    puzzle: "// TODO: Connect to database",
+                    options: [
+                        {{ text: "Use environment variables for credentials", correct: true }},
+                        {{ text: "Hardcode the password", correct: false }},
+                        {{ text: "Store credentials in comments", correct: false }}
+                    ]
+                }}
+            }};
+            
+            const game = games[type] || games.python;
+            
+            title.textContent = game.title;
+            desc.textContent = game.desc;
+            puzzle.textContent = game.puzzle;
+            
+            options.innerHTML = '';
+            game.options.forEach(option => {{
+                const btn = document.createElement('button');
+                btn.className = 'puzzle-btn';
+                btn.textContent = option.text;
+                btn.addEventListener('click', () => {{
+                    if (option.correct) {{
+                        gameState.stats.achievements++;
+                        gameState.stats.xp += 20;
+                        showNotification("CORRECT! +20 XP");
+                        addSkillAndContinue([type.toUpperCase()]);
+                    }} else {{
+                        showNotification("TRY AGAIN!");
+                    }}
+                    miniGame.classList.remove('show');
+                    updateStats();
+                }});
+                options.appendChild(btn);
+            }});
+            
+            miniGame.classList.add('show');
+        }}
+        
+        function nextCard() {{
+            // Get random card from current deck or switch to new deck
+            const decks = ['military', 'academia', 'industry', 'skills', 'projects'];
+            const randomDeck = decks[Math.floor(Math.random() * decks.length)];
+            const deck = cardTemplates[randomDeck];
+            
+            if (deck && deck.length > 0) {{
+                const randomCard = deck[Math.floor(Math.random() * deck.length)];
+                createCard(randomCard);
+            }} else {{
+                createCard(cardTemplates.main[Math.floor(Math.random() * cardTemplates.main.length)]);
+            }}
+        }}
+        
+        function updateStats() {{
+            document.getElementById('skillsStat').textContent = gameState.stats.skills;
+            document.getElementById('xpStat').textContent = gameState.stats.xp;
+            document.getElementById('achieveStat').textContent = gameState.stats.achievements;
+        }}
+        
+        function showNotification(message) {{
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => {{
+                notification.classList.remove('show');
+            }}, 2000);
+        }}
+        
+        function endGame() {{
+            document.getElementById('finalSkills').textContent = gameState.stats.skills;
+            document.getElementById('finalXP').textContent = gameState.stats.xp;
+            document.getElementById('finalAchieve').textContent = gameState.stats.achievements;
+            document.getElementById('gameOver').classList.add('show');
+        }}
+    </script>
+</body>
+</html>
+""")
+```

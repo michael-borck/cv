@@ -1,0 +1,1197 @@
+---
+title: "TechLife Magazine - Michael Borck Special Edition"
+format:
+  html:
+    toc: false
+    embed-resources: true
+    standalone: true
+    theme: none
+---
+
+```{python}
+#| include: false
+import yaml
+import json
+import datetime
+
+with open("../data/cv-data.yml", 'r') as f:
+    cv_data = yaml.safe_load(f)
+
+# Convert to JSON for JavaScript
+cv_json = json.dumps(cv_data)
+
+# Get current date
+current_date = datetime.datetime.now().strftime("%B %Y")
+```
+
+```{python}
+#| output: asis
+print(f"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechLife Magazine - {cv_data['personal']['name']} Special Edition</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+        
+        * {{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }}
+        
+        body {{
+            font-family: 'Inter', sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }}
+        
+        /* Magazine Header */
+        .magazine-header {{
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }}
+        
+        .header-content {{
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }}
+        
+        .magazine-logo {{
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }}
+        
+        .issue-info {{
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }}
+        
+        .nav-menu {{
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }}
+        
+        .nav-menu a {{
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }}
+        
+        .nav-menu a:hover {{
+            opacity: 0.8;
+        }}
+        
+        /* Hero Cover */
+        .hero-cover {{
+            position: relative;
+            height: 80vh;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }}
+        
+        .hero-pattern {{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.5) 35px, rgba(255,255,255,.5) 70px);
+        }}
+        
+        .cover-content {{
+            position: relative;
+            text-align: center;
+            color: white;
+            z-index: 2;
+            padding: 0 20px;
+        }}
+        
+        .cover-label {{
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 15px;
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }}
+        
+        @keyframes pulse {{
+            0%, 100% {{ transform: scale(1); }}
+            50% {{ transform: scale(1.05); }}
+        }}
+        
+        .cover-title {{
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }}
+        
+        .cover-subtitle {{
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }}
+        
+        .cover-meta {{
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }}
+        
+        .cover-meta span {{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }}
+        
+        /* Table of Contents */
+        .toc-section {{
+            background: white;
+            padding: 60px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }}
+        
+        .container {{
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }}
+        
+        .section-header {{
+            text-align: center;
+            margin-bottom: 40px;
+        }}
+        
+        .section-header h2 {{
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }}
+        
+        .section-header p {{
+            color: #666;
+            font-size: 1.1rem;
+        }}
+        
+        .toc-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }}
+        
+        .toc-item {{
+            background: #f8f8f8;
+            padding: 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }}
+        
+        .toc-item:hover {{
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }}
+        
+        .toc-number {{
+            color: #667eea;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }}
+        
+        .toc-title {{
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }}
+        
+        .toc-description {{
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }}
+        
+        /* Article Sections */
+        .article-section {{
+            padding: 80px 0;
+            background: white;
+            display: none;
+        }}
+        
+        .article-section.active {{
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }}
+        
+        @keyframes fadeIn {{
+            from {{ opacity: 0; transform: translateY(20px); }}
+            to {{ opacity: 1; transform: translateY(0); }}
+        }}
+        
+        .article-layout {{
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }}
+        
+        .article-content {{
+            max-width: 700px;
+        }}
+        
+        .article-title {{
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }}
+        
+        .article-meta {{
+            display: flex;
+            gap: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }}
+        
+        .article-body {{
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+        }}
+        
+        .article-body p {{
+            margin-bottom: 20px;
+        }}
+        
+        .pull-quote {{
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #667eea;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 4px solid #667eea;
+            background: #f8f9ff;
+            font-style: italic;
+        }}
+        
+        /* Sidebar */
+        .article-sidebar {{
+            position: sticky;
+            top: 100px;
+        }}
+        
+        .sidebar-box {{
+            background: #f8f8f8;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }}
+        
+        .sidebar-title {{
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }}
+        
+        .skill-tags {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }}
+        
+        .skill-tag {{
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: transform 0.2s ease;
+        }}
+        
+        .skill-tag:hover {{
+            transform: scale(1.05);
+        }}
+        
+        .stat-item {{
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }}
+        
+        .stat-item:last-child {{
+            border-bottom: none;
+        }}
+        
+        .stat-label {{
+            color: #666;
+        }}
+        
+        .stat-value {{
+            font-weight: 600;
+            color: #667eea;
+        }}
+        
+        /* Timeline */
+        .timeline {{
+            position: relative;
+            padding-left: 40px;
+            margin-top: 30px;
+        }}
+        
+        .timeline::before {{
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e0e0e0;
+        }}
+        
+        .timeline-item {{
+            position: relative;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+        }}
+        
+        .timeline-item::before {{
+            content: '';
+            position: absolute;
+            left: -29px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #e0e0e0;
+        }}
+        
+        .timeline-date {{
+            color: #667eea;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }}
+        
+        .timeline-title {{
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }}
+        
+        .timeline-description {{
+            color: #666;
+            line-height: 1.6;
+        }}
+        
+        /* Feature Cards */
+        .feature-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }}
+        
+        .feature-card {{
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }}
+        
+        .feature-card:hover {{
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }}
+        
+        .feature-image {{
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }}
+        
+        .feature-content {{
+            padding: 25px;
+        }}
+        
+        .feature-title {{
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }}
+        
+        .feature-description {{
+            color: #666;
+            margin-bottom: 15px;
+        }}
+        
+        .feature-link {{
+            color: #667eea;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s ease;
+        }}
+        
+        .feature-link:hover {{
+            gap: 10px;
+        }}
+        
+        /* Code Showcase */
+        .code-showcase {{
+            background: #1a1a1a;
+            color: #f0f0f0;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }}
+        
+        .code-header {{
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }}
+        
+        .code-dot {{
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }}
+        
+        .dot-red {{ background: #ff5f56; }}
+        .dot-yellow {{ background: #ffbd2e; }}
+        .dot-green {{ background: #27c93f; }}
+        
+        .code-content {{
+            line-height: 1.6;
+        }}
+        
+        .code-comment {{ color: #6a9955; }}
+        .code-keyword {{ color: #569cd6; }}
+        .code-string {{ color: #ce9178; }}
+        .code-function {{ color: #dcdcaa; }}
+        
+        /* Interactive Elements */
+        .interactive-panel {{
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 40px 0;
+            text-align: center;
+        }}
+        
+        .interactive-title {{
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }}
+        
+        .interactive-buttons {{
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }}
+        
+        .btn {{
+            padding: 12px 30px;
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }}
+        
+        .btn:hover {{
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }}
+        
+        .btn-primary {{
+            background: white;
+            color: #667eea;
+        }}
+        
+        .btn-primary:hover {{
+            background: transparent;
+            color: white;
+        }}
+        
+        /* Footer */
+        .magazine-footer {{
+            background: #1a1a1a;
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }}
+        
+        .footer-content {{
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }}
+        
+        .footer-section h3 {{
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }}
+        
+        .footer-links {{
+            list-style: none;
+        }}
+        
+        .footer-links li {{
+            margin-bottom: 10px;
+        }}
+        
+        .footer-links a {{
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }}
+        
+        .footer-links a:hover {{
+            color: white;
+        }}
+        
+        .footer-bottom {{
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #666;
+        }}
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {{
+            .nav-menu {{
+                display: none;
+            }}
+            
+            .article-layout {{
+                grid-template-columns: 1fr;
+            }}
+            
+            .article-sidebar {{
+                position: static;
+            }}
+            
+            .cover-title {{
+                font-size: 3rem;
+            }}
+            
+            .article-title {{
+                font-size: 2rem;
+            }}
+            
+            .timeline {{
+                padding-left: 20px;
+            }}
+            
+            .timeline::before {{
+                left: 5px;
+            }}
+            
+            .timeline-item::before {{
+                left: -19px;
+            }}
+        }}
+        
+        /* Scroll Progress Bar */
+        .progress-bar {{
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }}
+        
+        /* Back to Top Button */
+        .back-to-top {{
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }}
+        
+        .back-to-top.visible {{
+            opacity: 1;
+            visibility: visible;
+        }}
+        
+        .back-to-top:hover {{
+            background: #764ba2;
+            transform: translateY(-5px);
+        }}
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Magazine Header -->
+    <header class="magazine-header">
+        <div class="header-content">
+            <div class="magazine-logo">TechLife</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a onclick="showSection('toc')">Contents</a></li>
+                    <li><a onclick="showSection('profile')">Profile</a></li>
+                    <li><a onclick="showSection('career')">Career</a></li>
+                    <li><a onclick="showSection('projects')">Projects</a></li>
+                    <li><a onclick="showSection('contact')">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="issue-info">Issue #{datetime.datetime.now().strftime('%Y%m')} • {current_date}</div>
+        </div>
+    </header>
+    
+    <!-- Hero Cover -->
+    <section class="hero-cover">
+        <div class="hero-pattern"></div>
+        <div class="cover-content">
+            <div class="cover-label">Exclusive Feature</div>
+            <h1 class="cover-title">{cv_data['personal']['name']}</h1>
+            <p class="cover-subtitle">The Journey of a Tech Innovator</p>
+            <div class="cover-meta">
+                <span>📍 {cv_data['personal']['location']}</span>
+                <span>💼 {len(cv_data['experience'])} Years Experience</span>
+                <span>🚀 {len(cv_data['projects'])} Projects</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Table of Contents -->
+    <section class="toc-section" id="toc">
+        <div class="container">
+            <div class="section-header">
+                <h2>In This Issue</h2>
+                <p>Navigate through the digital journey</p>
+            </div>
+            <div class="toc-grid">
+                <div class="toc-item" onclick="showSection('profile')">
+                    <div class="toc-number">FEATURE 01</div>
+                    <div class="toc-title">The Profile</div>
+                    <div class="toc-description">Meet the mind behind the code - personal journey and philosophy</div>
+                </div>
+                <div class="toc-item" onclick="showSection('career')">
+                    <div class="toc-number">FEATURE 02</div>
+                    <div class="toc-title">Career Chronicle</div>
+                    <div class="toc-description">From military systems to AI innovation - a professional evolution</div>
+                </div>
+                <div class="toc-item" onclick="showSection('projects')">
+                    <div class="toc-number">FEATURE 03</div>
+                    <div class="toc-title">Innovation Lab</div>
+                    <div class="toc-description">Showcase of creative projects and technical achievements</div>
+                </div>
+                <div class="toc-item" onclick="showSection('skills')">
+                    <div class="toc-number">TECH STACK</div>
+                    <div class="toc-title">Skills & Tools</div>
+                    <div class="toc-description">Complete technical arsenal and expertise breakdown</div>
+                </div>
+                <div class="toc-item" onclick="showSection('education')">
+                    <div class="toc-number">KNOWLEDGE</div>
+                    <div class="toc-title">Academic Journey</div>
+                    <div class="toc-description">Educational background and continuous learning path</div>
+                </div>
+                <div class="toc-item" onclick="showSection('contact')">
+                    <div class="toc-number">CONNECT</div>
+                    <div class="toc-title">Get In Touch</div>
+                    <div class="toc-description">Collaboration opportunities and contact information</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Profile Article -->
+    <section class="article-section" id="profile">
+        <div class="container">
+            <div class="article-layout">
+                <div class="article-content">
+                    <h1 class="article-title">The Mind Behind the Machine</h1>
+                    <div class="article-meta">
+                        <span>By Editorial Team</span>
+                        <span>•</span>
+                        <span>10 min read</span>
+                        <span>•</span>
+                        <span>Feature Story</span>
+                    </div>
+                    <div class="article-body">
+                        <p>{cv_data['summary']}</p>
+                        
+                        <div class="pull-quote">
+                            "Innovation happens at the intersection of technology and human needs"
+                        </div>
+                        
+                        <h3>The Philosophy</h3>
+                        <p>With a unique blend of military precision, academic rigor, and entrepreneurial spirit, 
+                        {cv_data['personal']['name']} brings a multifaceted approach to technology leadership.</p>
+                        
+                        <h3>Core Values</h3>
+                        <ul>
+                            <li>Continuous learning and adaptation</li>
+                            <li>Building solutions that matter</li>
+                            <li>Empowering teams through mentorship</li>
+                            <li>Bridging technology and business needs</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="article-sidebar">
+                    <div class="sidebar-box">
+                        <h3 class="sidebar-title">Quick Facts</h3>
+                        <div class="stat-item">
+                            <span class="stat-label">Location</span>
+                            <span class="stat-value">{cv_data['personal']['location']}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Specialization</span>
+                            <span class="stat-value">AI & Software</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Experience</span>
+                            <span class="stat-value">15+ Years</span>
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-box">
+                        <h3 class="sidebar-title">Interests</h3>
+                        <div class="skill-tags">
+""")
+
+for interest in cv_data['interests']:
+    print(f'                            <span class="skill-tag">{interest}</span>')
+
+print(f"""                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Career Chronicle -->
+    <section class="article-section" id="career">
+        <div class="container">
+            <div class="article-layout">
+                <div class="article-content">
+                    <h1 class="article-title">Career Chronicle</h1>
+                    <div class="article-meta">
+                        <span>Professional Journey</span>
+                        <span>•</span>
+                        <span>{len(cv_data['experience'])} Positions</span>
+                    </div>
+                    
+                    <div class="article-body">
+                        <p>From submarine systems to cloud architectures, this career spans the full spectrum of modern technology.</p>
+                        
+                        <h3>Experience Timeline</h3>
+                        <div class="timeline">
+""")
+
+for exp in cv_data['experience'][:5]:  # Show first 5 experiences
+    org = exp.get('organization', '')
+    responsibilities = exp.get('responsibilities', [])
+    print(f"""                            <div class="timeline-item">
+                                <div class="timeline-date">{exp['period']}</div>
+                                <div class="timeline-title">{exp['title']}</div>
+                                <div class="timeline-description">{org}</div>
+                                {f'<div class="timeline-description">{responsibilities[0]}</div>' if responsibilities else ''}
+                            </div>
+""")
+
+print(f"""                        </div>
+                    </div>
+                </div>
+                
+                <div class="article-sidebar">
+                    <div class="sidebar-box">
+                        <h3 class="sidebar-title">Career Highlights</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 10px;">✅ Led 20+ successful projects</li>
+                            <li style="margin-bottom: 10px;">✅ 100% student satisfaction</li>
+                            <li style="margin-bottom: 10px;">✅ 4 published books</li>
+                            <li style="margin-bottom: 10px;">✅ Military clearance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Showcase -->
+    <section class="article-section" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2>Innovation Laboratory</h2>
+                <p>Featured projects and creative solutions</p>
+            </div>
+            
+            <div class="feature-grid">
+""")
+
+for proj in cv_data['projects'][:6]:  # Show first 6 projects
+    icon = "🚀"
+    if "AI" in proj['name'] or "Talk" in proj['name']:
+        icon = "🤖"
+    elif "Cloud" in proj['name']:
+        icon = "☁️"
+    elif "Reality" in proj['name']:
+        icon = "🎮"
+    
+    print(f"""                <div class="feature-card">
+                    <div class="feature-image">{icon}</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">{proj['name']}</h3>
+                        <p class="feature-description">{proj.get('description', 'Innovative solution leveraging cutting-edge technology')}</p>
+                        <a href="#" class="feature-link" onclick="showProjectDetail('{proj['name']}')">
+                            Explore Project →
+                        </a>
+                    </div>
+                </div>
+""")
+
+print(f"""            </div>
+            
+            <div class="interactive-panel">
+                <h3 class="interactive-title">Want to see more?</h3>
+                <p>Explore the complete portfolio of projects and innovations</p>
+                <div class="interactive-buttons">
+                    <a href="{cv_data['personal']['github']}" target="_blank" class="btn">View GitHub</a>
+                    <a href="{cv_data['personal']['portfolio']}" target="_blank" class="btn btn-primary">Portfolio</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Skills & Technologies -->
+    <section class="article-section" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2>Technical Arsenal</h2>
+                <p>Languages, frameworks, and tools mastered</p>
+            </div>
+            
+            <div class="article-layout">
+                <div class="article-content">
+                    <div class="code-showcase">
+                        <div class="code-header">
+                            <span class="code-dot dot-red"></span>
+                            <span class="code-dot dot-yellow"></span>
+                            <span class="code-dot dot-green"></span>
+                        </div>
+                        <div class="code-content">
+                            <span class="code-comment"># Core Programming Languages</span><br>
+                            <span class="code-keyword">languages</span> = [<br>
+""")
+
+for lang in cv_data['skills']['programming']['core']:
+    print(f'                                <span class="code-string">    "{lang}"</span>,<br>')
+
+print(f"""                            ]<br><br>
+                            <span class="code-comment"># AI/ML Stack</span><br>
+                            <span class="code-keyword">ai_ml_tools</span> = {{<br>
+""")
+
+for tool in cv_data['skills']['programming']['ai_ml']:
+    print(f'                                <span class="code-string">    "{tool}"</span>: <span class="code-string">"Expert"</span>,<br>')
+
+print(f"""                            }}<br><br>
+                            <span class="code-comment"># Web Technologies</span><br>
+                            <span class="code-function">deploy_stack</span>(<br>
+""")
+
+for tech in cv_data['skills']['programming']['web'][:5]:
+    print(f'                                <span class="code-string">    "{tech}"</span>,<br>')
+
+print(f"""                            )
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="article-sidebar">
+                    <div class="sidebar-box">
+                        <h3 class="sidebar-title">Skill Categories</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Full-Stack</span>
+                            <span class="skill-tag">Cloud Architecture</span>
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">DevOps</span>
+                            <span class="skill-tag">Data Science</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Education -->
+    <section class="article-section" id="education">
+        <div class="container">
+            <div class="section-header">
+                <h2>Academic Excellence</h2>
+                <p>Educational foundation and continuous learning</p>
+            </div>
+            
+            <div class="article-layout">
+                <div class="article-content">
+""")
+
+for edu in cv_data['education']:
+    print(f"""                    <div class="sidebar-box" style="background: white; margin-bottom: 30px;">
+                        <h3 style="color: #667eea; margin-bottom: 10px;">{edu['degree']}</h3>
+                        <p style="font-weight: 600; margin-bottom: 5px;">{edu['field']}</p>
+                        <p style="color: #666; margin-bottom: 10px;">{edu['institution']} • {edu['year']}</p>
+                        {f'<p style="font-style: italic; color: #666;">Thesis: {edu["thesis"]}</p>' if edu.get('thesis') else ''}
+                    </div>
+""")
+
+print(f"""                </div>
+                
+                <div class="article-sidebar">
+                    <div class="sidebar-box">
+                        <h3 class="sidebar-title">Certifications</h3>
+                        <ul style="list-style: none; padding: 0;">
+""")
+
+for cert in cv_data.get('certifications', []):
+    print(f'                            <li style="margin-bottom: 10px;">📜 {cert["name"]}</li>')
+
+print(f"""                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="article-section" id="contact">
+        <div class="container">
+            <div class="interactive-panel" style="background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);">
+                <h2 class="interactive-title">Let's Connect</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 30px;">Ready to discuss your next project or collaboration?</p>
+                
+                <div class="interactive-buttons">
+                    <a href="mailto:{cv_data['personal']['email']}" class="btn btn-primary">
+                        📧 Send Email
+                    </a>
+                    <a href="{cv_data['personal']['linkedin']}" target="_blank" class="btn">
+                        💼 LinkedIn
+                    </a>
+                    <a href="{cv_data['personal']['github']}" target="_blank" class="btn">
+                        💻 GitHub
+                    </a>
+                    <a href="tel:{cv_data['personal']['phone']}" class="btn">
+                        📱 Call
+                    </a>
+                </div>
+                
+                <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <p style="opacity: 0.8;">Or reach out directly:</p>
+                    <p style="font-size: 1.1rem; margin-top: 10px;">{cv_data['personal']['email']}</p>
+                    <p style="font-size: 1.1rem;">{cv_data['personal']['phone']}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="magazine-footer">
+        <div class="footer-content">
+            <div>
+                <h3>TechLife Magazine</h3>
+                <p style="color: #999; margin-top: 10px;">Special Edition featuring {cv_data['personal']['name']}</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="showSection('toc')">Table of Contents</a></li>
+                    <li><a href="#" onclick="showSection('profile')">Profile</a></li>
+                    <li><a href="#" onclick="showSection('projects')">Projects</a></li>
+                    <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Connect</h3>
+                <ul class="footer-links">
+                    <li><a href="{cv_data['personal']['linkedin']}" target="_blank">LinkedIn</a></li>
+                    <li><a href="{cv_data['personal']['github']}" target="_blank">GitHub</a></li>
+                    <li><a href="{cv_data['personal']['portfolio']}" target="_blank">Portfolio</a></li>
+                    <li><a href="mailto:{cv_data['personal']['email']}">Email</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© {datetime.datetime.now().year} TechLife Magazine - Digital Edition | Generated from Single Source of Truth</p>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</div>
+    
+    <script>
+        const cvData = {cv_json};
+        
+        // Show/hide sections
+        function showSection(sectionId) {{
+            // Hide all sections
+            document.querySelectorAll('.article-section').forEach(section => {{
+                section.classList.remove('active');
+            }});
+            
+            // Show table of contents if requested
+            if (sectionId === 'toc') {{
+                document.getElementById('toc').scrollIntoView({{ behavior: 'smooth' }});
+                return;
+            }}
+            
+            // Show selected section
+            const section = document.getElementById(sectionId);
+            if (section) {{
+                section.classList.add('active');
+                section.scrollIntoView({{ behavior: 'smooth' }});
+            }}
+        }}
+        
+        // Scroll progress bar
+        window.addEventListener('scroll', () => {{
+            const scrollTop = window.scrollY;
+            const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / documentHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+            
+            // Show/hide back to top button
+            const backToTop = document.getElementById('backToTop');
+            if (scrollTop > 500) {{
+                backToTop.classList.add('visible');
+            }} else {{
+                backToTop.classList.remove('visible');
+            }}
+        }});
+        
+        // Scroll to top
+        function scrollToTop() {{
+            window.scrollTo({{ top: 0, behavior: 'smooth' }});
+        }}
+        
+        // Show project detail (placeholder)
+        function showProjectDetail(projectName) {{
+            alert(`Project details for ${{projectName}} would open in a modal or new section`);
+        }}
+        
+        // Initialize - show profile by default
+        document.addEventListener('DOMContentLoaded', () => {{
+            // Add smooth scroll behavior
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {{
+                anchor.addEventListener('click', function (e) {{
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {{
+                        target.scrollIntoView({{ behavior: 'smooth' }});
+                    }}
+                }});
+            }});
+            
+            // Animate elements on scroll
+            const observerOptions = {{
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            }};
+            
+            const observer = new IntersectionObserver((entries) => {{
+                entries.forEach(entry => {{
+                    if (entry.isIntersecting) {{
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }}
+                }});
+            }}, observerOptions);
+            
+            // Observe feature cards
+            document.querySelectorAll('.feature-card').forEach(card => {{
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            }});
+        }});
+    </script>
+</body>
+</html>
+""")
+```

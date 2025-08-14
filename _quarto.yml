@@ -9,14 +9,12 @@ format:
   pdf:
     documentclass: article
     papersize: a4
-    margin-left: 2cm
-    margin-right: 2cm
-    margin-top: 2cm
-    margin-bottom: 2cm
-    fontfamily: sourcesanspro
-    fontfamilyoptions: default,osf,scale=0.95
-    fontsize: 11pt
-    linestretch: 1.15
+    margin-left: 1.5cm
+    margin-right: 1.5cm
+    margin-top: 1.5cm
+    margin-bottom: 1.5cm
+    fontsize: 10pt
+    linestretch: 1.2
     colorlinks: true
     linkcolor: blue
     urlcolor: blue
@@ -25,12 +23,64 @@ format:
     pdf-engine: xelatex
     include-in-header:
       text: |
+        \usepackage{fontspec}
+        \usepackage{xcolor}
         \usepackage{enumitem}
-        \setlist{noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt}
         \usepackage{titlesec}
-        \titlespacing{\section}{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
-        \titlespacing{\subsection}{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
-        \titlespacing{\subsubsection}{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+        \usepackage{fancyhdr}
+        \usepackage[most]{tcolorbox}
+        
+        % Modern font setup
+        \setmainfont{TeX Gyre Heros}  % Modern sans-serif font similar to Helvetica
+        \setsansfont{TeX Gyre Heros}
+        \setmonofont{TeX Gyre Cursor}
+        
+        % Define modern colors
+        \definecolor{primarycolor}{HTML}{2c3e50}
+        \definecolor{secondarycolor}{HTML}{3498db}
+        \definecolor{accentcolor}{HTML}{e74c3c}
+        \definecolor{lightgray}{HTML}{ecf0f1}
+        \definecolor{darkgray}{HTML}{34495e}
+        
+        % Modern section formatting
+        \titleformat{\section}
+          {\normalfont\Large\bfseries\color{primarycolor}}
+          {\thesection}{0.5em}{}
+          [\vspace{-0.5em}\color{secondarycolor}\hrule height 1.5pt\vspace{0.5em}]
+        
+        \titleformat{\subsection}
+          {\normalfont\large\bfseries\color{primarycolor}}
+          {\thesubsection}{0.5em}{}
+        
+        \titleformat{\subsubsection}
+          {\normalfont\normalsize\bfseries\color{darkgray}}
+          {\thesubsubsection}{0.5em}{}
+        
+        % Adjust spacing
+        \titlespacing{\section}{0pt}{8pt}{6pt}
+        \titlespacing{\subsection}{0pt}{6pt}{4pt}
+        \titlespacing{\subsubsection}{0pt}{4pt}{2pt}
+        
+        % Modern list styling
+        \setlist{noitemsep,topsep=2pt,parsep=2pt,partopsep=0pt,leftmargin=*}
+        \setlist[itemize]{label=\textcolor{secondarycolor}{\textbullet}}
+        
+        % Remove page numbers
+        \pagestyle{empty}
+        
+        % Reduce spacing in title
+        \makeatletter
+        \renewcommand{\maketitle}{
+          \begin{center}
+            {\LARGE\bfseries\color{primarycolor}\@title\par}
+            \vspace{0.3em}
+            {\large\color{darkgray}\@author\par}
+            \vspace{0.2em}
+            {\color{darkgray}\@date\par}
+          \end{center}
+          \vspace{0.5em}
+        }
+        \makeatother
 
   html:
     theme: 

@@ -1,0 +1,961 @@
+---
+title: "Terminal CV - Michael Borck"
+format:
+  html:
+    toc: false
+    embed-resources: true
+    standalone: true
+    theme: none
+---
+
+```{python}
+#| include: false
+import yaml
+import json
+
+with open("../data/cv-data.yml", 'r') as f:
+    cv_data = yaml.safe_load(f)
+
+# Convert to JSON for JavaScript
+cv_json = json.dumps(cv_data)
+```
+
+```{python}
+#| output: asis
+print(f"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal CV - {cv_data['personal']['name']}</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap');
+        
+        * {{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }}
+        
+        body {{
+            background: #0c0c0c;
+            color: #00ff00;
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }}
+        
+        /* Phosphor CRT effect */
+        body::before {{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.03),
+                rgba(0, 255, 0, 0.03) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }}
+        
+        body::after {{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                ellipse at center,
+                rgba(0, 255, 0, 0) 0%,
+                rgba(0, 0, 0, 0.4) 100%
+            );
+            pointer-events: none;
+            z-index: 2;
+        }}
+        
+        .terminal-container {{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 3;
+        }}
+        
+        .terminal-header {{
+            background: #1a1a1a;
+            padding: 10px;
+            border-bottom: 2px solid #00ff00;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }}
+        
+        .terminal-title {{
+            color: #00ff00;
+            font-weight: 600;
+            text-shadow: 0 0 10px #00ff00;
+        }}
+        
+        .terminal-controls {{
+            display: flex;
+            gap: 10px;
+        }}
+        
+        .control-btn {{
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+        }}
+        
+        .control-close {{ background: #ff5f56; }}
+        .control-minimize {{ background: #ffbd2e; }}
+        .control-maximize {{ background: #27c93f; }}
+        
+        .terminal-body {{
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            font-size: 14px;
+        }}
+        
+        .terminal-output {{
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }}
+        
+        .command-line {{
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }}
+        
+        .prompt {{
+            color: #00ff00;
+            margin-right: 10px;
+            text-shadow: 0 0 5px #00ff00;
+        }}
+        
+        .command-input {{
+            background: none;
+            border: none;
+            color: #00ff00;
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+            flex: 1;
+            caret-color: #00ff00;
+        }}
+        
+        .cursor {{
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: #00ff00;
+            animation: blink 1s infinite;
+            vertical-align: text-bottom;
+            margin-left: 2px;
+        }}
+        
+        @keyframes blink {{
+            0%, 50% {{ opacity: 1; }}
+            51%, 100% {{ opacity: 0; }}
+        }}
+        
+        /* Text colors */
+        .green {{ color: #00ff00; text-shadow: 0 0 5px #00ff00; }}
+        .yellow {{ color: #ffff00; text-shadow: 0 0 5px #ffff00; }}
+        .cyan {{ color: #00ffff; text-shadow: 0 0 5px #00ffff; }}
+        .red {{ color: #ff0000; text-shadow: 0 0 5px #ff0000; }}
+        .white {{ color: #ffffff; text-shadow: 0 0 5px #ffffff; }}
+        .dim {{ opacity: 0.7; }}
+        
+        /* ASCII Art */
+        .ascii-art {{
+            color: #00ffff;
+            line-height: 1;
+            font-size: 10px;
+            text-shadow: 0 0 10px #00ffff;
+            margin: 20px 0;
+        }}
+        
+        .room-description {{
+            color: #ffffff;
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 2px solid #00ff00;
+        }}
+        
+        .inventory {{
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #00ff00;
+            padding: 10px;
+            margin: 10px 0;
+        }}
+        
+        .achievement {{
+            color: #ffff00;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }}
+        
+        @keyframes pulse {{
+            0%, 100% {{ opacity: 1; }}
+            50% {{ opacity: 0.5; }}
+        }}
+        
+        /* Scrollbar styling */
+        .terminal-body::-webkit-scrollbar {{
+            width: 10px;
+        }}
+        
+        .terminal-body::-webkit-scrollbar-track {{
+            background: #0c0c0c;
+        }}
+        
+        .terminal-body::-webkit-scrollbar-thumb {{
+            background: #00ff00;
+            border-radius: 5px;
+        }}
+        
+        .terminal-body::-webkit-scrollbar-thumb:hover {{
+            background: #00cc00;
+        }}
+        
+        /* Boot sequence */
+        .boot-sequence {{
+            animation: bootUp 2s ease-out;
+        }}
+        
+        @keyframes bootUp {{
+            0% {{
+                opacity: 0;
+                transform: translateY(20px);
+            }}
+            100% {{
+                opacity: 1;
+                transform: translateY(0);
+            }}
+        }}
+        
+        /* Help text */
+        .help-text {{
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid #00ffff;
+            padding: 10px;
+            margin: 10px 0;
+        }}
+        
+        .command-list {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }}
+        
+        .command-item {{
+            color: #00ffff;
+        }}
+        
+        .command-desc {{
+            color: #ffffff;
+            opacity: 0.8;
+            font-size: 12px;
+        }}
+    </style>
+</head>
+<body>
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <div class="terminal-title">TERMINAL CV v1.0 - {cv_data['personal']['name'].upper()}</div>
+            <div class="terminal-controls">
+                <div class="control-btn control-close"></div>
+                <div class="control-btn control-minimize"></div>
+                <div class="control-btn control-maximize"></div>
+            </div>
+        </div>
+        
+        <div class="terminal-body" id="terminalBody">
+            <div class="terminal-output" id="terminalOutput"></div>
+            <div class="command-line">
+                <span class="prompt" id="prompt">></span>
+                <input type="text" class="command-input" id="commandInput" autofocus>
+                <span class="cursor"></span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const cvData = {cv_json};
+        
+        // Game State
+        const gameState = {{
+            currentRoom: 'entrance',
+            inventory: [],
+            visitedRooms: [],
+            unlockedAchievements: [],
+            commandHistory: [],
+            historyIndex: -1
+        }};
+        
+        // Room Definitions
+        const rooms = {{
+            entrance: {{
+                name: "Career Portal",
+                description: "You stand in a vast digital lobby. Holographic displays show fragments of a professional journey. Three corridors lead to different eras: MILITARY (north), ACADEMIA (east), and INDUSTRY (west). A TERMINAL glows softly in the center.",
+                exits: {{ north: 'military', east: 'academia', west: 'industry' }},
+                items: ['terminal', 'readme'],
+                ascii: `
+    ╔══════════════════════════════════╗
+    ║      CAREER PORTAL ENTRANCE      ║
+    ║          - EST. 1989 -           ║
+    ╚══════════════════════════════════╝
+                `
+            }},
+            military: {{
+                name: "Military Command Center",
+                description: "Red emergency lights cast shadows across banks of vintage equipment. Maps of submarine routes cover the walls. You see PROJECT files scattered on a desk, and a SECURITY clearance badge.",
+                exits: {{ south: 'entrance', down: 'submarine' }},
+                items: ['project_files', 'security_badge', 'navy_manual'],
+                ascii: `
+       ⚓ ROYAL AUSTRALIAN NAVY ⚓
+          CLASSIFIED SECTION
+                `
+            }},
+            submarine: {{
+                name: "Submarine Systems Room",
+                description: "Deep beneath the surface, servers hum with critical data. The IT infrastructure that kept submarines operational. A SYSTEM diagram shows the network architecture.",
+                exits: {{ up: 'military' }},
+                items: ['system_diagram', 'maintenance_log'],
+                ascii: `
+    <<<[ SUBMARINE DEPTH: -200m ]>>>
+                `
+            }},
+            academia: {{
+                name: "University Lecture Hall",
+                description: "Rows of seats face a smart board displaying Python code. Student FEEDBACK forms pile high. The enthusiasm for teaching is palpable. A door marked RESEARCH leads deeper.",
+                exits: {{ west: 'entrance', north: 'research', south: 'classroom' }},
+                items: ['feedback_forms', 'python_textbook', 'teaching_award'],
+                ascii: `
+    📚 CURTIN UNIVERSITY 📚
+       Lecture Hall 3.15
+                `
+            }},
+            classroom: {{
+                name: "Interactive Classroom",
+                description: "An innovative teaching space with VR headsets and coding stations. The 'Cloud Core' simulation runs on the main screen. STUDENT projects showcase impressive work.",
+                exits: {{ north: 'academia' }},
+                items: ['student_projects', 'cloud_core_sim'],
+                ascii: `
+    [ 100% Student Satisfaction ]
+                `
+            }},
+            research: {{
+                name: "AI Research Laboratory",
+                description: "Whiteboards covered in neural network diagrams. A THESIS on 'Feature Extraction from Multi-modal Data' sits open. Machine learning models train on multiple screens.",
+                exits: {{ south: 'academia', east: 'publications' }},
+                items: ['thesis', 'research_papers', 'ml_models'],
+                ascii: `
+    🤖 AI/ML RESEARCH LAB 🤖
+                `
+            }},
+            publications: {{
+                name: "Publication Archive",
+                description: "Shelves of books and papers. Your eye catches 'Python Step By Step in an AI World' among other BOOKS. Conference PAPERS are neatly organized by year.",
+                exits: {{ west: 'research' }},
+                items: ['books', 'conference_papers'],
+                ascii: `
+    ║█║▌║█║▌│║▌║▌█║
+     PUBLICATION ARCHIVE
+                `
+            }},
+            industry: {{
+                name: "Consulting Office",
+                description: "Modern open-plan space with multiple CLIENT folders. A whiteboard shows ongoing PROJECTS. The coffee machine has seen better days.",
+                exits: {{ east: 'entrance', north: 'projects' }},
+                items: ['client_folders', 'project_board', 'coffee_machine'],
+                ascii: `
+    💼 CONSULTING HQ 💼
+                `
+            }},
+            projects: {{
+                name: "Innovation Lab",
+                description: "Prototypes and demos everywhere. REALITY_REIGNS runs on one screen, TALK_BUDDY on another. The creative energy is infectious.",
+                exits: {{ south: 'industry' }},
+                items: ['reality_reigns', 'talk_buddy', 'curriculum_curator'],
+                ascii: `
+    ⚡ INNOVATION LAB ⚡
+                `
+            }}
+        }};
+        
+        // Items that can be examined
+        const items = {{
+            terminal: {{
+                description: "A retro terminal displaying contact information:\\n" +
+                    `Email: {cv_data['personal']['email']}\\n` +
+                    `LinkedIn: {cv_data['personal']['linkedin']}\\n` +
+                    `GitHub: {cv_data['personal']['github']}`,
+                takeable: false
+            }},
+            readme: {{
+                description: "A README file that says:\\n'Welcome, traveler. Type HELP for commands. Your journey through this career awaits.'",
+                takeable: true
+            }},
+            project_files: {{
+                description: "Military messaging system documentation. Critical infrastructure that connected defense communications.",
+                takeable: true
+            }},
+            security_badge: {{
+                description: "IT Manager - Submarine Systems Centre, RAN. Jul 1996 - Jan 2000. Level: CLASSIFIED",
+                takeable: true
+            }},
+            python_textbook: {{
+                description: "'Python Step By Step in an AI World' - A comprehensive guide authored by Michael Borck",
+                takeable: true
+            }},
+            teaching_award: {{
+                description: "Certificate of Excellence: 100% Student Satisfaction Score - ISYS3015, ISYS2001, ISYS6018",
+                takeable: true
+            }},
+            thesis: {{
+                description: "PhD Thesis (2017): 'Feature Extraction from Multi-modal Data' - Combining GIS, Machine Learning & Computer Vision",
+                takeable: false
+            }},
+            reality_reigns: {{
+                description: "Swipe-based decision game providing interactive fiction storytelling. 290+ downloads and growing!",
+                takeable: false
+            }},
+            talk_buddy: {{
+                description: "AI-based audio interface for conversation practice. Used for medical diagnoses, HR discussions, and language learning.",
+                takeable: false
+            }},
+            cloud_core_sim: {{
+                description: "Complete virtual company simulation with IT infrastructure, policies, and chatbot staff. Students love it!",
+                takeable: false
+            }},
+            feedback_forms: {{
+                description: "Student feedback: 'Michael is an absolute legend', 'He really cared about my learning', 'Hard but fun!'",
+                takeable: true
+            }},
+            books: {{
+                description: "Four published books (Creative Commons):\\n" +
+                    "- Python Step By Step in an AI World\\n" +
+                    "- JumpStart Python in the AI Era\\n" +
+                    "- Intentional Prompting: Blending AI and Human Oversight\\n" +
+                    "- Python Dev Book: From Zero to Production",
+                takeable: false
+            }}
+        }};
+        
+        // Initialize terminal
+        const terminalOutput = document.getElementById('terminalOutput');
+        const commandInput = document.getElementById('commandInput');
+        const terminalBody = document.getElementById('terminalBody');
+        
+        // Boot sequence
+        function bootSequence() {{
+            const bootMessages = [
+                "BOOTING TERMINAL CV SYSTEM...",
+                "Loading career data...",
+                "Initializing experience modules...",
+                "Mounting skill repositories...",
+                "Establishing network connections...",
+                "",
+                "SYSTEM READY",
+                "",
+                getASCIILogo(),
+                "",
+                "<span class='cyan'>Welcome to the Terminal CV of {cv_data['personal']['name']}</span>",
+                "<span class='yellow'>Type 'help' for available commands</span>",
+                ""
+            ];
+            
+            let index = 0;
+            const interval = setInterval(() => {{
+                if (index < bootMessages.length) {{
+                    appendOutput(bootMessages[index]);
+                    index++;
+                }} else {{
+                    clearInterval(interval);
+                    showRoom();
+                }}
+            }}, 100);
+        }}
+        
+        function getASCIILogo() {{
+            return `<pre class='ascii-art'>
+╔════════════════════════════════════════╗
+║                                        ║
+║     TERMINAL CV - ADVENTURE MODE      ║
+║          Michael Borck                ║
+║     AI Leader & Tech Innovator        ║
+║                                        ║
+╚════════════════════════════════════════╝
+</pre>`;
+        }}
+        
+        // Command processing
+        commandInput.addEventListener('keydown', (e) => {{
+            if (e.key === 'Enter') {{
+                const command = commandInput.value.trim().toLowerCase();
+                if (command) {{
+                    gameState.commandHistory.push(command);
+                    gameState.historyIndex = gameState.commandHistory.length;
+                    appendOutput(`<span class='green'>></span> ${{command}}`);
+                    processCommand(command);
+                    commandInput.value = '';
+                }}
+            }} else if (e.key === 'ArrowUp') {{
+                e.preventDefault();
+                if (gameState.historyIndex > 0) {{
+                    gameState.historyIndex--;
+                    commandInput.value = gameState.commandHistory[gameState.historyIndex];
+                }}
+            }} else if (e.key === 'ArrowDown') {{
+                e.preventDefault();
+                if (gameState.historyIndex < gameState.commandHistory.length - 1) {{
+                    gameState.historyIndex++;
+                    commandInput.value = gameState.commandHistory[gameState.historyIndex];
+                }} else {{
+                    gameState.historyIndex = gameState.commandHistory.length;
+                    commandInput.value = '';
+                }}
+            }}
+        }});
+        
+        function processCommand(cmd) {{
+            const parts = cmd.split(' ');
+            const action = parts[0];
+            const target = parts.slice(1).join(' ');
+            
+            switch(action) {{
+                case 'help':
+                case 'h':
+                case '?':
+                    showHelp();
+                    break;
+                    
+                case 'look':
+                case 'l':
+                    if (target) {{
+                        examine(target);
+                    }} else {{
+                        showRoom();
+                    }}
+                    break;
+                    
+                case 'examine':
+                case 'x':
+                case 'ex':
+                    examine(target);
+                    break;
+                    
+                case 'go':
+                case 'move':
+                    move(target);
+                    break;
+                    
+                case 'north':
+                case 'n':
+                    move('north');
+                    break;
+                    
+                case 'south':
+                case 's':
+                    move('south');
+                    break;
+                    
+                case 'east':
+                case 'e':
+                    move('east');
+                    break;
+                    
+                case 'west':
+                case 'w':
+                    move('west');
+                    break;
+                    
+                case 'up':
+                case 'u':
+                    move('up');
+                    break;
+                    
+                case 'down':
+                case 'd':
+                    move('down');
+                    break;
+                    
+                case 'take':
+                case 'get':
+                    take(target);
+                    break;
+                    
+                case 'inventory':
+                case 'i':
+                case 'inv':
+                    showInventory();
+                    break;
+                    
+                case 'use':
+                    use(target);
+                    break;
+                    
+                case 'skills':
+                    showSkills();
+                    break;
+                    
+                case 'experience':
+                case 'exp':
+                    showExperience();
+                    break;
+                    
+                case 'education':
+                case 'edu':
+                    showEducation();
+                    break;
+                    
+                case 'contact':
+                    showContact();
+                    break;
+                    
+                case 'clear':
+                case 'cls':
+                    clearTerminal();
+                    break;
+                    
+                case 'map':
+                    showMap();
+                    break;
+                    
+                case 'achievements':
+                case 'ach':
+                    showAchievements();
+                    break;
+                    
+                case 'xyzzy':
+                case 'plugh':
+                    easterEgg();
+                    break;
+                    
+                case 'sudo':
+                    if (target === 'make sandwich') {{
+                        appendOutput("<span class='yellow'>Okay. Here's your sandwich. 🥪</span>");
+                    }} else {{
+                        appendOutput("<span class='red'>Permission denied. Nice try though!</span>");
+                    }}
+                    break;
+                    
+                default:
+                    appendOutput(`<span class='red'>Unknown command: ${{cmd}}. Type 'help' for available commands.</span>`);
+            }}
+        }}
+        
+        function showHelp() {{
+            const helpText = `
+<div class='help-text'>
+<span class='cyan'>AVAILABLE COMMANDS:</span>
+
+<div class='command-list'>
+    <div>
+        <span class='command-item'>look / l</span>
+        <div class='command-desc'>Examine surroundings</div>
+    </div>
+    <div>
+        <span class='command-item'>examine [item] / x</span>
+        <div class='command-desc'>Look at specific item</div>
+    </div>
+    <div>
+        <span class='command-item'>go [direction]</span>
+        <div class='command-desc'>Move in direction</div>
+    </div>
+    <div>
+        <span class='command-item'>n/s/e/w/u/d</span>
+        <div class='command-desc'>Quick movement</div>
+    </div>
+    <div>
+        <span class='command-item'>take [item]</span>
+        <div class='command-desc'>Pick up an item</div>
+    </div>
+    <div>
+        <span class='command-item'>inventory / i</span>
+        <div class='command-desc'>Check inventory</div>
+    </div>
+    <div>
+        <span class='command-item'>skills</span>
+        <div class='command-desc'>View technical skills</div>
+    </div>
+    <div>
+        <span class='command-item'>experience</span>
+        <div class='command-desc'>View work history</div>
+    </div>
+    <div>
+        <span class='command-item'>education</span>
+        <div class='command-desc'>View education</div>
+    </div>
+    <div>
+        <span class='command-item'>contact</span>
+        <div class='command-desc'>Contact information</div>
+    </div>
+    <div>
+        <span class='command-item'>map</span>
+        <div class='command-desc'>Show location map</div>
+    </div>
+    <div>
+        <span class='command-item'>clear</span>
+        <div class='command-desc'>Clear screen</div>
+    </div>
+</div>
+
+<span class='dim'>Tip: Try 'xyzzy' for a surprise!</span>
+</div>`;
+            appendOutput(helpText);
+        }}
+        
+        function showRoom() {{
+            const room = rooms[gameState.currentRoom];
+            if (!gameState.visitedRooms.includes(gameState.currentRoom)) {{
+                gameState.visitedRooms.push(gameState.currentRoom);
+                if (gameState.visitedRooms.length === Object.keys(rooms).length) {{
+                    unlockAchievement("Explorer - Visited all locations!");
+                }}
+            }}
+            
+            let output = `\\n<span class='yellow'>${{room.name.toUpperCase()}}</span>\\n`;
+            if (room.ascii) {{
+                output += `<pre class='ascii-art'>${{room.ascii}}</pre>`;
+            }}
+            output += `<div class='room-description'>${{room.description}}</div>`;
+            
+            // Show exits
+            const exits = Object.keys(room.exits);
+            if (exits.length > 0) {{
+                output += `\\nExits: <span class='cyan'>${{exits.join(', ')}}</span>`;
+            }}
+            
+            // Show items
+            if (room.items && room.items.length > 0) {{
+                output += `\\nYou can see: <span class='green'>${{room.items.join(', ')}}</span>`;
+            }}
+            
+            appendOutput(output);
+        }}
+        
+        function move(direction) {{
+            const room = rooms[gameState.currentRoom];
+            if (room.exits[direction]) {{
+                gameState.currentRoom = room.exits[direction];
+                appendOutput(`\\nYou go ${{direction}}...\\n`);
+                showRoom();
+            }} else {{
+                appendOutput(`<span class='red'>You can't go that way.</span>`);
+            }}
+        }}
+        
+        function examine(itemName) {{
+            const room = rooms[gameState.currentRoom];
+            const normalizedItem = itemName.replace(/ /g, '_').toLowerCase();
+            
+            if (room.items && room.items.includes(normalizedItem)) {{
+                if (items[normalizedItem]) {{
+                    appendOutput(`\\n<span class='white'>${{items[normalizedItem].description}}</span>`);
+                }} else {{
+                    appendOutput(`The ${{itemName}} looks interesting, but there's nothing special about it.`);
+                }}
+            }} else if (gameState.inventory.includes(normalizedItem)) {{
+                if (items[normalizedItem]) {{
+                    appendOutput(`\\n<span class='white'>${{items[normalizedItem].description}}</span>`);
+                }}
+            }} else {{
+                appendOutput(`<span class='red'>You don't see any '${{itemName}}' here.</span>`);
+            }}
+        }}
+        
+        function take(itemName) {{
+            const room = rooms[gameState.currentRoom];
+            const normalizedItem = itemName.replace(/ /g, '_').toLowerCase();
+            
+            if (room.items && room.items.includes(normalizedItem)) {{
+                if (items[normalizedItem] && items[normalizedItem].takeable) {{
+                    gameState.inventory.push(normalizedItem);
+                    room.items = room.items.filter(item => item !== normalizedItem);
+                    appendOutput(`<span class='green'>You take the ${{itemName}}.</span>`);
+                    
+                    if (gameState.inventory.length === 5) {{
+                        unlockAchievement("Collector - Gathered 5 items!");
+                    }}
+                }} else {{
+                    appendOutput(`<span class='red'>You can't take that.</span>`);
+                }}
+            }} else {{
+                appendOutput(`<span class='red'>There's no '${{itemName}}' here to take.</span>`);
+            }}
+        }}
+        
+        function showInventory() {{
+            if (gameState.inventory.length === 0) {{
+                appendOutput("Your inventory is empty.");
+            }} else {{
+                let output = "<div class='inventory'>\\n<span class='cyan'>INVENTORY:</span>\\n";
+                gameState.inventory.forEach(item => {{
+                    output += `  - ${{item.replace(/_/g, ' ')}}\\n`;
+                }});
+                output += "</div>";
+                appendOutput(output);
+            }}
+        }}
+        
+        function showSkills() {{
+            let output = "\\n<span class='cyan'>TECHNICAL SKILLS:</span>\\n\\n";
+            
+            output += "<span class='yellow'>Core Languages:</span>\\n";
+            output += cvData.skills.programming.core.join(', ') + "\\n\\n";
+            
+            output += "<span class='yellow'>Web Technologies:</span>\\n";
+            output += cvData.skills.programming.web.join(', ') + "\\n\\n";
+            
+            output += "<span class='yellow'>AI/ML Stack:</span>\\n";
+            output += cvData.skills.programming.ai_ml.join(', ') + "\\n";
+            
+            appendOutput(output);
+        }}
+        
+        function showExperience() {{
+            let output = "\\n<span class='cyan'>EXPERIENCE TIMELINE:</span>\\n";
+            
+            cvData.experience.slice(0, 3).forEach(exp => {{
+                output += `\\n<span class='yellow'>${{exp.title}}</span>\\n`;
+                output += `${{exp.organization || ''}} | ${{exp.period}}\\n`;
+                if (exp.responsibilities && exp.responsibilities.length > 0) {{
+                    output += `  • ${{exp.responsibilities[0]}}\\n`;
+                }}
+            }});
+            
+            output += "\\n<span class='dim'>Type 'go' to explore locations and learn more...</span>";
+            appendOutput(output);
+        }}
+        
+        function showEducation() {{
+            let output = "\\n<span class='cyan'>EDUCATION:</span>\\n";
+            
+            cvData.education.forEach(edu => {{
+                output += `\\n<span class='yellow'>${{edu.degree}}</span>\\n`;
+                output += `${{edu.field}} - ${{edu.institution}} (${{edu.year}})\\n`;
+                if (edu.thesis) {{
+                    output += `<span class='dim'>Thesis: ${{edu.thesis}}</span>\\n`;
+                }}
+            }});
+            
+            appendOutput(output);
+        }}
+        
+        function showContact() {{
+            const output = `
+<span class='cyan'>CONTACT INFORMATION:</span>
+
+📧 Email: <span class='green'>{cv_data['personal']['email']}</span>
+📱 Phone: <span class='green'>{cv_data['personal']['phone']}</span>
+💼 LinkedIn: <span class='green'>{cv_data['personal']['linkedin']}</span>
+💻 GitHub: <span class='green'>{cv_data['personal']['github']}</span>
+🌐 Portfolio: <span class='green'>{cv_data['personal']['portfolio']}</span>
+
+<span class='dim'>Copy any of these to get in touch!</span>`;
+            appendOutput(output);
+        }}
+        
+        function showMap() {{
+            const map = `
+<pre class='ascii-art'>
+           [MILITARY]
+                |
+                |
+    [INDUSTRY]--+--[ACADEMIA]
+                |      |
+           [ENTRANCE] [RESEARCH]
+                       |
+                 [PUBLICATIONS]
+                 
+You are here: <span class='yellow'>${{rooms[gameState.currentRoom].name}}</span>
+</pre>`;
+            appendOutput(map);
+        }}
+        
+        function showAchievements() {{
+            let output = "\\n<span class='cyan'>ACHIEVEMENTS:</span>\\n\\n";
+            
+            if (gameState.unlockedAchievements.length === 0) {{
+                output += "<span class='dim'>No achievements yet. Keep exploring!</span>";
+            }} else {{
+                gameState.unlockedAchievements.forEach(ach => {{
+                    output += `<span class='achievement'>🏆 ${{ach}}</span>\\n`;
+                }});
+            }}
+            
+            appendOutput(output);
+        }}
+        
+        function unlockAchievement(achievement) {{
+            if (!gameState.unlockedAchievements.includes(achievement)) {{
+                gameState.unlockedAchievements.push(achievement);
+                appendOutput(`\\n<span class='achievement'>🏆 ACHIEVEMENT UNLOCKED: ${{achievement}}</span>\\n`);
+            }}
+        }}
+        
+        function easterEgg() {{
+            const messages = [
+                "A hollow voice says 'PLUGH'",
+                "Nothing happens... or does it?",
+                "You feel a strange tingling sensation...",
+                "Suddenly, you remember playing Atari 2600 games!"
+            ];
+            const message = messages[Math.floor(Math.random() * messages.length)];
+            appendOutput(`<span class='yellow'>${{message}}</span>`);
+            unlockAchievement("Adventurer - Found the magic word!");
+        }}
+        
+        function use(itemName) {{
+            const normalizedItem = itemName.replace(/ /g, '_').toLowerCase();
+            
+            if (!gameState.inventory.includes(normalizedItem)) {{
+                appendOutput(`<span class='red'>You don't have a '${{itemName}}'.</span>`);
+                return;
+            }}
+            
+            if (normalizedItem === 'coffee_machine' && gameState.currentRoom === 'industry') {{
+                appendOutput("<span class='green'>You brew a perfect cup of coffee. Your coding skills increase!</span>");
+                unlockAchievement("Caffeinated - Used the coffee machine!");
+            }} else {{
+                appendOutput(`You can't use the ${{itemName}} here.`);
+            }}
+        }}
+        
+        function clearTerminal() {{
+            terminalOutput.innerHTML = '';
+            showRoom();
+        }}
+        
+        function appendOutput(text) {{
+            terminalOutput.innerHTML += text + '\\n';
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }}
+        
+        // Start the adventure
+        bootSequence();
+    </script>
+</body>
+</html>
+""")
+```

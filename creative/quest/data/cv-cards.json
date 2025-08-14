@@ -1,0 +1,489 @@
+{
+  "cardDecks": {
+    "main": [
+      {
+        "type": "main",
+        "title": "Choose Your Path",
+        "text": "You discover the chronicles of Michael Borck, a versatile technologist with 11 career chapters. Which aspect of their journey interests you most?",
+        "icon": "\ud83e\udded",
+        "imagePath": "assets/img/professional/office-equipment.png",
+        "leftChoice": "Professional Journey",
+        "rightChoice": "Personal Story",
+        "leftResult": "switchDeckFn(\"professional\")",
+        "rightResult": "switchDeckFn(\"personal\")"
+      }
+    ],
+    "professional": [
+      {
+        "type": "main",
+        "title": "Professional Focus",
+        "text": "Michael Borck has built an impressive career spanning military service, academia, and industry. Which era would you like to explore?",
+        "icon": "\ud83d\udcbc",
+        "imagePath": "assets/img/professional/developer.png",
+        "leftChoice": "Work Experience",
+        "rightChoice": "Education & Research",
+        "leftResult": "switchDeckFn(\"work\")",
+        "rightResult": "switchDeckFn(\"education\")"
+      }
+    ],
+    "personal": [
+      {
+        "type": "main",
+        "title": "Personal Journey",
+        "text": "Beyond the professional achievements, discover the person behind the CV. Michael Borck has diverse interests and creative projects.",
+        "icon": "\ud83e\udde9",
+        "imagePath": "assets/img/personal/creativity.png",
+        "leftChoice": "Projects & Innovation",
+        "rightChoice": "Skills & Interests",
+        "leftResult": "switchDeckFn(\"projects\")",
+        "rightResult": "switchDeckFn(\"skills\")"
+      }
+    ],
+    "work": [
+      {
+        "type": "work",
+        "title": "Career Timeline",
+        "text": "Three distinct phases define this journey: Military Service (1989-2000), Academia (2001-Present), and Consulting (2008-Present). Where shall we begin?",
+        "icon": "\u23f0",
+        "imagePath": "assets/img/professional/leadership.png",
+        "leftChoice": "Military Era",
+        "rightChoice": "Academic Journey",
+        "leftResult": "switchDeckFn(\"military\")",
+        "rightResult": "switchDeckFn(\"academic\")"
+      },
+      {
+        "type": "work",
+        "title": "Industry & Consulting",
+        "text": "Beyond military and academia, Michael Borck has extensive consulting experience across multiple industries.",
+        "icon": "\ud83d\udcbc",
+        "imagePath": "assets/img/professional/office-equipment.png",
+        "leftChoice": "Explore Consulting",
+        "rightChoice": "Back to Timeline",
+        "leftResult": "switchDeckFn(\"industry\")",
+        "rightResult": "switchDeckFn(\"work\")"
+      }
+    ],
+    "education": [
+      {
+        "type": "education",
+        "title": "Doctor of Philosophy (PhD)",
+        "text": "Computer Science at Curtin University (2017)",
+        "icon": "\ud83c\udf93",
+        "imagePath": "assets/img/education/certificate.png",
+        "leftChoice": "Add Qualification",
+        "rightChoice": "Continue",
+        "leftResult": "addSkillFn(\"Computer Science\"); increaseStatsFn(1, 0, 1)",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "education",
+        "title": "Bachelor of Science (Computer Science) (Honours)",
+        "text": "Computer Science at Curtin University (2001)",
+        "icon": "\ud83c\udf93",
+        "imagePath": "assets/img/education/certificate.png",
+        "leftChoice": "Add Qualification",
+        "rightChoice": "Continue",
+        "leftResult": "addSkillFn(\"Computer Science\"); increaseStatsFn(1, 0, 1)",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "education",
+        "title": "Graduate Diploma in Business",
+        "text": "Business at Curtin University (2000)",
+        "icon": "\ud83c\udf93",
+        "imagePath": "assets/img/education/certificate.png",
+        "leftChoice": "Add Qualification",
+        "rightChoice": "Continue",
+        "leftResult": "addSkillFn(\"Business\"); increaseStatsFn(1, 0, 1)",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "navigation",
+        "title": "Education Complete",
+        "text": "A strong foundation in Computer Science, Mathematics, and Business. Continue your exploration?",
+        "icon": "\ud83c\udf93",
+        "imagePath": "assets/img/education/certificate.png",
+        "leftChoice": "Explore Projects",
+        "rightChoice": "Back to Main",
+        "leftResult": "switchDeckFn(\"projects\")",
+        "rightResult": "switchDeckFn(\"main\")"
+      }
+    ],
+    "military": [
+      {
+        "type": "work",
+        "title": "IT Manager",
+        "text": "Submarine Systems Centre, RAN (Jul 1996 \u2013 Jan 2000): Strategic IT Leadership - Managed comprehensive information technology infrastructure supporting submarine operations and maintenance Executive Advisory - Provided strategic IT guidance to senior military leadership and operational boards",
+        "icon": "\u2694\ufe0f",
+        "imagePath": "assets/img/professional/leadership.png",
+        "leftChoice": "Learn Skills",
+        "rightChoice": "Continue Journey",
+        "leftResult": "addSkillFn(\"Leadership\"); increaseStatsFn(2, 1, 1)",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "work",
+        "title": "Project Manager \u2014 Command and Control",
+        "text": "HQADF (Jul 1993 \u2013 Dec 1996): Strategic Leadership - Managed development of critical military messaging systems for Australian Defence Force headquarters Project Excellence - Successfully controlled cost, schedule, and quality across multi-year defense communications project",
+        "icon": "\u2694\ufe0f",
+        "imagePath": "assets/img/professional/leadership.png",
+        "leftChoice": "Learn Skills",
+        "rightChoice": "Continue Journey",
+        "leftResult": "addSkillFn(\"Leadership\"); increaseStatsFn(2, 1, 1)",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "navigation",
+        "title": "Military Journey Complete",
+        "text": "You have explored the military service era. Where to next?",
+        "icon": "\ud83c\udf96\ufe0f",
+        "imagePath": "assets/img/professional/leadership.png",
+        "leftChoice": "Explore Academia",
+        "rightChoice": "Back to Career Timeline",
+        "leftResult": "switchDeckFn(\"academic\")",
+        "rightResult": "switchDeckFn(\"work\")"
+      }
+    ],
+    "academic": [
+      {
+        "type": "work",
+        "title": "Lecturer \u2014 School of Marketing and Management",
+        "text": "Curtin University: AI Program Leadership - AI Leader for the School, developing new AI programs within undergraduate and postgraduate curricula",
+        "icon": "\ud83c\udf93",
+        "imagePath": "assets/img/education/university.png",
+        "leftChoice": "View Achievements",
+        "rightChoice": "Explore More",
+        "leftResult": "showMiniGameFn(\"teachingChallenge\")",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "work",
+        "title": "Course Leadership & Development",
+        "text": "Curtin University: Course Lead for Information Systems undergraduate and postgraduate degree programs",
+        "icon": "\ud83c\udf93",
+        "imagePath": "assets/img/education/university.png",
+        "leftChoice": "View Achievements",
+        "rightChoice": "Explore More",
+        "leftResult": "showMiniGameFn(\"teachingChallenge\")",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "navigation",
+        "title": "Academic Path Complete",
+        "text": "Michael Borck has achieved 100% student satisfaction and pioneered AI education. Continue exploring?",
+        "icon": "\ud83c\udf93",
+        "imagePath": "assets/img/education/university.png",
+        "leftChoice": "View Projects",
+        "rightChoice": "Back to Career",
+        "leftResult": "switchDeckFn(\"projects\")",
+        "rightResult": "switchDeckFn(\"work\")"
+      }
+    ],
+    "industry": [
+      {
+        "type": "work",
+        "title": "AI, IS & Educational Technology Consultant",
+        "text": "Self-Employed: AI strategy and implementation consultation",
+        "icon": "\ud83d\udca1",
+        "imagePath": "assets/img/professional/developer.png",
+        "leftChoice": "Gain Experience",
+        "rightChoice": "Next Challenge",
+        "leftResult": "addSkillFn(\"Consulting\"); increaseStatsFn(1, 2, 1)",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "work",
+        "title": "Software Contractor",
+        "text": "CRCSI & Landgate WA: Computer Vision Innovation - Developed automated detection and recognition systems for street sign inventory",
+        "icon": "\ud83d\udca1",
+        "imagePath": "assets/img/professional/developer.png",
+        "leftChoice": "Gain Experience",
+        "rightChoice": "Next Challenge",
+        "leftResult": "addSkillFn(\"Consulting\"); increaseStatsFn(1, 2, 1)",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "navigation",
+        "title": "Consulting Journey Complete",
+        "text": "You have explored the consulting and industry experience. Ready for more?",
+        "icon": "\ud83d\udca1",
+        "imagePath": "assets/img/professional/developer.png",
+        "leftChoice": "View Skills",
+        "rightChoice": "Back to Main",
+        "leftResult": "switchDeckFn(\"skills\")",
+        "rightResult": "switchDeckFn(\"main\")"
+      }
+    ],
+    "projects": [
+      {
+        "type": "project",
+        "title": "Reality Reigns",
+        "text": "Swipe-based decision game providing interactive fiction storytelling from fantasy adventures to educational simulations",
+        "icon": "\ud83d\ude80",
+        "imagePath": "assets/img/projects/ai-project.png",
+        "leftChoice": "Study Project",
+        "rightChoice": "Next Project",
+        "leftResult": "addSkillFn(\"Innovation\"); increaseStatsFn(1, 1, 2)",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "project",
+        "title": "Talk Buddy",
+        "text": "AI-based audio interface tool for conversation practice (medical diagnoses, HR discussions, English conversation)",
+        "icon": "\ud83d\ude80",
+        "imagePath": "assets/img/projects/ai-project.png",
+        "leftChoice": "Study Project",
+        "rightChoice": "Next Project",
+        "leftResult": "addSkillFn(\"Innovation\"); increaseStatsFn(1, 1, 2)",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "project",
+        "title": "Curriculum Curator",
+        "text": "AI-based tool for creating, managing and curating learning materials based on unique teaching philosophies",
+        "icon": "\ud83d\ude80",
+        "imagePath": "assets/img/projects/ai-project.png",
+        "leftChoice": "Study Project",
+        "rightChoice": "Next Project",
+        "leftResult": "addSkillFn(\"Innovation\"); increaseStatsFn(1, 1, 2)",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "project",
+        "title": "Feed Forward System",
+        "text": "AI-based assessment feedback tool for various assessment types",
+        "icon": "\ud83d\ude80",
+        "imagePath": "assets/img/projects/ai-project.png",
+        "leftChoice": "Study Project",
+        "rightChoice": "Next Project",
+        "leftResult": "addSkillFn(\"Innovation\"); increaseStatsFn(1, 1, 2)",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "navigation",
+        "title": "Projects Explored",
+        "text": "You have discovered innovative AI tools and educational platforms. What next?",
+        "icon": "\ud83d\ude80",
+        "imagePath": "assets/img/projects/ai-project.png",
+        "leftChoice": "View Skills",
+        "rightChoice": "Back to Main",
+        "leftResult": "switchDeckFn(\"skills\")",
+        "rightResult": "switchDeckFn(\"main\")"
+      }
+    ],
+    "skills": [
+      {
+        "type": "skill",
+        "title": "Master Python",
+        "text": "You discover expertise in Python. This is a valuable skill in modern development.",
+        "icon": "\ud83d\udcbb",
+        "imagePath": "assets/img/icons/programming-languages/python.png",
+        "leftChoice": "Learn Skill",
+        "rightChoice": "Skip to Next",
+        "leftResult": "addSkillFn(\"Python\"); increaseStatsFn(2, 0, 0); nextCard()",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "skill",
+        "title": "Master C/C++",
+        "text": "You discover expertise in C/C++. This is a valuable skill in modern development.",
+        "icon": "\ud83d\udcbb",
+        "imagePath": "assets/img/icons/programming-languages/c++.png",
+        "leftChoice": "Learn Skill",
+        "rightChoice": "Skip to Next",
+        "leftResult": "addSkillFn(\"C/C++\"); increaseStatsFn(2, 0, 0); nextCard()",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "skill",
+        "title": "Master C#",
+        "text": "You discover expertise in C#. This is a valuable skill in modern development.",
+        "icon": "\ud83d\udcbb",
+        "imagePath": "assets/img/icons/programming-languages/java.png",
+        "leftChoice": "Learn Skill",
+        "rightChoice": "Skip to Next",
+        "leftResult": "addSkillFn(\"C#\"); increaseStatsFn(2, 0, 0); nextCard()",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "skill",
+        "title": "Master Java",
+        "text": "You discover expertise in Java. This is a valuable skill in modern development.",
+        "icon": "\ud83d\udcbb",
+        "imagePath": "assets/img/icons/programming-languages/java.png",
+        "leftChoice": "Learn Skill",
+        "rightChoice": "Skip to Next",
+        "leftResult": "addSkillFn(\"Java\"); increaseStatsFn(2, 0, 0); nextCard()",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "skill",
+        "title": "Master JavaScript",
+        "text": "You discover expertise in JavaScript. This is a valuable skill in modern development.",
+        "icon": "\ud83d\udcbb",
+        "imagePath": "assets/img/icons/programming-languages/javascript.png",
+        "leftChoice": "Learn Skill",
+        "rightChoice": "Skip to Next",
+        "leftResult": "addSkillFn(\"JavaScript\"); increaseStatsFn(2, 0, 0); nextCard()",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "navigation",
+        "title": "Skills Mastered",
+        "text": "You have discovered a diverse technical skillset. Ready to complete your journey?",
+        "icon": "\ud83d\udcbb",
+        "imagePath": "assets/img/icons/programming-languages/python.png",
+        "leftChoice": "View Achievements",
+        "rightChoice": "Back to Main",
+        "leftResult": "switchDeckFn(\"achievements\")",
+        "rightResult": "switchDeckFn(\"main\")"
+      }
+    ],
+    "achievements": [
+      {
+        "type": "achievement",
+        "title": "100% Student Satisfaction",
+        "text": "Achieved perfect satisfaction scores across multiple units including ISYS3015, ISYS2001, and ISYS6018.",
+        "icon": "\ud83c\udfc6",
+        "imagePath": "assets/img/education/university.png",
+        "leftChoice": "Amazing!",
+        "rightChoice": "Continue",
+        "leftResult": "addSkillFn(\"Excellence\"); increaseStatsFn(0, 0, 3)",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "achievement",
+        "title": "AI Leader & Innovator",
+        "text": "AI Leader for School of Marketing and Management, creator of multiple AI-powered educational tools.",
+        "icon": "\ud83e\udd16",
+        "imagePath": "assets/img/projects/ai-project.png",
+        "leftChoice": "Impressive!",
+        "rightChoice": "Continue",
+        "leftResult": "addSkillFn(\"AI Leadership\"); increaseStatsFn(2, 0, 2)",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "achievement",
+        "title": "Published Author",
+        "text": "4 technical books (Creative Commons licensed) and 6+ peer-reviewed publications in computer vision and machine learning.",
+        "icon": "\ud83d\udcda",
+        "imagePath": "assets/img/education/learning.png",
+        "leftChoice": "Scholarly!",
+        "rightChoice": "Continue",
+        "leftResult": "addSkillFn(\"Research\"); increaseStatsFn(1, 0, 2)",
+        "rightResult": "nextCard()"
+      },
+      {
+        "type": "achievement",
+        "title": "Path Complete!",
+        "text": "You've explored one path through Michael Borck's journey. There are many more stories to discover! Try different choices to uncover all experiences.",
+        "icon": "\ud83c\udf89",
+        "imagePath": "assets/img/personal/teamwork.png",
+        "leftChoice": "Contact Michael",
+        "rightChoice": "Explore More Paths",
+        "leftResult": "showNotificationFn(\"Thank you for playing! Contact: michael.borck@curtin.edu.au\")",
+        "rightResult": "switchDeckFn(\"main\")"
+      }
+    ]
+  },
+  "miniGames": {
+    "deploymentChallenge": {
+      "title": "DEPLOYMENT CHALLENGE",
+      "description": "A critical deployment is failing in production. How do you handle it?",
+      "buttons": [
+        {
+          "text": "Rollback immediately",
+          "result": "increaseStatsFn(1, 2, 0); showNotificationFn(\"Crisis averted!\")"
+        },
+        {
+          "text": "Debug in production",
+          "result": "increaseStatsFn(2, 0, 1); showNotificationFn(\"Risky but educational!\")"
+        },
+        {
+          "text": "Call the team",
+          "result": "increaseStatsFn(0, 1, 2); showNotificationFn(\"Teamwork wins!\")"
+        }
+      ]
+    },
+    "teachingChallenge": {
+      "title": "TEACHING MOMENT",
+      "description": "A student is struggling with a complex concept. Your approach?",
+      "buttons": [
+        {
+          "text": "Use real-world examples",
+          "result": "increaseStatsFn(0, 2, 2); showNotificationFn(\"Student breakthrough!\")"
+        },
+        {
+          "text": "Provide extra resources",
+          "result": "increaseStatsFn(1, 1, 1); showNotificationFn(\"Steady progress!\")"
+        },
+        {
+          "text": "One-on-one mentoring",
+          "result": "increaseStatsFn(0, 1, 3); showNotificationFn(\"Personal touch works!\")"
+        }
+      ]
+    },
+    "personalValues": {
+      "title": "CORE VALUES",
+      "description": "What drives Michael Borck forward?",
+      "buttons": [
+        {
+          "text": "Innovation & Creation",
+          "result": "increaseStatsFn(2, 0, 1); showNotificationFn(\"Creative spirit!\")"
+        },
+        {
+          "text": "Teaching & Mentoring",
+          "result": "increaseStatsFn(0, 1, 3); showNotificationFn(\"Educator at heart!\")"
+        },
+        {
+          "text": "Problem Solving",
+          "result": "increaseStatsFn(3, 0, 0); showNotificationFn(\"Solution finder!\")"
+        }
+      ]
+    }
+  },
+  "personalCards": [
+    {
+      "type": "personal",
+      "title": "Personal Interest: Karate",
+      "text": "Outside of work, Michael Borck enjoys Karate.",
+      "icon": "\ud83c\udfaf",
+      "imagePath": "assets/img/personal/creativity.png"
+    },
+    {
+      "type": "personal",
+      "title": "Personal Interest: Muay Thai",
+      "text": "Outside of work, Michael Borck enjoys Muay Thai.",
+      "icon": "\ud83c\udfaf",
+      "imagePath": "assets/img/personal/creativity.png"
+    },
+    {
+      "type": "personal",
+      "title": "Personal Interest: Krav Maga",
+      "text": "Outside of work, Michael Borck enjoys Krav Maga.",
+      "icon": "\ud83c\udfaf",
+      "imagePath": "assets/img/personal/creativity.png"
+    },
+    {
+      "type": "personal",
+      "title": "Personal Interest: Atari 2600 Programming",
+      "text": "Outside of work, Michael Borck enjoys Atari 2600 Programming.",
+      "icon": "\ud83c\udfaf",
+      "imagePath": "assets/img/personal/creativity.png"
+    },
+    {
+      "type": "personal",
+      "title": "Personal Interest: Astronomy",
+      "text": "Outside of work, Michael Borck enjoys Astronomy.",
+      "icon": "\ud83c\udfaf",
+      "imagePath": "assets/img/personal/creativity.png"
+    },
+    {
+      "type": "personal",
+      "title": "Personal Interest: Photography",
+      "text": "Outside of work, Michael Borck enjoys Photography.",
+      "icon": "\ud83c\udfaf",
+      "imagePath": "assets/img/personal/creativity.png"
+    }
+  ]
+}
