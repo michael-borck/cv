@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Michael Borck</title>
+    <link rel="stylesheet" href="assets/css/chat.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💬</text></svg>">
+</head>
+<body>
+    <!-- Chat Interface -->
+    <div class="chat-container">
+        <!-- Header -->
+        <div class="chat-header">
+            <div class="profile-section">
+                <div class="avatar">
+                    <img src="https://source.unsplash.com/100x100/?professional,portrait" alt="Michael Borck" class="avatar-img">
+                    <div class="status-indicator online"></div>
+                </div>
+                <div class="profile-info">
+                    <h1 class="profile-name">Michael Borck</h1>
+                    <p class="profile-status">AI Leader & Cyber Security Expert</p>
+                    <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-actions">
+                <button class="action-btn" id="clearChatBtn" title="Clear conversation">
+                    🗑️
+                </button>
+                <button class="action-btn" id="suggestionsBtn" title="Show suggestions">
+                    💡
+                </button>
+                <button class="action-btn" id="downloadBtn" title="Download conversation">
+                    📄
+                </button>
+            </div>
+        </div>
+
+        <!-- Chat Messages -->
+        <div class="chat-messages" id="chatMessages">
+            <!-- Welcome message will be inserted here -->
+        </div>
+
+        <!-- Suggestions Panel -->
+        <div class="suggestions-panel" id="suggestionsPanel">
+            <h3>💡 Try asking about:</h3>
+            <div class="suggestion-categories">
+                <div class="suggestion-category">
+                    <h4>🎓 Experience & Background</h4>
+                    <div class="suggestion-items">
+                        <button class="suggestion-btn" data-query="Tell me about your experience">Experience overview</button>
+                        <button class="suggestion-btn" data-query="What's your educational background?">Education</button>
+                        <button class="suggestion-btn" data-query="Tell me about your military service">Military background</button>
+                        <button class="suggestion-btn" data-query="What do you teach?">Teaching areas</button>
+                    </div>
+                </div>
+                <div class="suggestion-category">
+                    <h4>💻 Technical Skills</h4>
+                    <div class="suggestion-items">
+                        <button class="suggestion-btn" data-query="What programming languages do you know?">Programming languages</button>
+                        <button class="suggestion-btn" data-query="Tell me about your AI expertise">AI & Machine Learning</button>
+                        <button class="suggestion-btn" data-query="What cybersecurity experience do you have?">Cybersecurity</button>
+                        <button class="suggestion-btn" data-query="What tools and technologies do you use?">Tools & Tech</button>
+                    </div>
+                </div>
+                <div class="suggestion-category">
+                    <h4>📚 Publications & Projects</h4>
+                    <div class="suggestion-items">
+                        <button class="suggestion-btn" data-query="What books have you written?">Published books</button>
+                        <button class="suggestion-btn" data-query="Tell me about your projects">Recent projects</button>
+                        <button class="suggestion-btn" data-query="What research have you done?">Research work</button>
+                        <button class="suggestion-btn" data-query="What are your achievements?">Key achievements</button>
+                    </div>
+                </div>
+                <div class="suggestion-category">
+                    <h4>👨‍🏫 Teaching & Philosophy</h4>
+                    <div class="suggestion-items">
+                        <button class="suggestion-btn" data-query="What's your teaching philosophy?">Teaching philosophy</button>
+                        <button class="suggestion-btn" data-query="How do you engage students?">Student engagement</button>
+                        <button class="suggestion-btn" data-query="What educational tools have you created?">Educational innovations</button>
+                        <button class="suggestion-btn" data-query="What feedback do students give?">Student feedback</button>
+                    </div>
+                </div>
+                <div class="suggestion-category">
+                    <h4>📞 Contact & Collaboration</h4>
+                    <div class="suggestion-items">
+                        <button class="suggestion-btn" data-query="How can I contact you?">Contact information</button>
+                        <button class="suggestion-btn" data-query="Do you do consulting work?">Consulting services</button>
+                        <button class="suggestion-btn" data-query="Are you available for speaking?">Speaking engagements</button>
+                        <button class="suggestion-btn" data-query="What's your location?">Location</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Section -->
+        <div class="chat-input-section">
+            <div class="input-container">
+                <input 
+                    type="text" 
+                    id="messageInput" 
+                    placeholder="Ask me anything about my background, skills, or experience..."
+                    autocomplete="off"
+                    maxlength="500"
+                >
+                <button id="sendBtn" class="send-btn" disabled>
+                    <svg viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="input-footer">
+                <span class="char-count" id="charCount">0/500</span>
+                <span class="help-text">Press Enter to send • Type "help" for suggestions</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions Menu -->
+    <div class="quick-actions" id="quickActions">
+        <button class="quick-action" data-action="experience">
+            <span class="icon">💼</span>
+            <span class="label">Experience</span>
+        </button>
+        <button class="quick-action" data-action="skills">
+            <span class="icon">⚡</span>
+            <span class="label">Skills</span>
+        </button>
+        <button class="quick-action" data-action="education">
+            <span class="icon">🎓</span>
+            <span class="label">Education</span>
+        </button>
+        <button class="quick-action" data-action="contact">
+            <span class="icon">📧</span>
+            <span class="label">Contact</span>
+        </button>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Loading conversation data...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/chatbot.js"></script>
+    <script src="assets/js/responses.js"></script>
+    <script src="assets/js/nlp.js"></script>
+</body>
+</html>

@@ -1,10 +1,13 @@
 # Quarto
 /.quarto/
 _site/
-*.html
-*.pdf
 *_cache/
 *_files/
+
+# Ignore Quarto-generated HTML/PDF in src and output
+src/*.html
+src/*.pdf
+output/*.pdf
 
 # Output directory
 output/

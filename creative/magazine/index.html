@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TechLife Magazine - Special Edition</title>
+<link href="assets/css/magazine.css" rel="stylesheet"/>
+<link href="assets/css/animations.css" rel="stylesheet"/>
+<style>
+        .portal-backlink {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 10000;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .portal-backlink:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .portal-backlink svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .portal-backlink {
+                padding: 8px 16px;
+                font-size: 12px;
+                top: 10px;
+                left: 10px;
+            }
+        }
+        
+        /* Ensure it's above other elements */
+        .floating-chat-widget {
+            z-index: 9999;
+        }
+    </style></head>
+<body><a class="portal-backlink" href="../../index.html" title="Return to CV Portal">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<polyline points="15 18 9 12 15 6"></polyline>
+</svg>
+        CV Portal
+    </a>
+<!-- Magazine Header -->
+<header class="magazine-header">
+<div class="header-content">
+<div class="magazine-brand">
+<h1 class="magazine-logo">TechLife</h1>
+<span class="issue-info" id="issueInfo">Loading...</span>
+</div>
+<nav class="nav-menu">
+<a href="#cover">Cover Story</a>
+<a href="#features">Features</a>
+<a href="#projects">Projects</a>
+<a href="#timeline">Timeline</a>
+<a href="#contact">Contact</a>
+</nav>
+<button class="menu-toggle" id="menuToggle">☰</button>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="hero-section" id="hero">
+<div class="hero-image" id="heroImage"></div>
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<span class="hero-category">SPECIAL EDITION</span>
+<h1 class="hero-title" id="heroTitle">Loading...</h1>
+<p class="hero-subtitle" id="heroSubtitle">Loading...</p>
+<p class="hero-lead" id="heroLead">Loading...</p>
+<div class="hero-stats" id="heroStats"></div>
+</div>
+<div class="scroll-indicator">
+<span>Scroll to explore</span>
+<div class="scroll-arrow">↓</div>
+</div>
+</section>
+<!-- Main Content -->
+<main class="magazine-content">
+<!-- Cover Story -->
+<article class="cover-story" id="cover">
+<div class="container">
+<div class="story-header">
+<span class="section-label">COVER STORY</span>
+<h2 class="story-title" id="coverTitle">Loading...</h2>
+<p class="story-subtitle" id="coverSubtitle">Loading...</p>
+</div>
+<div class="story-layout">
+<div class="story-image">
+<img alt="Cover Story" id="coverImage" src=""/>
+</div>
+<div class="story-content" id="coverContent">
+<!-- Content will be loaded here -->
+</div>
+</div>
+</div>
+</article>
+<!-- Features Grid -->
+<section class="features-section" id="features">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">Featured Articles</h2>
+<p class="section-subtitle">Key moments and achievements</p>
+</div>
+<div class="features-grid" id="featuresGrid">
+<!-- Feature cards will be loaded here -->
+</div>
+</div>
+</section>
+<!-- Project Spotlight -->
+<section class="spotlight-section" id="projects">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">Project Spotlight</h2>
+<p class="section-subtitle">Innovation in action</p>
+</div>
+<div class="projects-carousel" id="projectsCarousel">
+<!-- Projects will be loaded here -->
+</div>
+</div>
+</section>
+<!-- Tech Stack -->
+<section class="tech-section" id="tech">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">Technology Arsenal</h2>
+<p class="section-subtitle">Tools and expertise</p>
+</div>
+<div class="tech-grid" id="techGrid">
+<!-- Tech categories will be loaded here -->
+</div>
+</div>
+</section>
+<!-- Timeline -->
+<section class="timeline-section" id="timeline">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">Career Timeline</h2>
+<p class="section-subtitle">A journey through technology</p>
+</div>
+<div class="timeline-wrapper" id="timelineWrapper">
+<!-- Timeline events will be loaded here -->
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="testimonials-section" id="testimonials">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">What People Say</h2>
+</div>
+<div class="testimonials-grid" id="testimonialsGrid">
+<!-- Testimonials will be loaded here -->
+</div>
+</div>
+</section>
+<!-- Publications -->
+<section class="publications-section" id="publications">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">Published Works</h2>
+<p class="section-subtitle">Books and research</p>
+</div>
+<div class="books-showcase" id="booksShowcase">
+<!-- Books will be loaded here -->
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="contact-section" id="contact">
+<div class="contact-image" id="contactImage"></div>
+<div class="contact-overlay"></div>
+<div class="container">
+<div class="contact-content">
+<h2 class="contact-title">Get In Touch</h2>
+<p class="contact-subtitle">Let's connect and create something amazing</p>
+<div class="contact-info" id="contactInfo">
+<!-- Contact details will be loaded here -->
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Sidebar -->
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-toggle" id="sidebarToggle">
+<span>→</span>
+</div>
+<div class="sidebar-content">
+<div class="quick-facts" id="quickFacts">
+<h3>Quick Facts</h3>
+<!-- Facts will be loaded here -->
+</div>
+<div class="achievements" id="achievements">
+<h3>Achievements</h3>
+<!-- Achievements will be loaded here -->
+</div>
+</div>
+</aside>
+<!-- Footer -->
+<footer class="magazine-footer">
+<div class="container">
+<div class="footer-content">
+<div class="footer-brand">
+<h3>TechLife Magazine</h3>
+<p>Special Edition</p>
+</div>
+<div class="footer-nav">
+<a href="#hero">Top</a>
+<a href="#cover">Cover Story</a>
+<a href="#features">Features</a>
+<a href="#contact">Contact</a>
+</div>
+<div class="footer-copyright">
+<p>© 2024 TechLife Magazine. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Load JavaScript modules -->
+<script src="assets/js/magazine.js" type="module"></script>
+<!-- Load NLP and Response systems for floating chat -->
+<script src="../chatbot/assets/js/nlp.js"></script>
+<script src="../chatbot/assets/js/responses.js"></script>
+<script src="../chatbot/assets/js/floating-chat.js"></script>
+</body>
+</html>
