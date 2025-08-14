@@ -47,12 +47,12 @@ sed -i "s/name: caddy_default/name: $CADDY_NETWORK/" docker-compose.vps.yml
 echo -e "${YELLOW}Step 4: Checking for existing container...${NC}"
 if docker ps -a | grep -q $CONTAINER_NAME; then
     echo "Stopping and removing existing container..."
-    docker-compose -f docker-compose.vps.yml down
+    docker compose -f docker-compose.vps.yml down
 fi
 
 # 5. Build and start container
 echo -e "${YELLOW}Step 5: Building and starting container...${NC}"
-docker-compose -f docker-compose.vps.yml up -d --build
+docker compose -f docker-compose.vps.yml up -d --build
 
 # 6. Wait for container to be healthy
 echo -e "${YELLOW}Step 6: Waiting for container to be healthy...${NC}"
@@ -95,9 +95,9 @@ echo ""
 echo "Useful commands:"
 echo "  View logs:         docker logs $CONTAINER_NAME"
 echo "  View logs (live):  docker logs -f $CONTAINER_NAME"
-echo "  Restart API:       docker-compose -f docker-compose.vps.yml restart"
-echo "  Stop API:          docker-compose -f docker-compose.vps.yml down"
-echo "  Rebuild & start:   docker-compose -f docker-compose.vps.yml up -d --build"
+echo "  Restart API:       docker compose -f docker-compose.vps.yml restart"
+echo "  Stop API:          docker compose -f docker-compose.vps.yml down"
+echo "  Rebuild & start:   docker compose -f docker-compose.vps.yml up -d --build"
 echo ""
 echo "Test locally on VPS:"
 echo "  docker exec resume-api curl http://localhost:8000/health"
